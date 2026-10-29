@@ -1,0 +1,9 @@
+.git
+.github
+*.py
+*.ipa
+*.bak
+config.json
+wrangler.jsonc
+.gitignore
+.assetsignore

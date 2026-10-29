@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Hệ thống Tự động Quản lý Kho App & Game iOS (Shadowrocket, Asphalt 8 & Mở rộng):
+Hệ thống Tự động Quản lý Kho App & Game iOS (Shadowrocket, Locket Widget, Asphalt 8 & Mở rộng):
 - Tự động quét bản cập nhật IPA mới từ trang nguồn (ipaomtk.com) cho từng App/Game
 - Tự động quét chứng chỉ mới nhất (updatedAt) & kiểm tra thu hồi Apple OCSP (ocsp.apple.com)
 - Tự động ký lại khi link hết hạn hoặc có bản mới, lưu vào links_cache.json + HTML
-- Hỗ trợ thêm Game mới chỉ bằng 1 lệnh: python -X utf8 auto_sign_manager.py --add-game <url>
+- Hỗ trợ thêm Game/App mới chỉ bằng 1 lệnh: python -X utf8 auto_sign_manager.py --add-game <url>
 - Tự động gửi Email cảnh báo khi có sự cố
 """
 
@@ -252,7 +252,6 @@ def sign_remote_ipa(cfg: dict, item: dict, cert_id: str) -> dict:
         raise RuntimeError(start_payload.get("error") or start_payload.get("message") or "Không tạo được job ký.")
 
     job_id = start_payload["jobId"]
-    # Các game nặng có thể mất 15-90s để server họ tải & ký
     for _ in range(90):
         time.sleep(3)
         poll_url = f"{status_url}?job={urllib.parse.quote(job_id)}&t={int(time.time() * 1000)}"
@@ -437,12 +436,11 @@ def add_game_from_ipaomtk_url(url: str) -> None:
     remote_ipa_url = ipa_matches[0]
 
     title_m = re.findall(r"<title>([^<]+)</title>", html_dl, flags=re.IGNORECASE)
-    raw_title = title_m[0].strip() if title_m else "New Game"
+    raw_title = title_m[0].strip() if title_m else "New App"
     ver_m = re.search(r"\bv?(\d+\.\d+(?:\.\d+)?)\b", raw_title, flags=re.IGNORECASE)
     version = ver_m.group(1) if ver_m else "1.0"
     app_name = re.sub(r"\s+IPA.*$", "", raw_title, flags=re.IGNORECASE).strip()
 
-    # Tìm icon từ trang chính
     req_main = urllib.request.Request(main_url, headers={"User-Agent": "Mozilla/5.0"})
     html_main = urllib.request.urlopen(req_main, timeout=15).read().decode("utf-8", errors="ignore")
     imgs = re.findall(r'https?://ipaomtk\.com/wp-content/uploads/[^\s"\'<>]+300x300\.(?:jpg|jpeg|png|webp)', html_main, flags=re.IGNORECASE)
@@ -457,9 +455,22 @@ def add_game_from_ipaomtk_url(url: str) -> None:
         "id": slug,
         "name": app_name,
         "category": category,
+        "tag_vi": "Trò chơi" if category == "game" else "Ứng dụng",
+        "tag_en": "Game" if category == "game" else "App",
         "version": version,
+        "size": "",
         "subtitle_vi": f"Bản v{version} • Đã ký sẵn cho iOS",
         "subtitle_en": f"v{version} • Pre-signed for iOS",
+        "features_vi": [
+            f"Đã ký sẵn bản {app_name} v{version} mới nhất trên 3 Server",
+            "Hỗ trợ cài trực tiếp qua Safari hoặc tải file IPA gốc",
+            "Tự động quét và cập nhật khi có phiên bản mới"
+        ],
+        "features_en": [
+            f"Pre-signed {app_name} v{version} across 3 Certificate Servers",
+            "Direct Safari OTA install or raw IPA file download",
+            "Automatically updates when a new release drops"
+        ],
         "icon": icon_url,
         "source_page_url": dl_url,
         "remote_ipa_url": remote_ipa_url,
@@ -532,6 +543,7 @@ def run_sync(force_resign: bool = False) -> bool:
 
     # 2. Duyệt qua từng App & Game trong catalog
     catalog = cfg.get("catalog", [])
+    ordered_apps = {}
     for item in catalog:
         app_id = item["id"]
         app_cache = cache["apps"].get(app_id, {})
@@ -559,7 +571,6 @@ def run_sync(force_resign: bool = False) -> bool:
         enterprise_servers = []
         apple_server = None
 
-        # Kiểm tra link Apple Chính Hãng / 3uTools nếu có (như Shadowrocket)
         fallback_plist = item.get("fallback_3utools_plist", "").strip()
         if fallback_plist and check_manifest_alive(fallback_plist):
             log(f"✔ [{item['name']}] Bản Chính Hãng Apple (v{item['version']}) hoạt động tốt")
@@ -616,7 +627,6 @@ def run_sync(force_resign: bool = False) -> bool:
                     enterprise_servers.append(server_entry)
                 renewed_items.append(f"{item['name']} ({base_name})")
                 log(f"✅ Ký xong [{item['name']} | {base_name}] -> {signed['manifest_url']}")
-                # Nghỉ nhẹ 1.5s giữa các lần gọi API ký để tránh bị rate-limit
                 time.sleep(1.5)
             except Exception as e:
                 err_detail = f"Lỗi ký [{item['name']} | {base_name}]: {e}"
@@ -635,15 +645,34 @@ def run_sync(force_resign: bool = False) -> bool:
             clean_title = re.sub(r"^Server\s+\d+\s+—\s+", "", srv["label"])
             srv["label"] = f"Server {idx} — {clean_title}"
 
-        cache["apps"][app_id] = {
+        sig_str = app_cache.get("remote_ipa_signature") or ""
+        auto_size = item.get("size", "")
+        if not auto_size and "|" in sig_str:
+            try:
+                raw_bytes = int(sig_str.split("|")[-1])
+                if raw_bytes >= 1073741824:
+                    auto_size = f"{raw_bytes / 1073741824:.2f} GB"
+                elif raw_bytes >= 1048576:
+                    auto_size = f"{raw_bytes / 1048576:.1f} MB"
+            except Exception:
+                pass
+
+        ordered_apps[app_id] = {
             "id": app_id,
             "name": item["name"],
             "category": item.get("category", "app"),
+            "tag_vi": item.get("tag_vi", "Trò chơi" if item.get("category") == "game" else "Ứng dụng"),
+            "tag_en": item.get("tag_en", "Game" if item.get("category") == "game" else "App"),
             "version": item.get("version", "1.0"),
+            "size": auto_size or "iOS IPA",
             "subtitle_vi": item.get("subtitle_vi", ""),
             "subtitle_en": item.get("subtitle_en", ""),
+            "features_vi": item.get("features_vi", []),
+            "features_en": item.get("features_en", []),
             "icon": item.get("icon", ""),
-            "remote_ipa_signature": app_cache.get("remote_ipa_signature"),
+            "remote_ipa_url": item.get("remote_ipa_url", ""),
+            "source_page_url": item.get("source_page_url", ""),
+            "remote_ipa_signature": sig_str,
             "updated_at": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "servers": item_servers
         }
@@ -651,10 +680,10 @@ def run_sync(force_resign: bool = False) -> bool:
         if app_id == "shadowrocket":
             cache["servers"] = item_servers
 
+    cache["apps"] = ordered_apps
     now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     cache["updated_at"] = now_str
 
-    # Cảnh báo Email nếu có lỗi nghiêm trọng
     cooldown_sec = int(cfg["email_alert"].get("cooldown_minutes", 60)) * 60
     now_ts = time.time()
     total_active = sum(len(a.get("servers", [])) for a in cache["apps"].values())

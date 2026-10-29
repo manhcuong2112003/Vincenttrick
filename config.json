@@ -15,9 +15,22 @@
       "id": "shadowrocket",
       "name": "Shadowrocket",
       "category": "app",
+      "tag_vi": "Tiện ích VPN",
+      "tag_en": "VPN Utility",
       "version": "2.2.92",
-      "subtitle_vi": "Proxy & VPN Utility • Không cần Apple ID & PC",
+      "size": "22.5 MB",
+      "subtitle_vi": "Proxy & VPN Chuyên Nghiệp • Không cần Apple ID & PC",
       "subtitle_en": "Proxy & VPN Utility • No Apple ID or PC required",
+      "features_vi": [
+        "Có Server 1 Bản Chính Hãng Apple (Không cần DNS, cài ăn ngay)",
+        "Hỗ trợ đầy đủ cấu hình Proxy, VPN, Đổi vùng & Chặn quảng cáo",
+        "Tự động quét và cập nhật khi có phiên bản mới"
+      ],
+      "features_en": [
+        "Includes Official Apple Server 1 (No DNS needed, zero verify errors)",
+        "Full Proxy, VPN, Packet Tunnel & Ad-block rules support",
+        "Auto-scans and updates on upstream release"
+      ],
       "icon": "./Shadowrocket – Cài đặt_files/shadowrocket.png",
       "source_page_url": "https://ipaomtk.com/shadowrocket/download/",
       "remote_ipa_url": "https://file.ipaomtk.com/Shadowrocket/Shadowrocket-IPAOMTK.COM.ipa",
@@ -25,28 +38,54 @@
       "fallback_3utools_plist": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist"
     },
     {
-      "id": "asphalt-8",
-      "name": "Asphalt 8 Airborne",
-      "category": "game",
-      "version": "9.2.0",
-      "subtitle_vi": "Game Đua Xe Siêu Phẩm • Đã ký sẵn cho iOS",
-      "subtitle_en": "Arcade Racing Game • Pre-signed for iOS",
-      "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Asphalt-8-Airborne--300x300.jpg",
-      "source_page_url": "https://ipaomtk.com/asphalt-8-ipa/download/",
-      "remote_ipa_url": "https://file.ipaomtk.com/Asphalt-8-Airborne/Asphalt-8-IPAOMTK.COM.ipa",
+      "id": "locket-widget",
+      "name": "Locket Widget",
+      "category": "app",
+      "tag_vi": "Mạng xã hội • Widget",
+      "tag_en": "Social Widget",
+      "version": "2.70.0",
+      "size": "86.8 MB",
+      "subtitle_vi": "Widget Ảnh Bạn Bè • Chia sẻ khoảnh khắc lên Màn hình chính",
+      "subtitle_en": "Live Photo Home Screen Widget • Pre-signed for iOS",
+      "features_vi": [
+        "Gửi ảnh trực tiếp lên Widget Màn hình chính của bạn bè và người thân",
+        "Đã ký sẵn trên 3 Server chứng chỉ + Hỗ trợ tải file IPA gốc",
+        "Tự động phát hiện và ký lại khi Locket ra bản cập nhật mới"
+      ],
+      "features_en": [
+        "Share live photos directly to friends' iPhone Home Screen widgets",
+        "Pre-signed across 3 Certificate Servers + Direct IPA download",
+        "Automatically detects and re-signs new Locket releases"
+      ],
+      "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Locket-Widget-300x300.jpg",
+      "source_page_url": "https://ipaomtk.com/locket-widget/download/",
+      "remote_ipa_url": "https://file.ipaomtk.com/Locket-Widget/Locket-Widget-IPAOMTK.com.ipa",
       "local_ipa_path": "",
       "fallback_3utools_plist": ""
     },
     {
-      "id": "locket-widget",
-      "name": "Locket Widget",
-      "category": "app",
-      "version": "2.70.0",
-      "subtitle_vi": "Bản v2.70.0 • Đã ký sẵn cho iOS",
-      "subtitle_en": "v2.70.0 • Pre-signed for iOS",
-      "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Locket-Widget-300x300.jpg",
-      "source_page_url": "https://ipaomtk.com/locket-widget/download/",
-      "remote_ipa_url": "https://file.ipaomtk.com/Locket-Widget/Locket-Widget-IPAOMTK.com.ipa",
+      "id": "asphalt-8",
+      "name": "Asphalt 8 Airborne",
+      "category": "game",
+      "tag_vi": "Game Đua Xe",
+      "tag_en": "Racing Game",
+      "version": "9.2.0",
+      "size": "2.82 GB",
+      "subtitle_vi": "Game Đua Xe Siêu Phẩm 3D • Đã ký sẵn cho iOS",
+      "subtitle_en": "Blockbuster 3D Arcade Racing • Pre-signed for iOS",
+      "features_vi": [
+        "Đồ họa 3D tốc độ cao với hơn 300 siêu xe & mô tô bản quyền",
+        "Đã ký sẵn trên 3 Server không tốn băng thông máy cá nhân",
+        "Hỗ trợ cài trực tiếp qua Safari hoặc tải file IPA"
+      ],
+      "features_en": [
+        "High-octane 3D arcade racing with 300+ licensed vehicles",
+        "Pre-signed across 3 servers with zero local bandwidth",
+        "Direct Safari OTA install or raw IPA file download"
+      ],
+      "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Asphalt-8-Airborne--300x300.jpg",
+      "source_page_url": "https://ipaomtk.com/asphalt-8-ipa/download/",
+      "remote_ipa_url": "https://file.ipaomtk.com/Asphalt-8-Airborne/Asphalt-8-IPAOMTK.COM.ipa",
       "local_ipa_path": "",
       "fallback_3utools_plist": ""
     }
