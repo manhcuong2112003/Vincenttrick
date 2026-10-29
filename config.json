@@ -1,0 +1,85 @@
+{
+  "app": {
+    "name": "Shadowrocket",
+    "version": "2.2.92",
+    "build": "3445",
+    "remote_ipa_url": "https://file.ipaomtk.com/Shadowrocket/Shadowrocket-IPAOMTK.COM.ipa",
+    "local_ipa_path": "Shadowrocket-IPAOMTK.COM.ipa",
+    "dns_profile_url": "https://file.ipaomtk.com/DNS/IPAOMTK-DNS.mobileconfig",
+    "fallback_3utools_plist": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist",
+    "html_file": "Shadowrocket – Cài đặt.html",
+    "cache_file": "links_cache.json"
+  },
+  "catalog": [
+    {
+      "id": "shadowrocket",
+      "name": "Shadowrocket",
+      "category": "app",
+      "version": "2.2.92",
+      "subtitle_vi": "Proxy & VPN Utility • Không cần Apple ID & PC",
+      "subtitle_en": "Proxy & VPN Utility • No Apple ID or PC required",
+      "icon": "./Shadowrocket – Cài đặt_files/shadowrocket.png",
+      "source_page_url": "https://ipaomtk.com/shadowrocket/download/",
+      "remote_ipa_url": "https://file.ipaomtk.com/Shadowrocket/Shadowrocket-IPAOMTK.COM.ipa",
+      "local_ipa_path": "Shadowrocket-IPAOMTK.COM.ipa",
+      "fallback_3utools_plist": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist"
+    },
+    {
+      "id": "asphalt-8",
+      "name": "Asphalt 8 Airborne",
+      "category": "game",
+      "version": "9.2.0",
+      "subtitle_vi": "Game Đua Xe Siêu Phẩm • Đã ký sẵn cho iOS",
+      "subtitle_en": "Arcade Racing Game • Pre-signed for iOS",
+      "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Asphalt-8-Airborne--300x300.jpg",
+      "source_page_url": "https://ipaomtk.com/asphalt-8-ipa/download/",
+      "remote_ipa_url": "https://file.ipaomtk.com/Asphalt-8-Airborne/Asphalt-8-IPAOMTK.COM.ipa",
+      "local_ipa_path": "",
+      "fallback_3utools_plist": ""
+    }
+  ],
+  "signtools_api": {
+    "base_url": "https://signtools.ipaomtk.com",
+    "certificates_endpoint": "https://signtools.ipaomtk.com/server-certificates.php",
+    "remote_sign_start": "https://signtools.ipaomtk.com/remote-sign-start.php",
+    "remote_sign_status": "https://signtools.ipaomtk.com/remote-sign-status.php",
+    "local_sign_merge": "https://signtools.ipaomtk.com/sign-merge.php",
+    "bundle_mode": "com.ipaomtk.auto"
+  },
+  "preferred_certificates": [
+    {
+      "id": "main/China Telecom Corporation Limited.zip",
+      "label": "Server 1 — China Telecom (Full VPN)",
+      "badge": "Khuyên dùng • Hỗ trợ VPN"
+    },
+    {
+      "id": "main/RAKUTEN SECURITIES,INC.zip",
+      "label": "Server 2 — Rakuten Securities",
+      "badge": "Mặc định • Ổn định"
+    },
+    {
+      "id": "main/HSBC Bank plc.zip",
+      "label": "Server 3 — HSBC Bank Plc",
+      "badge": "Dự phòng 1 • Hạn 05/2027"
+    },
+    {
+      "id": "main/Beihang University.zip",
+      "label": "Server 4 — Beihang University",
+      "badge": "Dự phòng 2 • Hạn 12/2026"
+    }
+  ],
+  "email_alert": {
+    "enabled": true,
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_user": "dien_gmail_cua_ban@gmail.com",
+    "smtp_app_password": "xxxx xxxx xxxx xxxx",
+    "recipient_email": "dien_gmail_nhan_thong_bao@gmail.com",
+    "notify_on_auto_renew": false,
+    "notify_on_recovery": true,
+    "cooldown_minutes": 60
+  },
+  "monitor": {
+    "check_interval_seconds": 900
+  }
+}

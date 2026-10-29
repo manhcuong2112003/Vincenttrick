@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kho App &amp; Game iOS – Cài đặt trực tiếp</title>
+<style>
+  :root {
+    --bg: #f0f4ff;
+    --card-bg: #ffffff;
+    --text: #1a1a2e;
+    --sub: #6b7280;
+    --btn-bg: linear-gradient(135deg, #1e5eff 0%, #0a34c8 100%);
+    --btn-text: #ffffff;
+    --badge-bg: #e8f0fe;
+    --badge-text: #1e5eff;
+    --border: rgba(0,0,0,0.08);
+    --shadow: 0 8px 32px rgba(30,94,255,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    --lang-bg: #e8edf7;
+    --lang-active: #1e5eff;
+    --lang-text: #6b7280;
+    --divider: #e5e7eb;
+    --info-bg: #f8faff;
+    --srv-active-bg: #eef4ff;
+    --srv-active-border: #1e5eff;
+    --dns-bg: #f0fdf4;
+    --dns-border: #bbf7d0;
+    --dns-text: #15803d;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0e1a;
+      --card-bg: #141828;
+      --text: #f0f4ff;
+      --sub: #9ca3af;
+      --btn-bg: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      --badge-bg: rgba(30,94,255,0.15);
+      --badge-text: #60a5fa;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 8px 32px rgba(0,0,0,0.5);
+      --lang-bg: rgba(255,255,255,0.06);
+      --lang-active: #2563eb;
+      --lang-text: #9ca3af;
+      --divider: rgba(255,255,255,0.08);
+      --info-bg: rgba(255,255,255,0.03);
+      --srv-active-bg: rgba(37,99,235,0.18);
+      --srv-active-border: #3b82f6;
+      --dns-bg: rgba(21,128,61,0.15);
+      --dns-border: rgba(74,222,128,0.25);
+      --dns-text: #4ade80;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    transition: background 0.3s, color 0.3s;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: 18px;
+    padding-top: calc(env(safe-area-inset-top,0px) + 18px);
+    padding-bottom: calc(env(safe-area-inset-bottom,0px) + 18px);
+  }
+
+  /* Lang toggle */
+  .lang-toggle {
+    display: flex;
+    background: var(--lang-bg);
+    border-radius: 22px;
+    padding: 3px;
+    margin-bottom: 14px;
+    gap: 2px;
+  }
+  .lang-btn {
+    border: none;
+    background: transparent;
+    color: var(--lang-text);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 18px;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+  }
+  .lang-btn.active {
+    background: var(--lang-active);
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(30,94,255,0.35);
+  }
+
+  /* Card */
+  .card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 22px 20px;
+    max-width: 425px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  /* App & Game Switcher */
+  .catalog-tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .catalog-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    background: var(--info-bg);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .catalog-item.active {
+    background: var(--srv-active-bg);
+    border-color: var(--srv-active-border);
+    box-shadow: 0 2px 10px rgba(30,94,255,0.12);
+  }
+  .catalog-thumb {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #1a1a3e;
+  }
+  .catalog-meta {
+    min-width: 0;
+    flex: 1;
+  }
+  .catalog-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .catalog-ver {
+    font-size: 10.5px;
+    color: var(--sub);
+    font-weight: 600;
+  }
+
+  /* Logo */
+  .logo-img {
+    width: 82px; height: 82px;
+    border-radius: 20px;
+    display: inline-block;
+    object-fit: cover;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  }
+  .logo-fallback {
+    width: 82px; height: 82px;
+    border-radius: 20px;
+    display: none;
+    margin: 0 auto;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--badge-bg);
+    color: var(--badge-text);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: pulse 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.45; transform:scale(0.65); }
+  }
+
+  .app-name { font-size: 24px; font-weight: 750; letter-spacing: -0.5px; margin-bottom: 3px; }
+  .app-sub { font-size: 13px; color: var(--sub); margin-bottom: 15px; }
+
+  .divider { height: 1px; background: var(--divider); margin: 0 0 14px; }
+
+  /* Server Selector */
+  .section-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--sub);
+    text-align: left;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .server-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 15px;
+  }
+  .server-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: var(--info-bg);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .server-option.active {
+    background: var(--srv-active-bg);
+    border-color: var(--srv-active-border);
+  }
+  .server-left {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+  }
+  .server-radio {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--sub);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .server-option.active .server-radio {
+    border-color: var(--srv-active-border);
+  }
+  .server-option.active .server-radio::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--srv-active-border);
+  }
+  .server-title {
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .server-tag {
+    font-size: 10.5px;
+    font-weight: 650;
+    padding: 3px 8px;
+    border-radius: 8px;
+    background: var(--badge-bg);
+    color: var(--badge-text);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Primary Install Button */
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%;
+    background: var(--btn-bg);
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px; font-weight: 700;
+    padding: 15px 20px;
+    border-radius: 14px;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 4px 18px rgba(30,94,255,0.38);
+    transition: opacity 0.15s, transform 0.15s;
+    margin-bottom: 10px;
+  }
+  .btn:active { opacity: 0.85; transform: scale(0.98); }
+
+  /* Anti-Revoke DNS Button */
+  .btn-dns {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    width: 100%;
+    background: var(--dns-bg);
+    border: 1px solid var(--dns-border);
+    color: var(--dns-text);
+    text-decoration: none;
+    font-size: 13px; font-weight: 700;
+    padding: 11px 14px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    transition: opacity 0.15s;
+  }
+  .btn-dns:active { opacity: 0.8; }
+
+  /* Guide Box */
+  .guide-box {
+    background: var(--info-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 11px 13px;
+    text-align: left;
+    font-size: 12px;
+    color: var(--sub);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .guide-box strong { color: var(--text); }
+
+  /* Warning */
+  .warn {
+    font-size: 11.5px; color: var(--sub);
+    line-height: 1.5; display: flex; gap: 5px; text-align: left;
+  }
+  .warn-icon { flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btn-vi" onclick="setLang('vi')">🇻🇳 Tiếng Việt</button>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇺🇸 English</button>
+</div>
+
+<div class="card">
+  <div class="section-label" style="margin-bottom: 7px;">
+    <span>
+      <span class="vi" style="display: inline;">CHỌN ỨNG DỤNG / GAME:</span>
+      <span class="en" style="display: none;">SELECT APP / GAME:</span>
+    </span>
+    <span id="updated-time-label" style="font-weight: 500; font-size: 10.5px;">Auto-Sync</span>
+  </div>
+
+  <!-- Danh sách App & Game -->
+  <div class="catalog-tabs" id="catalog-tabs"></div>
+
+  <div class="divider"></div>
+
+  <!-- Logo -->
+  <div style="text-align:center; margin-bottom:10px;">
+    <img class="logo-img" id="logo-img" src="./Shadowrocket – Cài đặt_files/shadowrocket.png" alt="App Icon" onerror="this.style.display='none'; document.getElementById('logo-svg').style.display='block';">
+    <svg id="logo-svg" class="logo-fallback" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+      <rect width="88" height="88" rx="20" fill="#1a1a3e"></rect>
+      <circle cx="44" cy="38" r="14" fill="#2563eb"></circle>
+    </svg>
+  </div>
+
+  <!-- Badge -->
+  <div class="badge">
+    <span class="badge-dot"></span>
+    <span id="app-badge-text">Sẵn sàng cài đặt • v2.2.92</span>
+  </div>
+
+  <div class="app-name" id="app-title">Shadowrocket</div>
+  <div class="app-sub" id="app-subtitle">Proxy &amp; VPN Utility • Không cần Apple ID &amp; PC</div>
+
+  <div class="divider"></div>
+
+  <div class="section-label">
+    <span>
+      <span class="vi" style="display: inline;">CHỌN SERVER CHỨNG CHỈ:</span>
+      <span class="en" style="display: none;">SELECT CERTIFICATE SERVER:</span>
+    </span>
+  </div>
+
+  <div class="server-list" id="server-list"></div>
+
+  <a class="btn" id="main-install-btn" href="itms-services://?action=download-manifest&url=https%3A%2F%2Fdl.3u.com%2Fplist%2F2026%2F09%2F08%2F1788829540721_622855.plist">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+    <span id="install-btn-text">Cài đặt Shadowrocket (v2.2.92)</span>
+  </a>
+
+  <a class="btn-dns" id="dns-install-btn" href="https://file.ipaomtk.com/DNS/IPAOMTK-DNS.mobileconfig">
+    🛡️
+    <span class="vi" style="display: inline;">Cài Cấu Hình DNS Chống Thu Hồi Chứng Chỉ</span>
+    <span class="en" style="display: none;">Install Anti-Revoke DNS Profile</span>
+  </a>
+
+  <div class="guide-box">
+    <div class="vi" style="display: inline;">
+      <strong>💡 Lưu ý khi cài đặt:</strong><br>
+      1. Với các Server ghi <strong>"Cần DNS"</strong>, hãy bấm nút <strong>🛡️ Cài Cấu Hình DNS Chống Thu Hồi</strong> và kích hoạt trong Cài đặt trước khi tải.<br>
+      2. Sau khi tải xong, vào <strong>Cài đặt → Cài đặt chung → Quản lý VPN &amp; Thiết bị</strong> → Bấm <strong>Tin cậy</strong> chứng chỉ doanh nghiệp.<br>
+      3. Nếu 1 Server báo không tải được trên máy bạn, hãy chạm chọn Server kế tiếp.
+    </div>
+    <div class="en" style="display: none;">
+      <strong>💡 Installation Notes:</strong><br>
+      1. For <strong>"Enterprise • Cần DNS"</strong> servers, install &amp; enable the <strong>🛡️ Anti-Revoke DNS Profile</strong> first.<br>
+      2. Go to <strong>Settings → General → VPN &amp; Device Management</strong> → Trust the Enterprise Certificate.<br>
+      3. If one server fails on your device, switch to the next server above.
+    </div>
+  </div>
+
+  <div class="warn">
+    <span class="warn-icon">⚠</span>
+    <span>
+      <span class="vi" style="display: inline;">Chỉ mở bằng <strong>Safari trên iPhone/iPad</strong>. Không dùng Chrome hoặc Android.</span>
+      <span class="en" style="display: none;">Open in <strong>Safari on iPhone/iPad</strong> only.</span>
+    </span>
+  </div>
+</div>
+
+<script>
+  /*__SERVERS_DATA_START__*/const SIGN_DATA = {"updated_at": "2026-10-29 21:22:10", "dns_url": "https://file.ipaomtk.com/DNS/IPAOMTK-DNS.mobileconfig", "fallback_3u_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fdl.3u.com%2Fplist%2F2026%2F09%2F08%2F1788829540721_622855.plist", "apps": {"shadowrocket": {"id": "shadowrocket", "name": "Shadowrocket", "category": "app", "version": "2.2.92", "subtitle_vi": "Proxy & VPN Utility • Không cần Apple ID & PC", "subtitle_en": "Proxy & VPN Utility • No Apple ID or PC required", "icon": "./Shadowrocket – Cài đặt_files/shadowrocket.png", "remote_ipa_signature": "\"6aa2a4e5-16808fe\"|Thu, 10 Sep 2026 12:39:01 GMT|23595262", "updated_at": "2026-10-29 21:21:55", "servers": [{"cert_id": "apple_official_3u", "label": "Server 1 — Bản Chính Hãng Apple (v2.2.92)", "badge": "Khuyên dùng • Không lỗi xác minh", "manifest_url": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fdl.3u.com%2Fplist%2F2026%2F09%2F08%2F1788829540721_622855.plist", "ipa_url": "https://dl.3u.com/soft/2026/09/07/z_932747118_890167352_1.ipa", "signed_at": "2026-10-29 21:21:37", "ocsp_status": "APPLE_OFFICIAL", "status": "active"}, {"cert_id": "main/RAKUTEN SECURITIES,INC.zip", "label": "Server 2 — Rakuten Securities (Cần DNS)", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.ipa", "signed_at": "2026-10-29 19:12:03", "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/Beihang University.zip", "label": "Server 3 — Beihang University", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.ipa", "signed_at": "2026-10-29 20:05:53", "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/China Telecom Corporation Limited.zip", "label": "Server 4 — China Telecom (Cần bật DNS trước)", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.ipa", "signed_at": "2026-10-29 19:10:28", "ocsp_status": "REVOKED", "status": "active"}]}, "asphalt-8": {"id": "asphalt-8", "name": "Asphalt 8 Airborne", "category": "game", "version": "9.2.0", "subtitle_vi": "Game Đua Xe Siêu Phẩm • Đã ký sẵn cho iOS", "subtitle_en": "Arcade Racing Game • Pre-signed for iOS", "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Asphalt-8-Airborne--300x300.jpg", "remote_ipa_signature": "\"6ad36d78-b489f8f0\"|Sat, 17 Oct 2026 12:43:36 GMT|3028941040", "updated_at": "2026-10-29 21:22:10", "servers": [{"cert_id": "main/RAKUTEN SECURITIES,INC.zip", "label": "Server 1 — RAKUTEN SECURITIES,INC", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Asphalt-8-IPAOMTK.COM-signed-ff5402ad4330a220273b.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FAsphalt-8-IPAOMTK.COM-signed-ff5402ad4330a220273b.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Asphalt-8-IPAOMTK.COM-signed-ff5402ad4330a220273b.ipa", "signed_at": "2026-10-29 20:59:37", "cert_updated_at_ts": 1792425927, "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/Beihang University.zip", "label": "Server 2 — Beihang University", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Asphalt-8-IPAOMTK.COM-signed-3acf6f544ca12c6bf990.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FAsphalt-8-IPAOMTK.COM-signed-3acf6f544ca12c6bf990.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Asphalt-8-IPAOMTK.COM-signed-3acf6f544ca12c6bf990.ipa", "signed_at": "2026-10-29 21:07:00", "cert_updated_at_ts": 1792240223, "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/China Telecom Corporation Limited.zip", "label": "Server 3 — China Telecom (Full VPN)", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Asphalt-8-IPAOMTK.COM-signed-9a13ced8ecce09da862e.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FAsphalt-8-IPAOMTK.COM-signed-9a13ced8ecce09da862e.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Asphalt-8-IPAOMTK.COM-signed-9a13ced8ecce09da862e.ipa", "signed_at": "2026-10-29 21:06:28", "ocsp_status": "REVOKED", "status": "active"}]}}, "servers": [{"cert_id": "apple_official_3u", "label": "Server 1 — Bản Chính Hãng Apple (v2.2.92)", "badge": "Khuyên dùng • Không lỗi xác minh", "manifest_url": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fdl.3u.com%2Fplist%2F2026%2F09%2F08%2F1788829540721_622855.plist", "ipa_url": "https://dl.3u.com/soft/2026/09/07/z_932747118_890167352_1.ipa", "signed_at": "2026-10-29 21:21:37", "ocsp_status": "APPLE_OFFICIAL", "status": "active"}, {"cert_id": "main/RAKUTEN SECURITIES,INC.zip", "label": "Server 2 — Rakuten Securities (Cần DNS)", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.ipa", "signed_at": "2026-10-29 19:12:03", "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/Beihang University.zip", "label": "Server 3 — Beihang University", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.ipa", "signed_at": "2026-10-29 20:05:53", "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/China Telecom Corporation Limited.zip", "label": "Server 4 — China Telecom (Cần bật DNS trước)", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.ipa", "signed_at": "2026-10-29 19:10:28", "ocsp_status": "REVOKED", "status": "active"}]};/*__SERVERS_DATA_END__*/
+
+  let currentLang = 'vi';
+  let selectedAppId = 'shadowrocket';
+  let selectedServerIndex = 0;
+  let activeData = SIGN_DATA;
+
+  function getAppsList() {
+    if (activeData && activeData.apps && Object.keys(activeData.apps).length > 0) {
+      return Object.values(activeData.apps);
+    }
+    return [{
+      id: 'shadowrocket',
+      name: 'Shadowrocket',
+      category: 'app',
+      version: '2.2.92',
+      subtitle_vi: 'Proxy & VPN Utility • Không cần Apple ID & PC',
+      subtitle_en: 'Proxy & VPN Utility • No Apple ID or PC required',
+      icon: './Shadowrocket – Cài đặt_files/shadowrocket.png',
+      servers: (activeData && activeData.servers) ? activeData.servers : []
+    }];
+  }
+
+  function renderUI() {
+    const apps = getAppsList();
+    if (!apps.find(function(a) { return a.id === selectedAppId; })) {
+      selectedAppId = apps[0].id;
+    }
+    const currentApp = apps.find(function(a) { return a.id === selectedAppId; }) || apps[0];
+
+    const timeLabel = document.getElementById('updated-time-label');
+    if (activeData && activeData.updated_at && timeLabel) {
+      timeLabel.textContent = 'Cập nhật: ' + activeData.updated_at.slice(5, 16);
+    }
+
+    // 1. Render Catalog Tabs
+    const tabsEl = document.getElementById('catalog-tabs');
+    tabsEl.innerHTML = apps.map(function(app) {
+      const isAct = app.id === currentApp.id;
+      const badgeIcon = app.category === 'game' ? '🎮' : '📱';
+      return (
+        '<div class="catalog-item ' + (isAct ? 'active' : '') + '" onclick="selectApp(\'' + app.id + '\')">' +
+          '<img class="catalog-thumb" src="' + app.icon + '" alt="' + app.name + '">' +
+          '<div class="catalog-meta">' +
+            '<div class="catalog-title">' + badgeIcon + ' ' + app.name + '</div>' +
+            '<div class="catalog-ver">v' + app.version + '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+
+    // 2. Render Selected App Header
+    const logoImg = document.getElementById('logo-img');
+    const logoSvg = document.getElementById('logo-svg');
+    logoSvg.style.display = 'none';
+    logoImg.style.display = 'inline-block';
+    logoImg.src = currentApp.icon;
+
+    document.getElementById('app-title').textContent = currentApp.name;
+    document.getElementById('app-subtitle').textContent =
+      currentLang === 'vi' ? (currentApp.subtitle_vi || '') : (currentApp.subtitle_en || '');
+    document.getElementById('app-badge-text').textContent =
+      (currentLang === 'vi' ? 'Sẵn sàng cài đặt • v' : 'Ready to install • v') + currentApp.version;
+
+    // 3. Render Servers for Selected App
+    const servers = Array.isArray(currentApp.servers) ? currentApp.servers : [];
+    const listEl = document.getElementById('server-list');
+    if (selectedServerIndex >= servers.length) selectedServerIndex = 0;
+
+    if (!servers.length) {
+      listEl.innerHTML = '<div style="font-size:12px;color:var(--sub);padding:10px;">Đang đồng bộ chứng chỉ ký cho mục này...</div>';
+    } else {
+      listEl.innerHTML = servers.map(function(srv, idx) {
+        const isSelected = idx === selectedServerIndex;
+        return (
+          '<div class="server-option ' + (isSelected ? 'active' : '') + '" onclick="selectServer(' + idx + ')">' +
+            '<div class="server-left">' +
+              '<div class="server-radio"></div>' +
+              '<div class="server-title">' + srv.label + '</div>' +
+            '</div>' +
+            '<span class="server-tag">' + (srv.badge || 'Hoạt động') + '</span>' +
+          '</div>'
+        );
+      }).join('');
+      document.getElementById('main-install-btn').href = servers[selectedServerIndex].install_url;
+    }
+
+    document.getElementById('install-btn-text').textContent =
+      (currentLang === 'vi' ? 'Cài đặt ' : 'Install ') + currentApp.name + ' (v' + currentApp.version + ')';
+
+    if (activeData && activeData.dns_url) {
+      document.getElementById('dns-install-btn').href = activeData.dns_url;
+    }
+  }
+
+  function selectApp(appId) {
+    selectedAppId = appId;
+    selectedServerIndex = 0;
+    renderUI();
+  }
+
+  function selectServer(idx) {
+    selectedServerIndex = idx;
+    renderUI();
+  }
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-vi').classList.toggle('active', lang === 'vi');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+    document.querySelectorAll('.vi').forEach(function(el) {
+      el.style.display = lang === 'vi' ? 'inline' : 'none';
+    });
+    document.querySelectorAll('.en').forEach(function(el) {
+      el.style.display = lang === 'en' ? 'inline' : 'none';
+    });
+
+    document.documentElement.lang = lang;
+    renderUI();
+  }
+
+  fetch('./links_cache.json?t=' + Date.now())
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(json) {
+      if (json) {
+        activeData = Object.assign({}, activeData, json);
+        renderUI();
+      }
+    })
+    .catch(function() {});
+
+  renderUI();
+  setLang('vi');
+</script>
+
+</body>
+</html>

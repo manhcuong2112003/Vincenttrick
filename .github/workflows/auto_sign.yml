@@ -1,0 +1,42 @@
+name: Auto-Sign & Health Check iOS Portal
+
+on:
+  schedule:
+    # Tự động chạy mỗi 20 phút trên máy chủ GitHub (24/7 kể cả khi tắt PC)
+    - cron: '*/20 * * * *'
+  workflow_dispatch: # Cho phép bấm chạy thủ công ngay trên tab Actions
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-sign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Auto-Sign & Health Check Manager
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+        run: |
+          python3 auto_sign_manager.py
+
+      - name: Commit and Push updated cache & HTML
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add links_cache.json index.html "Shadowrocket – Cài đặt.html" config.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(auto-sign): update signed manifest links & status [skip ci]"
+            git push
+          else
+            echo "Không có thay đổi mới cần commit."
+          fi

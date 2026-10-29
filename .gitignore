@@ -1,0 +1,7 @@
+# Bỏ qua các file nháp, file view-source tham khảo và file IPA dung lượng lớn
+view-source_*.html
+*.ipa
+*.tmp
+__pycache__/
+*.pyc
+.DS_Store
