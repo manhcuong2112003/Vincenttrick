@@ -53,8 +53,8 @@ class ShadowrocketHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         path = urllib.parse.unquote(parsed.path)
 
-        if path in ("/", "/index.html"):
-            self.path = "/" + urllib.parse.quote("Shadowrocket – Cài đặt.html")
+        if path == "/":
+            self.path = "/index.html"
             return super().do_GET()
 
         if path == "/api/status":
@@ -94,4 +94,3 @@ if __name__ == "__main__":
         auto_sign_manager.log(f"📱 Truy cập trên iPhone (cùng Wi-Fi): http://{lan_ip}:{PORT}")
         auto_sign_manager.log("==========================================================")
         httpd.serve_forever()
-

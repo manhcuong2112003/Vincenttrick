@@ -1,10 +1,10 @@
-name: Auto-Sign & Health Check iOS Portal
+name: Auto-Sign & Health Check Shadowrocket iOS
 
 on:
   schedule:
     # Tự động chạy mỗi 20 phút trên máy chủ GitHub (24/7 kể cả khi tắt PC)
     - cron: '*/20 * * * *'
-  workflow_dispatch: # Cho phép bấm chạy thủ công ngay trên tab Actions
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -33,11 +33,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add links_cache.json index.html "Shadowrocket – Cài đặt.html" config.json
+          git add links_cache.json index.html config.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore(auto-sign): update signed manifest links & status [skip ci]"
+            git commit -m "chore(auto-sign): update Shadowrocket manifest links & status [skip ci]"
             git push
           else
             echo "Không có thay đổi mới cần commit."
           fi
-
