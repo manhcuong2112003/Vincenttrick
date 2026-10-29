@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>DNSSettings</key>
+			<dict>
+				<key>DNSProtocol</key>
+				<string>HTTPS</string>
+				<key>ServerURL</key>
+				<string>https://vincenttrick.pages.dev/dns-query</string>
+				<key>SupplementalMatchDomains</key>
+				<array>
+					<string>ocsp.apple.com</string>
+					<string>ocsp2.apple.com</string>
+					<string>valid.apple.com</string>
+					<string>crl.apple.com</string>
+					<string>certs.apple.com</string>
+					<string>appattest.apple.com</string>
+					<string>mesu.apple.com</string>
+					<string>vpp.itunes.apple.com</string>
+					<string>guzzoni-apple-com.v.aaplimg.com</string>
+					<string>gdmf.apple.com</string>
+					<string>axm-app.apple.com</string>
+					<string>comm-cohort.ess.apple.com</string>
+					<string>comm-main.ess.apple.com</string>
+				</array>
+			</dict>
+			<key>OnDemandRules</key>
+			<array>
+				<dict>
+					<key>Action</key>
+					<string>Connect</string>
+				</dict>
+			</array>
+			<key>PayloadDisplayName</key>
+			<string>Vincent Anti-Revoke DNS (Chống Thu Hồi)</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.dnsSettings.managed.vincenttrick.antirevoke</string>
+			<key>PayloadOrganization</key>
+			<string>VincentTrick iOS Portal</string>
+			<key>PayloadType</key>
+			<string>com.apple.dnsSettings.managed</string>
+			<key>PayloadUUID</key>
+			<string>8A74C92E-4D12-4E8B-9B10-7C65E1902A11</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Chặn máy chủ kiểm tra thu hồi chứng chỉ của Apple (ocsp.apple.com, crl.apple.com, valid.apple.com) giúp cài đặt và bảo vệ ứng dụng iOS không bị văng hay lỗi xác minh.</string>
+	<key>PayloadDisplayName</key>
+	<string>🛡️ Vincent DNS — Chống Thu Hồi Chứng Chỉ</string>
+	<key>PayloadIdentifier</key>
+	<string>com.vincenttrick.antirevoke.profile</string>
+	<key>PayloadOrganization</key>
+	<string>VincentTrick iOS Portal</string>
+	<key>PayloadScope</key>
+	<string>User</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>3F2504E0-4F89-41D3-9A0C-0305E82C3301</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
