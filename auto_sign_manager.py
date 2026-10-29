@@ -451,10 +451,12 @@ def add_game_from_ipaomtk_url(url: str) -> None:
     icon_url = imgs[0] if imgs else "https://ipaomtk.com/ipaomtk-icon.png"
 
     slug = urllib.parse.urlparse(main_url).path.strip("/").replace("-ipa", "")
+    is_game = bool(re.search(r'/category/games|game', html_main[:15000], flags=re.IGNORECASE)) and "locket" not in slug.lower()
+    category = "game" if is_game else "app"
     new_entry = {
         "id": slug,
         "name": app_name,
-        "category": "game",
+        "category": category,
         "version": version,
         "subtitle_vi": f"Bản v{version} • Đã ký sẵn cho iOS",
         "subtitle_en": f"v{version} • Pre-signed for iOS",

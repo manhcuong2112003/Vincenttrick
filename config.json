@@ -36,6 +36,19 @@
       "remote_ipa_url": "https://file.ipaomtk.com/Asphalt-8-Airborne/Asphalt-8-IPAOMTK.COM.ipa",
       "local_ipa_path": "",
       "fallback_3utools_plist": ""
+    },
+    {
+      "id": "locket-widget",
+      "name": "Locket Widget",
+      "category": "app",
+      "version": "2.70.0",
+      "subtitle_vi": "Bản v2.70.0 • Đã ký sẵn cho iOS",
+      "subtitle_en": "v2.70.0 • Pre-signed for iOS",
+      "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Locket-Widget-300x300.jpg",
+      "source_page_url": "https://ipaomtk.com/locket-widget/download/",
+      "remote_ipa_url": "https://file.ipaomtk.com/Locket-Widget/Locket-Widget-IPAOMTK.com.ipa",
+      "local_ipa_path": "",
+      "fallback_3utools_plist": ""
     }
   ],
   "signtools_api": {

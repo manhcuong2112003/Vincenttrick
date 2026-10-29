@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-29 14:36:07",
+  "updated_at": "2026-10-29 23:00:02",
   "last_error": null,
   "last_alert_sent_at": 0,
   "in_error_state": false,
@@ -11,18 +11,19 @@
       "manifest_url": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist",
       "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fdl.3u.com%2Fplist%2F2026%2F09%2F08%2F1788829540721_622855.plist",
       "ipa_url": "https://dl.3u.com/soft/2026/09/07/z_932747118_890167352_1.ipa",
-      "signed_at": "2026-10-29 14:36:00",
+      "signed_at": "2026-10-29 22:57:48",
       "ocsp_status": "APPLE_OFFICIAL",
       "status": "active"
     },
     {
       "cert_id": "main/RAKUTEN SECURITIES,INC.zip",
-      "label": "Server 2 — Rakuten Securities (Cần DNS)",
+      "label": "Server 2 — RAKUTEN SECURITIES,INC",
       "badge": "Enterprise • Cần DNS",
       "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist",
       "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist",
       "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.ipa",
-      "signed_at": "2026-10-29 19:12:03",
+      "signed_at": "2026-10-29 22:58:00",
+      "cert_updated_at_ts": 1792425927,
       "ocsp_status": "REVOKED",
       "status": "active"
     },
@@ -33,18 +34,20 @@
       "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist",
       "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist",
       "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.ipa",
-      "signed_at": "2026-10-29 20:05:53",
+      "signed_at": "2026-10-29 22:10:35",
+      "cert_updated_at_ts": 1792240223,
       "ocsp_status": "REVOKED",
       "status": "active"
     },
     {
       "cert_id": "main/China Telecom Corporation Limited.zip",
-      "label": "Server 4 — China Telecom (Cần bật DNS trước)",
+      "label": "Server 4 — China Telecom (Full VPN)",
       "badge": "Enterprise • Cần DNS",
       "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist",
       "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist",
       "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.ipa",
-      "signed_at": "2026-10-29 19:10:28",
+      "signed_at": "2026-10-29 22:58:13",
+      "cert_updated_at_ts": 1781541318,
       "ocsp_status": "REVOKED",
       "status": "active"
     }
@@ -60,7 +63,7 @@
       "subtitle_en": "Proxy & VPN Utility • No Apple ID or PC required",
       "icon": "./Shadowrocket – Cài đặt_files/shadowrocket.png",
       "remote_ipa_signature": "\"6aa2a4e5-16808fe\"|Thu, 10 Sep 2026 12:39:01 GMT|23595262",
-      "updated_at": "2026-10-29 14:36:04",
+      "updated_at": "2026-10-29 22:58:15",
       "servers": [
         {
           "cert_id": "apple_official_3u",
@@ -69,18 +72,19 @@
           "manifest_url": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist",
           "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fdl.3u.com%2Fplist%2F2026%2F09%2F08%2F1788829540721_622855.plist",
           "ipa_url": "https://dl.3u.com/soft/2026/09/07/z_932747118_890167352_1.ipa",
-          "signed_at": "2026-10-29 14:36:00",
+          "signed_at": "2026-10-29 22:57:48",
           "ocsp_status": "APPLE_OFFICIAL",
           "status": "active"
         },
         {
           "cert_id": "main/RAKUTEN SECURITIES,INC.zip",
-          "label": "Server 2 — Rakuten Securities (Cần DNS)",
+          "label": "Server 2 — RAKUTEN SECURITIES,INC",
           "badge": "Enterprise • Cần DNS",
           "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist",
           "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist",
           "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.ipa",
-          "signed_at": "2026-10-29 19:12:03",
+          "signed_at": "2026-10-29 22:58:00",
+          "cert_updated_at_ts": 1792425927,
           "ocsp_status": "REVOKED",
           "status": "active"
         },
@@ -91,18 +95,20 @@
           "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist",
           "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist",
           "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.ipa",
-          "signed_at": "2026-10-29 20:05:53",
+          "signed_at": "2026-10-29 22:10:35",
+          "cert_updated_at_ts": 1792240223,
           "ocsp_status": "REVOKED",
           "status": "active"
         },
         {
           "cert_id": "main/China Telecom Corporation Limited.zip",
-          "label": "Server 4 — China Telecom (Cần bật DNS trước)",
+          "label": "Server 4 — China Telecom (Full VPN)",
           "badge": "Enterprise • Cần DNS",
           "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist",
           "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist",
           "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.ipa",
-          "signed_at": "2026-10-29 19:10:28",
+          "signed_at": "2026-10-29 22:58:13",
+          "cert_updated_at_ts": 1781541318,
           "ocsp_status": "REVOKED",
           "status": "active"
         }
@@ -117,7 +123,7 @@
       "subtitle_en": "Arcade Racing Game • Pre-signed for iOS",
       "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Asphalt-8-Airborne--300x300.jpg",
       "remote_ipa_signature": "\"6ad36d78-b489f8f0\"|Sat, 17 Oct 2026 12:43:36 GMT|3028941040",
-      "updated_at": "2026-10-29 14:36:07",
+      "updated_at": "2026-10-29 22:58:24",
       "servers": [
         {
           "cert_id": "main/RAKUTEN SECURITIES,INC.zip",
@@ -151,6 +157,55 @@
           "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FAsphalt-8-IPAOMTK.COM-signed-9a13ced8ecce09da862e.plist",
           "ipa_url": "https://signtools.ipaomtk.com/output/Asphalt-8-IPAOMTK.COM-signed-9a13ced8ecce09da862e.ipa",
           "signed_at": "2026-10-29 21:06:28",
+          "ocsp_status": "REVOKED",
+          "status": "active"
+        }
+      ]
+    },
+    "locket-widget": {
+      "id": "locket-widget",
+      "name": "Locket Widget",
+      "category": "app",
+      "version": "2.70.0",
+      "subtitle_vi": "Bản v2.70.0 • Đã ký sẵn cho iOS",
+      "subtitle_en": "v2.70.0 • Pre-signed for iOS",
+      "icon": "https://ipaomtk.com/wp-content/uploads/2023/03/Locket-Widget-300x300.jpg",
+      "remote_ipa_signature": "\"6ae0e318-56cdc66\"|Tue, 27 Oct 2026 17:44:56 GMT|91020390",
+      "updated_at": "2026-10-29 23:00:02",
+      "servers": [
+        {
+          "cert_id": "main/RAKUTEN SECURITIES,INC.zip",
+          "label": "Server 1 — RAKUTEN SECURITIES,INC",
+          "badge": "Enterprise • Cần DNS",
+          "manifest_url": "https://signtools.ipaomtk.com/output/Locket-Widget-IPAOMTK.com-signed-2f13c21dca8fbdd8be2b.plist",
+          "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FLocket-Widget-IPAOMTK.com-signed-2f13c21dca8fbdd8be2b.plist",
+          "ipa_url": "https://signtools.ipaomtk.com/output/Locket-Widget-IPAOMTK.com-signed-2f13c21dca8fbdd8be2b.ipa",
+          "signed_at": "2026-10-29 22:58:55",
+          "cert_updated_at_ts": 1792425927,
+          "ocsp_status": "REVOKED",
+          "status": "active"
+        },
+        {
+          "cert_id": "main/Beihang University.zip",
+          "label": "Server 2 — Beihang University",
+          "badge": "Enterprise • Cần DNS",
+          "manifest_url": "https://signtools.ipaomtk.com/output/Locket-Widget-IPAOMTK.com-signed-5e7e921b27c224d654ec.plist",
+          "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FLocket-Widget-IPAOMTK.com-signed-5e7e921b27c224d654ec.plist",
+          "ipa_url": "https://signtools.ipaomtk.com/output/Locket-Widget-IPAOMTK.com-signed-5e7e921b27c224d654ec.ipa",
+          "signed_at": "2026-10-29 22:59:39",
+          "cert_updated_at_ts": 1792240223,
+          "ocsp_status": "REVOKED",
+          "status": "active"
+        },
+        {
+          "cert_id": "main/China Telecom Corporation Limited.zip",
+          "label": "Server 3 — China Telecom (Full VPN)",
+          "badge": "Enterprise • Cần DNS",
+          "manifest_url": "https://signtools.ipaomtk.com/output/Locket-Widget-IPAOMTK.com-signed-39a4a3afd292788aca05.plist",
+          "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FLocket-Widget-IPAOMTK.com-signed-39a4a3afd292788aca05.plist",
+          "ipa_url": "https://signtools.ipaomtk.com/output/Locket-Widget-IPAOMTK.com-signed-39a4a3afd292788aca05.ipa",
+          "signed_at": "2026-10-29 23:00:01",
+          "cert_updated_at_ts": 1781541318,
           "ocsp_status": "REVOKED",
           "status": "active"
         }

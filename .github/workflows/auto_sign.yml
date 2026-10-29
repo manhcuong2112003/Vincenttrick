@@ -40,3 +40,4 @@ jobs:
           else
             echo "Không có thay đổi mới cần commit."
           fi
+
