@@ -41,6 +41,7 @@
       "id": "locket-widget",
       "name": "Locket Widget",
       "category": "app",
+      "bundle_id": "com.locket.Locket",
       "tag_vi": "Mạng xã hội • Widget",
       "tag_en": "Social Widget",
       "version": "2.70.0",

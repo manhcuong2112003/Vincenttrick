@@ -239,7 +239,7 @@ def sign_remote_ipa(cfg: dict, item: dict, cert_id: str) -> dict:
     post_data = urllib.parse.urlencode({
         "certificate_mode": "server",
         "server_certificate": cert_id,
-        "bundle": cfg["signtools_api"].get("bundle_mode", "com.ipaomtk.auto"),
+        "bundle": item.get("bundle_id") or cfg["signtools_api"].get("bundle_mode", "com.ipaomtk.auto"),
         "ipa_url": item["remote_ipa_url"],
         "app_name": item["name"]
     }).encode("utf-8")
