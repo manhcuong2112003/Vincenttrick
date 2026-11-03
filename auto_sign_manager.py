@@ -33,9 +33,20 @@ CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
 OPENSSL_PATH = shutil.which("openssl") or r"C:\Program Files\Git\usr\bin\openssl.exe"
 
 
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 def log(msg: str) -> None:
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"[{now}] {msg}", flush=True)
+    enc = getattr(sys.stdout, "encoding", "utf-8") or "utf-8"
+    try:
+        print(f"[{now}] {msg}", flush=True)
+    except Exception:
+        safe_msg = msg.encode(enc, errors="replace").decode(enc, errors="replace")
+        print(f"[{now}] {safe_msg}", flush=True)
 
 
 def load_config() -> dict:
@@ -421,21 +432,9 @@ def run_sync(force_resign: bool = False) -> bool:
         online_certs = []
         online_cert_ids = {}
 
-    # 1. Tự động tổng hợp chứng chỉ mới nhất (theo updatedAt) + ưu tiên
+    # 1. Tự động ưu tiên chứng chỉ trong preferred_certificates trước
     target_certs = []
     seen_ids = set()
-    if online_certs:
-        sorted_online = sorted(online_certs, key=lambda c: c.get("updatedAt", 0), reverse=True)
-        for c in sorted_online[:2]:
-            cid = c["id"]
-            if cid not in seen_ids:
-                seen_ids.add(cid)
-                target_certs.append({
-                    "id": cid,
-                    "label": c.get("name", cid),
-                    "badge": "Mới nhất • Cần DNS",
-                    "updated_at_ts": c.get("updatedAt", 0)
-                })
 
     for pref in cfg.get("preferred_certificates", []):
         cid = pref["id"]
@@ -448,6 +447,19 @@ def run_sync(force_resign: bool = False) -> bool:
                 "badge": pref.get("badge", "Enterprise • Cần DNS"),
                 "updated_at_ts": online_cert_ids.get(cid, {}).get("updatedAt", 0)
             })
+
+    if online_certs:
+        sorted_online = sorted(online_certs, key=lambda c: c.get("updatedAt", 0), reverse=True)
+        for c in sorted_online:
+            cid = c["id"]
+            if cid not in seen_ids:
+                seen_ids.add(cid)
+                target_certs.append({
+                    "id": cid,
+                    "label": c.get("name", cid),
+                    "badge": "Mới nhất • Cần DNS",
+                    "updated_at_ts": c.get("updatedAt", 0)
+                })
 
     target_certs = target_certs[:3]
 

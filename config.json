@@ -9,7 +9,7 @@
     "remote_ipa_url": "https://file.ipaomtk.com/Shadowrocket/Shadowrocket-IPAOMTK.COM.ipa",
     "local_ipa_path": "Shadowrocket-IPAOMTK.COM.ipa",
     "dns_profile_url": "./Vincent-DNS.mobileconfig",
-    "fallback_3utools_plist": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist",
+    "fallback_3utools_plist": "",
     "html_file": "index.html",
     "cache_file": "links_cache.json"
   },
@@ -23,9 +23,9 @@
   },
   "preferred_certificates": [
     {
-      "id": "main/China Telecom Corporation Limited.zip",
-      "label": "Server 1 — China Telecom (Full VPN)",
-      "badge": "Khuyên dùng • Hỗ trợ VPN"
+      "id": "main/Beihang University.zip",
+      "label": "Server 1 — Beihang University",
+      "badge": "Khuyên dùng • Đã tin cậy trên máy"
     },
     {
       "id": "main/RAKUTEN SECURITIES,INC.zip",
@@ -33,14 +33,14 @@
       "badge": "Mặc định • Ổn định"
     },
     {
-      "id": "main/HSBC Bank plc.zip",
-      "label": "Server 3 — HSBC Bank Plc",
-      "badge": "Dự phòng 1 • Hạn 05/2027"
+      "id": "main/China Telecom Corporation Limited.zip",
+      "label": "Server 3 — China Telecom (Full VPN)",
+      "badge": "Dự phòng 1 • Hỗ trợ VPN"
     },
     {
-      "id": "main/Beihang University.zip",
-      "label": "Server 4 — Beihang University",
-      "badge": "Dự phòng 2 • Hạn 12/2026"
+      "id": "main/HSBC Bank plc.zip",
+      "label": "Server 4 — HSBC Bank Plc",
+      "badge": "Dự phòng 2 • Hạn 05/2027"
     }
   ],
   "email_alert": {
