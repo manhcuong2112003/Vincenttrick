@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-03 10:00:03",
+  "updated_at": "2026-11-03 10:04:20",
   "version": "2.2.92",
   "last_error": null,
   "last_alert_sent_at": 0,
@@ -13,7 +13,7 @@
       "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist",
       "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist",
       "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.ipa",
-      "signed_at": "2026-11-03 09:59:45",
+      "signed_at": "2026-11-03 10:04:06",
       "cert_updated_at_ts": 1792240223,
       "ocsp_status": "REVOKED",
       "status": "active"
@@ -25,7 +25,7 @@
       "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist",
       "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist",
       "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.ipa",
-      "signed_at": "2026-11-03 09:59:53",
+      "signed_at": "2026-11-03 10:04:12",
       "cert_updated_at_ts": 1792425927,
       "ocsp_status": "REVOKED",
       "status": "active"
@@ -37,7 +37,7 @@
       "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist",
       "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist",
       "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.ipa",
-      "signed_at": "2026-11-03 10:00:02",
+      "signed_at": "2026-11-03 10:04:19",
       "cert_updated_at_ts": 1781541318,
       "ocsp_status": "REVOKED",
       "status": "active"
