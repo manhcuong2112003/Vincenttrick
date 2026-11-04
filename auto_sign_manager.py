@@ -563,7 +563,7 @@ def run_sync(force_resign: bool = False) -> bool:
         cache["last_error"] = None
 
     save_cache(cache_path, cache)
-    update_html_file(cfg, cache)
+    # update_html_file(cfg, cache)  # Decoupled: index.html reads links_cache.json dynamically
     return len(item_servers) > 0
 
 

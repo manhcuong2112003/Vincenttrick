@@ -29,11 +29,21 @@ jobs:
         run: |
           python3 auto_sign_manager.py
 
-      - name: Commit and Push updated cache & HTML
+      - name: Verify No Conflict Markers & Valid JSON
+        run: |
+          if grep -rnw "." -e "<<<<<<<" -e "=======" -e ">>>>>>>" --exclude-dir=".git"; then
+            echo "❌ PHÁT HIỆN CONFLICT MARKER! HỦY BƯỚC COMMIT ĐỂ BẢO VỆ CODE!"
+            exit 1
+          fi
+          python3 -c "import json; json.load(open('links_cache.json', encoding='utf-8'))"
+          echo "✅ File cache JSON hợp lệ, không có conflict markers."
+
+      - name: Commit and Push updated cache only
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add links_cache.json index.html config.json
+          # Tách rời: Chỉ commit file dữ liệu links_cache.json & config.json, không sửa index.html
+          git add links_cache.json config.json
           if ! git diff --cached --quiet; then
             git commit -m "chore(auto-sign): update Shadowrocket manifest links & status [skip ci]"
             git push

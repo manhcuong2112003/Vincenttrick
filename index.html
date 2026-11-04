@@ -437,18 +437,41 @@
     renderUI();
   }
 
+  try {
+    renderUI();
+  } catch (e) {
+    console.error('renderUI error:', e);
+  }
+
+  try {
+    setLang('vi');
+  } catch (e) {
+    console.error('setLang error:', e);
+  }
+
   fetch('./links_cache.json?t=' + Date.now())
     .then(function(r) { return r.ok ? r.json() : null; })
     .then(function(json) {
-      if (json) {
+      if (json && json.servers && json.servers.length) {
         activeData = Object.assign({}, activeData, json);
-        renderUI();
+        try { renderUI(); } catch (e) {}
       }
     })
-    .catch(function() {});
+    .catch(function(err) {
+      console.warn('Cache fetch fallback to static:', err);
+    });
 
-  renderUI();
-  setLang('vi');
+  // Direct touch/click handler for iOS Safari itms-services
+  const installBtn = document.getElementById('main-install-btn');
+  if (installBtn) {
+    installBtn.addEventListener('click', function(e) {
+      const targetUrl = installBtn.getAttribute('href');
+      if (targetUrl && targetUrl.startsWith('itms-services:')) {
+        // Ensure iOS Safari opens itms-services protocol directly
+        window.location.href = targetUrl;
+      }
+    });
+  }
 </script>
 
 </body>
