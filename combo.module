@@ -1,0 +1,41 @@
+#!name=Combo 2-in-1: Locket Gold & YouTube Premium
+#!desc=Mở khóa trọn bộ Locket Gold VIP 30s + YouTube Premium (Chặn quảng cáo, PiP, Nghe nền tắt màn hình) trong 1 mô-đun duy nhất.
+#!author=Vincent
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Star.png
+
+[Rule]
+# 1. Chặn AppAttest và Firebase Realtime của Locket
+DOMAIN,appattest.apple.com,REJECT
+DOMAIN,firebaseremoteconfigrealtime.googleapis.com,REJECT
+DOMAIN-SUFFIX,firebaselogging.googleapis.com,REJECT
+DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com,REJECT
+# 2. Chặn UDP 443 (QUIC) để ép Locket & YouTube hạ xuống TCP HTTPS
+AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
+
+[URL Rewrite]
+# Chặn quảng cáo và mở khóa luồng YouTube
+(^https?:\/\/[\w-]+\.googlevideo\.com\/(?!dclk_video_ads).+?)&ctier=L(&.+?),ctier,(.+) $1$2$3 302
+^https?:\/\/[\w-]+\.googlevideo\.com\/(?!(dclk_video_ads|videoplayback\?)).+&oad _ reject-200
+^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads _ reject-200
+^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) _ reject-200
+^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext _ reject-200
+
+[Map Local]
+# Bỏ qua quảng cáo mở đầu YouTube
+^https?:\/\/[\w-]+\.googlevideo\.com\/initplayback.+&oad 'data-type=text data="" status-code=200'
+
+[Script]
+# [Locket] 1. Xóa ETag / If-None-Match
+deleteHeader = type=http-request,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com|firebaseremoteconfig\.googleapis\.com)\/.+,script-path=https://vincenttrick.pages.dev/deleteHeader.js,timeout=60
+
+# [Locket] 2. Mở khóa toàn bộ API RevenueCat VIP
+revenuecat = type=http-response,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com)\/.+\/(receipts|subscribers|product_entitlement_mapping).*,script-path=https://vincenttrick.pages.dev/locket_gold_30s.js,requires-body=true,max-size=-1,timeout=60
+
+# [Locket] 3. Mở khóa toàn bộ 1,014 cờ Firebase Remote Config (Gold VIP + 30s)
+locketFirebase = type=http-response,pattern=^https?:\/\/firebaseremoteconfig\.googleapis\.com\/.+,script-path=https://vincenttrick.pages.dev/locket_gold_30s.js,requires-body=true,max-size=-1,timeout=60
+
+# [YouTube] 4. Mở khóa YouTube Premium & Chặn quảng cáo Protobuf
+youtube.response = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch),requires-body=1,max-size=-1,binary-body-mode=1,script-path=https://vincenttrick.pages.dev/youtube.response.js,argument="{\"lyricLang\":\"vi\",\"captionLang\":\"vi\",\"blockUpload\":true,\"blockImmersive\":true,\"debug\":false}"
+
+[MITM]
+hostname = %APPEND% api.revenuecat.com, revenuecat.com, rc-cdn.revenuecat.com, sdk.revenuecat.com, firebaseremoteconfig.googleapis.com, redirector*.googlevideo.com, *.googlevideo.com, www.youtube.com, s.youtube.com, youtubei.googleapis.com

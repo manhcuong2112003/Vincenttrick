@@ -324,6 +324,64 @@
   }
   .btn:active { opacity: 0.85; transform: scale(0.98); }
 
+  /* Sub Module Selector Pills */
+  .sub-tabs {
+    display: flex;
+    background: var(--lang-bg);
+    border-radius: 14px;
+    padding: 3px;
+    gap: 4px;
+    margin-bottom: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .sub-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: var(--lang-text);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 4px;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
+  }
+  .sub-tab.active {
+    background: var(--card-bg);
+    color: var(--text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .sub-tab.active {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+  }
+
+  .btn-module {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+    font-size: 15.5px; font-weight: 700;
+    padding: 14px 18px;
+    border-radius: 14px;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 0.15s, transform 0.15s;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+  }
+  .btn-module:active { opacity: 0.85; transform: scale(0.98); }
+
   .btn-gold {
     display: flex; align-items: center; justify-content: center; gap: 8px;
     width: 100%;
@@ -445,10 +503,10 @@
       </span>
     </button>
     <button class="nav-tab" id="tab-btn-locket" onclick="switchTab('locket')">
-      <span class="tab-icon">👑</span>
+      <span class="tab-icon">⚡</span>
       <span class="tab-text">
-        <span class="vi">Mô-đun Locket Gold</span>
-        <span class="en" style="display:none;">Locket Gold Module</span>
+        <span class="vi">Mô-đun Tiện ích VIP</span>
+        <span class="en" style="display:none;">VIP Modules</span>
       </span>
     </button>
   </div>
@@ -514,40 +572,54 @@
     </div>
   </div>
 
-  <!-- ==================== TAB 2: LOCKET GOLD MODULE ==================== -->
+  <!-- ==================== TAB 2: VIP MODULES ==================== -->
   <div id="tab-content-locket" style="display:none;">
-    <!-- Logo -->
+
+    <!-- 3 Options Switcher -->
+    <div class="sub-tabs">
+      <button class="sub-tab active" id="sub-btn-combo" onclick="selectModule('combo')">
+        🌟 <span>Combo 2-in-1</span>
+      </button>
+      <button class="sub-tab" id="sub-btn-locket" onclick="selectModule('locket')">
+        👑 <span>Locket Gold</span>
+      </button>
+      <button class="sub-tab" id="sub-btn-youtube" onclick="selectModule('youtube')">
+        ▶️ <span>YouTube</span>
+      </button>
+    </div>
+
+    <!-- Logo / Icon -->
     <div style="text-align:center; margin-bottom:10px;">
-      <div style="width:80px; height:80px; border-radius:20px; background:linear-gradient(135deg, #f59e0b 0%, #b45309 100%); display:inline-flex; align-items:center; justify-content:center; box-shadow:0 4px 18px rgba(245,158,11,0.35);">
-        <span style="font-size:42px;">👑</span>
+      <div id="module-icon-box" style="width:80px; height:80px; border-radius:20px; background:linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%); display:inline-flex; align-items:center; justify-content:center; box-shadow:0 4px 18px rgba(124,58,237,0.35); transition:all 0.25s;">
+        <span id="module-icon-emoji" style="font-size:42px;">🌟</span>
       </div>
     </div>
 
     <!-- Badge -->
-    <div class="badge badge-gold">
-      <span>✨ Locket iOS</span>
+    <div class="badge badge-gold" id="module-badge-box">
+      <span id="module-badge-text">✨ KHUYÊN DÙNG • COMBO 2-IN-1</span>
     </div>
 
-    <div class="app-name">Locket Gold &amp; 30s Video</div>
-    <div class="app-sub">
-      <span class="vi">Cấu hình mô-đun mở khoá tính năng cho Locket App Store</span>
-      <span class="en" style="display:none;">Module configuration for Locket App Store</span>
+    <div class="app-name" id="module-title">Combo Locket &amp; YouTube</div>
+    <div class="app-sub" id="module-subtitle">
+      <span class="vi" id="module-sub-vi">Mở khóa cùng lúc Locket Gold VIP 30s và YouTube Premium</span>
+      <span class="en" id="module-sub-en" style="display:none;">Unlock Locket Gold VIP 30s and YouTube Premium together</span>
     </div>
 
     <div class="divider"></div>
 
     <!-- 1-Click Install Button for Shadowrocket -->
-    <a class="btn-gold" href="shadowrocket://install?module=https%3A%2F%2Fvincenttrick.pages.dev%2Flocket.module">
+    <a class="btn-module" id="module-install-btn" href="shadowrocket://install?module=https%3A%2F%2Fvincenttrick.pages.dev%2Fcombo.module" style="background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
         <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
       </svg>
-      <span class="vi">Mở Trực Tiếp Trong Shadowrocket</span>
-      <span class="en" style="display:none;">Open in Shadowrocket</span>
+      <span class="vi" id="module-btn-vi">Mở Trực Tiếp Trong Shadowrocket</span>
+      <span class="en" id="module-btn-en" style="display:none;">Open in Shadowrocket</span>
     </a>
 
     <!-- Copy Module URL Button -->
-    <button class="btn-outline" onclick="copyModuleUrl()">
+    <button class="btn-outline" onclick="copyCurrentModuleUrl()">
       🔗
       <span class="vi" id="btn-copy-url-text">Sao Chép Liên Kết Mô-Đun (URL)</span>
       <span class="en" id="btn-copy-url-text-en" style="display:none;">Copy Module Link (URL)</span>
@@ -557,15 +629,15 @@
     <div class="guide-box">
       <div class="vi">
         <strong>💡 Quy trình 3 bước kích hoạt:</strong><br>
-        1. Cài đặt <strong>Shadowrocket</strong> (Tab 1) và tải app <strong>Locket</strong> gốc từ App Store.<br>
-        2. Bấm nút <strong>"Mở Trực Tiếp Trong Shadowrocket"</strong> (hoặc copy link vào <em>Cấu hình → Mô-đun → Thêm mô-đun</em>).<br>
-        3. Trong Shadowrocket: Bật <strong>HTTPS Decryption (Giải mã HTTPS)</strong>, cài chứng chỉ CA và vào <strong>Cài đặt iPhone → Giới thiệu → Cài đặt tin cậy chứng chỉ</strong> để gạt xanh tin cậy. Sau đó bật VPN và mở Locket!
+        1. Cài đặt <strong>Shadowrocket</strong> (Tab 1) và tải app <strong>Locket</strong> / <strong>YouTube</strong> gốc từ App Store.<br>
+        2. Chọn 1 trong 3 mô-đun (khuyên dùng <strong>Combo 2-in-1</strong>) rồi bấm <strong>"Mở Trực Tiếp Trong Shadowrocket"</strong> (hoặc sao chép URL dán vào mục <em>Mô-đun</em>).<br>
+        3. Trong Shadowrocket: Bật <strong>HTTPS Decryption (Giải mã HTTPS)</strong>, cài chứng chỉ CA và vào <strong>Cài đặt iPhone → Giới thiệu → Cài đặt tin cậy chứng chỉ</strong> để gạt xanh tin cậy. Sau đó bật VPN và thưởng thức!
       </div>
       <div class="en" style="display:none;">
         <strong>💡 3-Step Setup Guide:</strong><br>
-        1. Install <strong>Shadowrocket</strong> (Tab 1) &amp; download official <strong>Locket</strong> from App Store.<br>
-        2. Tap <strong>"Open in Shadowrocket"</strong> (or paste the module link under <em>Config → Modules → Add Module</em>).<br>
-        3. In Shadowrocket: Enable <strong>HTTPS Decryption</strong>, install CA cert and enable full trust in <strong>iPhone Settings → About → Certificate Trust Settings</strong>. Turn on VPN and open Locket!
+        1. Install <strong>Shadowrocket</strong> (Tab 1) &amp; download official <strong>Locket</strong> / <strong>YouTube</strong> from App Store.<br>
+        2. Choose 1 of 3 modules (recommend <strong>Combo 2-in-1</strong>) and tap <strong>"Open in Shadowrocket"</strong>.<br>
+        3. In Shadowrocket: Enable <strong>HTTPS Decryption</strong>, install CA cert and enable full trust in <strong>iPhone Settings → About → Certificate Trust Settings</strong>. Turn on VPN and enjoy!
       </div>
     </div>
   </div>
@@ -586,12 +658,94 @@
 <script>
   /*__SERVERS_DATA_START__*/const SIGN_DATA = {"updated_at": "2026-11-04 10:06:54", "version": "2.2.92", "dns_url": "./Vincent-DNS.mobileconfig", "servers": [{"cert_id": "apple_official_3u", "label": "Server 1 — Bản Chính Hãng Apple (v2.2.92)", "badge": "Khuyên dùng • Không lỗi xác minh", "manifest_url": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fdl.3u.com%2Fplist%2F2026%2F09%2F08%2F1788829540721_622855.plist", "ipa_url": "https://dl.3u.com/soft/2026/09/07/z_932747118_890167352_1.ipa", "signed_at": "2026-11-04 10:06:51", "ocsp_status": "APPLE_OFFICIAL", "status": "active"}, {"cert_id": "main/Beihang University.zip", "label": "Server 2 — Beihang University", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.ipa", "signed_at": "2026-11-03 23:06:59", "cert_updated_at_ts": 1792240223, "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/RAKUTEN SECURITIES,INC.zip", "label": "Server 3 — Rakuten Securities", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.ipa", "signed_at": "2026-11-04 03:03:38", "cert_updated_at_ts": 1792425927, "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/China Telecom Corporation Limited.zip", "label": "Server 4 — China Telecom (Full VPN)", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.ipa", "signed_at": "2026-11-04 03:03:46", "cert_updated_at_ts": 1781541318, "ocsp_status": "REVOKED", "status": "active"}]};/*__SERVERS_DATA_END__*/
 
-  const MODULE_DIRECT_URL = "https://vincenttrick.pages.dev/locket.module";
+  const MODULES_DATA = {
+    combo: {
+      url: "https://vincenttrick.pages.dev/combo.module",
+      icon: "🌟",
+      iconBg: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
+      btnBg: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
+      badgeVi: "✨ KHUYÊN DÙNG • COMBO 2-IN-1",
+      badgeEn: "✨ RECOMMENDED • COMBO 2-IN-1",
+      title: "Combo Locket & YouTube",
+      subVi: "Mở khóa cùng lúc Locket Gold VIP 30s và YouTube Premium",
+      subEn: "Unlock Locket Gold VIP 30s & YouTube Premium together"
+    },
+    locket: {
+      url: "https://vincenttrick.pages.dev/locket.module",
+      icon: "👑",
+      iconBg: "linear-gradient(135deg, #f59e0b 0%, #b45309 100%)",
+      btnBg: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+      badgeVi: "✨ LOCKET GOLD VIP • 30S",
+      badgeEn: "✨ LOCKET GOLD VIP • 30S",
+      title: "Locket Gold & 30s Video",
+      subVi: "Cấu hình mô-đun mở khoá tính năng cho Locket App Store",
+      subEn: "Module configuration for Locket App Store"
+    },
+    youtube: {
+      url: "https://vincenttrick.pages.dev/youtube.module",
+      icon: "▶️",
+      iconBg: "linear-gradient(135deg, #ef4444 0%, #991b1b 100%)",
+      btnBg: "linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)",
+      badgeVi: "✨ YOUTUBE PREMIUM & PIP",
+      badgeEn: "✨ YOUTUBE PREMIUM & PIP",
+      title: "YouTube Premium & Chặn QC",
+      subVi: "Chặn sạch quảng cáo video & Shorts, mở khóa PiP & nghe nhạc nền",
+      subEn: "Block all video & Shorts ads, enable PiP and background audio"
+    }
+  };
 
+  let selectedModuleKey = 'combo';
   let currentLang = 'vi';
   let activeTab = 'sdrk';
   let selectedServerIndex = 0;
   let activeData = SIGN_DATA;
+
+  function selectModule(key) {
+    if (!MODULES_DATA[key]) return;
+    selectedModuleKey = key;
+    renderModuleUI();
+  }
+
+  function renderModuleUI() {
+    const data = MODULES_DATA[selectedModuleKey];
+    if (!data) return;
+
+    ['combo', 'locket', 'youtube'].forEach(function(k) {
+      const btn = document.getElementById('sub-btn-' + k);
+      if (btn) btn.classList.toggle('active', k === selectedModuleKey);
+    });
+
+    const iconBox = document.getElementById('module-icon-box');
+    if (iconBox) iconBox.style.background = data.iconBg;
+
+    const iconEmoji = document.getElementById('module-icon-emoji');
+    if (iconEmoji) iconEmoji.textContent = data.icon;
+
+    const badgeText = document.getElementById('module-badge-text');
+    if (badgeText) badgeText.textContent = currentLang === 'vi' ? data.badgeVi : data.badgeEn;
+
+    const titleEl = document.getElementById('module-title');
+    if (titleEl) titleEl.textContent = data.title;
+
+    const subVi = document.getElementById('module-sub-vi');
+    if (subVi) subVi.textContent = data.subVi;
+
+    const subEn = document.getElementById('module-sub-en');
+    if (subEn) subEn.textContent = data.subEn;
+
+    const installBtn = document.getElementById('module-install-btn');
+    if (installBtn) {
+      installBtn.href = 'shadowrocket://install?module=' + encodeURIComponent(data.url);
+      installBtn.style.background = data.btnBg;
+    }
+  }
+
+  function copyCurrentModuleUrl() {
+    const data = MODULES_DATA[selectedModuleKey];
+    if (!data) return;
+    const msg = currentLang === 'vi' ? '✔ Đã sao chép liên kết Mô-đun!' : '✔ Module URL copied!';
+    copyToClipboard(data.url, msg);
+  }
 
   function switchTab(tab) {
     activeTab = tab;
@@ -639,11 +793,6 @@
       prompt(currentLang === 'vi' ? 'Hãy sao chép liên kết dưới đây:' : 'Copy this link:', text);
     }
     document.body.removeChild(ta);
-  }
-
-  function copyModuleUrl() {
-    const msg = currentLang === 'vi' ? '✔ Đã sao chép liên kết Mô-đun!' : '✔ Module URL copied!';
-    copyToClipboard(MODULE_DIRECT_URL, msg);
   }
 
   function renderUI() {
@@ -710,9 +859,11 @@
 
     document.documentElement.lang = lang;
     renderUI();
+    renderModuleUI();
   }
 
   try { renderUI(); } catch (e) {}
+  try { renderModuleUI(); } catch (e) {}
   try { setLang('vi'); } catch (e) {}
 
   fetch('./links_cache.json?t=' + Date.now())
