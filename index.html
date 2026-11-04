@@ -361,59 +361,7 @@
   }
   .guide-box strong { color: var(--text); }
 
-  /* Feature Checklist */
-  .feature-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-bottom: 14px;
-    text-align: left;
-  }
-  .feature-item {
-    font-size: 11.5px;
-    font-weight: 600;
-    color: var(--text);
-    background: var(--info-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 9px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
 
-  /* Code preview */
-  .code-box {
-    background: var(--info-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 10px 12px;
-    text-align: left;
-    margin-bottom: 12px;
-  }
-  .code-header {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 11px; font-weight: 700; color: var(--sub);
-    margin-bottom: 6px;
-  }
-  .code-content {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 11px;
-    line-height: 1.45;
-    color: var(--text);
-    background: rgba(0,0,0,0.03);
-    border-radius: 8px;
-    padding: 8px;
-    max-height: 90px;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    word-break: break-all;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .code-content {
-      background: rgba(255,255,255,0.04);
-    }
-  }
 
   /* Warning */
   .warn {
@@ -543,24 +491,16 @@
 
     <!-- Badge -->
     <div class="badge badge-gold">
-      <span>✨ GOLD VIP • 30S VIDEO</span>
+      <span>✨ Locket iOS</span>
     </div>
 
     <div class="app-name">Locket Gold &amp; 30s Video</div>
     <div class="app-sub">
-      <span class="vi">Mở khóa 160 quyền VIP, 1.014 cờ Firebase &amp; Khung Hoàng Gia cho Locket App Store</span>
-      <span class="en" style="display:none;">Unlock 160 VIP Entitlements, 1,014 Firebase Flags &amp; Gold Crown for App Store Locket</span>
+      <span class="vi">Cấu hình mô-đun mở khoá tính năng cho Locket App Store</span>
+      <span class="en" style="display:none;">Module configuration for Locket App Store</span>
     </div>
 
     <div class="divider"></div>
-
-    <!-- Features Overview -->
-    <div class="feature-list">
-      <div class="feature-item">👑 <span class="vi">Mở Khóa Gold VIP</span><span class="en" style="display:none;">Unlock Gold VIP</span></div>
-      <div class="feature-item">⏱️ <span class="vi">Quay Video 30 Giây</span><span class="en" style="display:none;">30s Video Record</span></div>
-      <div class="feature-item">🖼️ <span class="vi">Khung Hoàng Gia VIP</span><span class="en" style="display:none;">Royal Crown Frames</span></div>
-      <div class="feature-item">🚀 <span class="vi">Dùng App Store Gốc</span><span class="en" style="display:none;">Original App Store</span></div>
-    </div>
 
     <!-- 1-Click Install Button for Shadowrocket -->
     <a class="btn-gold" href="shadowrocket://install?module=https%3A%2F%2Fvincenttrick.pages.dev%2Flocket.module">
@@ -578,22 +518,6 @@
       <span class="vi" id="btn-copy-url-text">Sao Chép Liên Kết Mô-Đun (URL)</span>
       <span class="en" id="btn-copy-url-text-en" style="display:none;">Copy Module Link (URL)</span>
     </button>
-
-    <!-- Copy Raw Text Button -->
-    <button class="btn-outline" style="border-color: var(--border); color: var(--sub);" onclick="copyModuleText()">
-      📋
-      <span class="vi" id="btn-copy-text-text">Sao Chép Toàn Bộ Mã Cấu Hình (Text)</span>
-      <span class="en" id="btn-copy-text-text-en" style="display:none;">Copy Raw Module Text</span>
-    </button>
-
-    <!-- Code Preview Box -->
-    <div class="code-box">
-      <div class="code-header">
-        <span>locket.module</span>
-        <span style="font-weight:500;">vincenttrick.pages.dev</span>
-      </div>
-      <div class="code-content" id="module-preview"></div>
-    </div>
 
     <!-- Step Guide -->
     <div class="guide-box">
@@ -627,30 +551,6 @@
 
 <script>
   /*__SERVERS_DATA_START__*/const SIGN_DATA = {"updated_at": "2026-11-04 10:06:54", "version": "2.2.92", "dns_url": "./Vincent-DNS.mobileconfig", "servers": [{"cert_id": "apple_official_3u", "label": "Server 1 — Bản Chính Hãng Apple (v2.2.92)", "badge": "Khuyên dùng • Không lỗi xác minh", "manifest_url": "https://dl.3u.com/plist/2026/09/08/1788829540721_622855.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fdl.3u.com%2Fplist%2F2026%2F09%2F08%2F1788829540721_622855.plist", "ipa_url": "https://dl.3u.com/soft/2026/09/07/z_932747118_890167352_1.ipa", "signed_at": "2026-11-04 10:06:51", "ocsp_status": "APPLE_OFFICIAL", "status": "active"}, {"cert_id": "main/Beihang University.zip", "label": "Server 2 — Beihang University", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-b6e64218a4ddb9e9d52d.ipa", "signed_at": "2026-11-03 23:06:59", "cert_updated_at_ts": 1792240223, "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/RAKUTEN SECURITIES,INC.zip", "label": "Server 3 — Rakuten Securities", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-dc4c5143e29b8899363d.ipa", "signed_at": "2026-11-04 03:03:38", "cert_updated_at_ts": 1792425927, "ocsp_status": "REVOKED", "status": "active"}, {"cert_id": "main/China Telecom Corporation Limited.zip", "label": "Server 4 — China Telecom (Full VPN)", "badge": "Enterprise • Cần DNS", "manifest_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist", "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fsigntools.ipaomtk.com%2Foutput%2FShadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.plist", "ipa_url": "https://signtools.ipaomtk.com/output/Shadowrocket-IPAOMTK.COM-signed-1ec2af6eef3eeacf88ca.ipa", "signed_at": "2026-11-04 03:03:46", "cert_updated_at_ts": 1781541318, "ocsp_status": "REVOKED", "status": "active"}]};/*__SERVERS_DATA_END__*/
-
-  const RAW_MODULE_CONTENT = `#!name=Locket Gold & 30s Video
-#!desc=Đồng bộ 100% cơ chế Server Uplocket: 160 quyền VIP, 1014 cờ Firebase, Theme Gold, Khung Hoàng Gia & Video 30s.
-#!author=Vincent
-
-[Rule]
-DOMAIN,appattest.apple.com,REJECT
-DOMAIN,firebaseremoteconfigrealtime.googleapis.com,REJECT
-DOMAIN-SUFFIX,firebaselogging.googleapis.com,REJECT
-DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com,REJECT
-AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
-
-[Script]
-# 1. Xóa ETag / If-None-Match (dùng setHeaderValue = "") để ép RevenueCat & Firebase luôn trả về HTTP 200
-deleteHeader = type=http-request,pattern=^https?:\\/\\/((api|rc-cdn|sdk)\\.revenuecat\\.com|revenuecat\\.com|firebaseremoteconfig\\.googleapis\\.com)\\/.+,script-path=https://raw.githubusercontent.com/manhcuong2112003/Locket_by_Vincent/main/deleteHeader.js,timeout=60
-
-# 2. Mở khóa toàn bộ API RevenueCat (Subscribers, Receipts, Offerings, Product Mapping trên cả api & rc-cdn)
-revenuecat = type=http-response,pattern=^https?:\\/\\/((api|rc-cdn|sdk)\\.revenuecat\\.com|revenuecat\\.com)\\/.+\\/(receipts|subscribers|product_entitlement_mapping).*,script-path=https://raw.githubusercontent.com/manhcuong2112003/Locket_by_Vincent/main/locket_gold_30s.js,requires-body=true,max-size=-1,timeout=60
-
-# 3. Mở khóa toàn bộ 1,014 cờ Firebase Remote Config (Feature Gates, Flag 30s, Theme Gold, Khung Hoàng Gia)
-locketFirebase = type=http-response,pattern=^https?:\\/\\/firebaseremoteconfig\\.googleapis\\.com\\/.+,script-path=https://raw.githubusercontent.com/manhcuong2112003/Locket_by_Vincent/main/locket_gold_30s.js,requires-body=true,max-size=-1,timeout=60
-
-[MITM]
-hostname = %APPEND% api.revenuecat.com, revenuecat.com, rc-cdn.revenuecat.com, sdk.revenuecat.com, firebaseremoteconfig.googleapis.com`;
 
   const MODULE_DIRECT_URL = "https://vincenttrick.pages.dev/locket.module";
 
@@ -712,11 +612,6 @@ hostname = %APPEND% api.revenuecat.com, revenuecat.com, rc-cdn.revenuecat.com, s
     copyToClipboard(MODULE_DIRECT_URL, msg);
   }
 
-  function copyModuleText() {
-    const msg = currentLang === 'vi' ? '✔ Đã sao chép mã cấu hình Mô-đun!' : '✔ Raw module text copied!';
-    copyToClipboard(RAW_MODULE_CONTENT, msg);
-  }
-
   function renderUI() {
     const ver = (activeData && activeData.version) ? activeData.version : '2.2.92';
     const servers = (activeData && Array.isArray(activeData.servers)) ? activeData.servers : [];
@@ -759,12 +654,6 @@ hostname = %APPEND% api.revenuecat.com, revenuecat.com, rc-cdn.revenuecat.com, s
 
     if (activeData && activeData.dns_url) {
       document.getElementById('dns-install-btn').href = activeData.dns_url;
-    }
-
-    // Render Module preview text
-    const previewEl = document.getElementById('module-preview');
-    if (previewEl) {
-      previewEl.textContent = RAW_MODULE_CONTENT.trim();
     }
   }
 
