@@ -112,35 +112,61 @@
   /* Main Tab Switcher */
   .nav-tabs {
     display: flex;
+    align-items: stretch;
     background: var(--lang-bg);
     border-radius: 16px;
     padding: 4px;
     margin-bottom: 18px;
-    gap: 4px;
+    gap: 6px;
     width: 100%;
+    box-sizing: border-box;
   }
   .nav-tab {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
     border: none;
     background: transparent;
     color: var(--lang-text);
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 700;
-    padding: 9px 10px;
+    line-height: 1.3;
+    padding: 9px 8px;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-tap-highlight-color: transparent;
-    white-space: nowrap;
+    white-space: normal;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
+    text-align: center;
   }
   .nav-tab.active {
     background: var(--card-bg);
     color: var(--text);
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .tab-icon {
+    font-size: 15px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .tab-text {
+    min-width: 0;
+    line-height: 1.25;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+  @media (max-width: 380px) {
+    .card {
+      padding: 20px 12px;
+    }
+    .nav-tab {
+      font-size: 12px;
+      padding: 8px 4px;
+      gap: 4px;
+    }
   }
 
   /* Logo */
@@ -412,10 +438,18 @@
   <!-- Nav Tabs -->
   <div class="nav-tabs">
     <button class="nav-tab active" id="tab-btn-sdrk" onclick="switchTab('sdrk')">
-      🚀 <span class="vi">Cài đặt Shadowrocket</span><span class="en" style="display:none;">Install Shadowrocket</span>
+      <span class="tab-icon">🚀</span>
+      <span class="tab-text">
+        <span class="vi">Cài đặt Shadowrocket</span>
+        <span class="en" style="display:none;">Install Shadowrocket</span>
+      </span>
     </button>
     <button class="nav-tab" id="tab-btn-locket" onclick="switchTab('locket')">
-      👑 <span class="vi">Mô-đun Locket Gold</span><span class="en" style="display:none;">Locket Gold Module</span>
+      <span class="tab-icon">👑</span>
+      <span class="tab-text">
+        <span class="vi">Mô-đun Locket Gold</span>
+        <span class="en" style="display:none;">Locket Gold Module</span>
+      </span>
     </button>
   </div>
 
