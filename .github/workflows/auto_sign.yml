@@ -31,12 +31,17 @@ jobs:
 
       - name: Verify No Conflict Markers & Valid JSON
         run: |
-          if grep -rnw "." -e "<<<<<<<" -e "=======" -e ">>>>>>>" --exclude-dir=".git"; then
-            echo "❌ PHÁT HIỆN CONFLICT MARKER! HỦY BƯỚC COMMIT ĐỂ BẢO VỆ CODE!"
-            exit 1
-          fi
-          python3 -c "import json; json.load(open('links_cache.json', encoding='utf-8'))"
-          echo "✅ File cache JSON hợp lệ, không có conflict markers."
+          python3 -c "
+          import re, sys, json
+          for f in ['links_cache.json', 'config.json', 'index.html']:
+              with open(f, 'r', encoding='utf-8') as fp:
+                  if re.search(r'^(<{7}|={7}|>{7})(\s|$)', fp.read(), re.MULTILINE):
+                      print(f'ERROR: Conflict marker found in {f}!')
+                      sys.exit(1)
+          json.load(open('links_cache.json', encoding='utf-8'))
+          json.load(open('config.json', encoding='utf-8'))
+          print('OK: Cache files valid and free of conflict markers.')
+          "
 
       - name: Commit and Push updated cache only
         run: |
