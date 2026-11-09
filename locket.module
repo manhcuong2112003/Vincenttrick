@@ -15,7 +15,7 @@ AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
 deleteHeader = type=http-request,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com|firebaseremoteconfig\.googleapis\.com)\/.+,script-path=https://vincenttrick.pages.dev/deleteHeader.js,timeout=60
 
 # 2. Mở khóa toàn bộ API RevenueCat (Subscribers, Receipts, Offerings, Product Mapping trên cả api & rc-cdn)
-revenuecat = type=http-response,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com)\/.+\/(receipts|subscribers|product_entitlement_mapping).*,script-path=https://vincenttrick.pages.dev/locket_gold_30s.js,requires-body=true,max-size=-1,timeout=60
+revenuecat = type=http-response,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com)\/.+\/(receipts|subscribers|offerings|product_entitlement_mapping).*,script-path=https://vincenttrick.pages.dev/locket_gold_30s.js,requires-body=true,max-size=-1,timeout=60
 
 # 3. Mở khóa toàn bộ 1,014 cờ Firebase Remote Config (Feature Gates, Flag 30s, Theme Gold, Khung Hoàng Gia)
 locketFirebase = type=http-response,pattern=^https?:\/\/firebaseremoteconfig\.googleapis\.com\/.+,script-path=https://vincenttrick.pages.dev/locket_gold_30s.js,requires-body=true,max-size=-1,timeout=60
