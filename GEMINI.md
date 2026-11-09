@@ -42,3 +42,24 @@
      - `entitlements.Gold` active = true, `expires_date` năm 2099.
      - `entries.is_gold` = "true".
      - `entries.can_record_30s_video` = "true".
+
+## 5. Nguyên Tắc Chống Hồi Quy & Cô Lập Tính Năng (Regression Prevention Invariant)
+1. **Tuyệt Đối Không Phá Hỏng Tính Năng Cốt Lõi Khi Thêm Tính Năng Mới:**
+   - Gold VIP, Video 30s và Khung Hoàng Gia là tính năng sống còn cấp độ 1 (P0).
+   - Khi phát triển hoặc sửa lỗi cho các tính năng cấp độ 2 (như AI Camera Filter, PhotoBooth, v.v.), **tuyệt đối không được làm suy chuyển hoặc gián đoạn luồng RevenueCat và Firebase Remote Config đã hoạt động ổn định**.
+2. **Cấm Ghi Đè Payload Tĩnh (Raw Dump Overwrite) Làm Hỏng Dynamic Engine:**
+   - Tuyệt đối không thay thế cơ chế tiêm động (Dynamic Entitlement Injection) bằng một chuỗi JSON tĩnh (`RAW_SUBS`) được trích xuất từ thiết bị khác.
+   - Luôn duy trì bộ tiêm động:
+     - Giữ nguyên và kế thừa `original_app_user_id` của thiết bị gọi request (tránh lệch UUID thiết bị).
+     - Luôn đảm bảo `unsubscribe_detected_at: null`, `billing_issues_detected_at: null`, `refunded_at: null`.
+     - Duy trì 160 entitlement keys với hạn 2099.
+3. **Nguyên Tắc Định Tuyến Mạng An Toàn (Transparent Proxy Invariant):**
+   - Khi cần điều hướng traffic sang Cloudflare Worker hoặc backend bên ngoài:
+     - Worker bắt buộc phải có cơ chế **Transparent Reverse Proxy**: Chỉ xử lý riêng các path được chỉ định (như `/generateFilteredImage`), toàn bộ các path Cloud Functions còn lại (như `fetchUsers`, `getMomentViews`, `createDynamicLink`...) phải được forward 100% nguyên vẹn sang `https://api.locketcamera.com`.
+     - Tuyệt đối không để Worker trả về 404 cho các hàm nội bộ của Locket, gây corrupt dữ liệu người dùng trên iOS.
+4. **Kiểm Thử Hồi Quy 4 Trụ Cột (4-Pillar Regression Test) Trước Khi Commit:**
+   - Bất kỳ thay đổi nào trên `locket_gold_30s.js`, `locket.module` hoặc `worker.js` đều phải vượt qua bài kiểm tra Node.js sandbox đồng thời:
+     1. **Trụ cột 1 (RevenueCat):** Gold active = true, `expires_date` = 2099, `unsubscribe_detected_at` = null, App User ID được bảo toàn.
+     2. **Trụ cột 2 (Firebase Remote Config):** Đủ 1,014 cờ, `is_gold: "true"`, `video_30s: "true"`, ETag động.
+     3. **Trụ cột 3 (App Stability):** `functions_domains` an toàn, không làm đứt gãy kết nối với backend Locket.
+     4. **Trụ cột 4 (Zero Side-Effects):** Xác nhận rõ việc sửa lỗi B không tạo ra bất kỳ thay đổi tiêu cực nào lên tính năng A.
