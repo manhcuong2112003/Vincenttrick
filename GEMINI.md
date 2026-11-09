@@ -30,3 +30,15 @@
 ## 3. Đồng Bộ Git & GitHub Actions
 - Trước khi `git push origin main`, luôn chạy `git pull --rebase -X theirs origin main` để tránh xung đột với commit tự động từ GitHub Actions.
 - Khi đẩy từ Windows, sử dụng remote có tiền tố username `https://manhcuong2112003@github.com/manhcuong2112003/Vincenttrick.git` để khớp với token lưu trong Windows Credential Manager.
+
+## 4. Nguyên Tắc An Toàn & Bảo Toàn Dữ Liệu Module (Learned from Debugging)
+1. **Tuyệt Đối Không Để `expires_date` Quá Khứ:**
+   - Toàn bộ 160 quyền VIP trong `subscriber.entitlements` (đặc biệt là `Gold`, `filters`, `all_filters`) bắt buộc phải có `"expires_date": "2099-12-31T23:59:59Z"`. Tuyệt đối không để ngày quá khứ khiến iOS coi gói cước là đã hết hạn.
+2. **Bảo Toàn Bộ 3 Kịch Bản Cốt Lõi Trong `locket.module`:**
+   - Chỉ giữ nguyên 3 hook chuẩn: `deleteHeader` (request), `revenuecat` (response), `locketFirebase` (response).
+   - Tuyệt đối không tùy tiện chèn thêm các hook `http-request` can thiệp vào luồng Locket nếu chưa kiểm thử riêng biệt để tránh nghẽn socket xác thực VIP.
+3. **Luôn Xác Thực Độc Lập Bằng Node.js Sandbox Trước Khi Commit:**
+   - Trước khi push code `locket_gold_30s.js`, bắt buộc phải chạy script kiểm thử giả lập với cả 2 URL `api.revenuecat.com` và `firebaseremoteconfig.googleapis.com` để đảm bảo:
+     - `entitlements.Gold` active = true, `expires_date` năm 2099.
+     - `entries.is_gold` = "true".
+     - `entries.can_record_30s_video` = "true".
