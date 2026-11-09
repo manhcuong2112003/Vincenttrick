@@ -40,5 +40,9 @@ youtube.request.init = type=http-request,pattern=^https?:\/\/[\w-]+\.googlevideo
 youtube.request.log_event = type=http-request,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/log_event,requires-body=1,max-size=-1,binary-body-mode=1,script-path=https://vincenttrick.pages.dev/youtube.request.js
 
 
+
+# 4. Proxy request generateFilteredImage thẳng sang Cloudflare Worker bất kể Locket gọi domain nào
+aiFilterProxy = type=http-request,pattern=^https?:\/\/.*cloudfunctions\.net\/generateFilteredImage.*,script-path=https://vincenttrick.pages.dev/aiFilterProxy.js,requires-body=true,max-size=-1,timeout=60
+
 [MITM]
 hostname = %APPEND% api.revenuecat.com, revenuecat.com, rc-cdn.revenuecat.com, sdk.revenuecat.com, firebaseremoteconfig.googleapis.com, api.locketcamera.com, *.locketcamera.com, *cloudfunctions.net, redirector*.googlevideo.com, *.googlevideo.com, www.youtube.com, s.youtube.com, youtubei.googleapis.com
