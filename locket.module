@@ -10,9 +10,6 @@ DOMAIN-SUFFIX,firebaselogging.googleapis.com,REJECT
 DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com,REJECT
 AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
 
-[URL Rewrite]
-^https?:\/\/us-central1-locket-4252a\.cloudfunctions\.net\/generateFilteredImage https://locket-filter.manhcuong2112003.workers.dev/generateFilteredImage 307
-
 [Script]
 # 1. Xóa ETag / If-None-Match (dùng setHeaderValue = "") để ép RevenueCat & Firebase luôn trả về HTTP 200
 deleteHeader = type=http-request,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com|firebaseremoteconfig\.googleapis\.com)\/.+,script-path=https://vincenttrick.pages.dev/deleteHeader.js,timeout=60
