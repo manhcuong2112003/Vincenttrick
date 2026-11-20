@@ -1,0 +1,15 @@
+{
+  "name": "vincenttrick",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-18",
+  "keep_vars": true,
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "triggers": {
+    "crons": ["*/10 * * * *"]
+  }
+}
