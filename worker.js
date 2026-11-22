@@ -710,6 +710,55 @@ export default {
             return new Response("OK", { status: 200 });
         }
 
+        // 2.5 API chọn khung Photobooth tự do cho Web Thư Viện Khung (/api/photobooth/frames & /api/photobooth/select-frame)
+        if (url.pathname === "/api/photobooth/frames") {
+            const pbServerUrl = getPhotoboothServerUrl(env);
+            const r = await fetch(`${pbServerUrl}/frames`);
+            const txt = await r.text();
+            return new Response(txt, {
+                status: r.status,
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    "Access-Control-Allow-Origin": "*"
+                }
+            });
+        }
+
+        if (url.pathname === "/api/photobooth/select-frame") {
+            if (request.method === "OPTIONS") {
+                return new Response(null, {
+                    status: 204,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                        "Access-Control-Allow-Headers": "Content-Type"
+                    }
+                });
+            }
+            const pbServerUrl = getPhotoboothServerUrl(env);
+            const pbHeaders = { "Content-Type": "application/json" };
+            if (env?.PHOTOBOOTH_SECRET) {
+                pbHeaders["X-API-Secret"] = env.PHOTOBOOTH_SECRET;
+            }
+            if (request.method === "GET") {
+                const userKey = url.searchParams.get("userKey") || "default_user";
+                const r = await fetch(`${pbServerUrl}/custom-frame?userKey=${encodeURIComponent(userKey)}`);
+                return new Response(await r.text(), {
+                    status: r.status,
+                    headers: { "Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*" }
+                });
+            }
+            const r = await fetch(`${pbServerUrl}/custom-frame`, {
+                method: "POST",
+                headers: pbHeaders,
+                body: await request.text()
+            });
+            return new Response(await r.text(), {
+                status: r.status,
+                headers: { "Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*" }
+            });
+        }
+
         // 3. Endpoint xử lý Filter ảnh: /generateFilteredImage
         if (url.pathname.endsWith("/generateFilteredImage") || url.pathname.includes("generateFilteredImage")) {
             const startTime = Date.now();

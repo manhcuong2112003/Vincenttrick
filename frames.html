@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thư Viện Khung Photobooth – Vincenttrick</title>
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --text: #111827;
+    --sub: #6b7280;
+    --accent: #7c3aed;
+    --border: rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b0f19;
+      --card: #151b2b;
+      --text: #f3f4f6;
+      --sub: #9ca3af;
+      --accent: #8b5cf6;
+      --border: rgba(255,255,255,0.08);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 20px 16px 48px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .sub { font-size: 13.5px; color: var(--sub); margin-bottom: 16px; line-height: 1.5; }
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 18px;
+  }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  input {
+    flex: 1;
+    min-width: 180px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+  }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tab {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .frame-card {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .frame-card:active { transform: scale(0.97); }
+  .frame-card.selected { border-color: var(--accent); }
+  .frame-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 10px;
+    background: repeating-conic-gradient(#e5e7eb 0% 25%, #f9fafb 0% 50%) 50% / 16px 16px;
+    margin-bottom: 8px;
+  }
+  .frame-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .frame-meta { font-size: 11px; color: var(--sub); }
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111827;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+    z-index: 99;
+  }
+</style>
+</head>
+<body>
+  <h1>🎨 Thư Viện Khung Photobooth</h1>
+  <p class="sub">
+    Chọn trước mẫu khung yêu thích, sau đó mở Locket và chụp với nút <strong>Khung Tự Chọn ★</strong> để ghép khung ngay lập tức.
+  </p>
+
+  <div class="panel">
+    <div style="font-size:12px;font-weight:700;color:var(--sub);margin-bottom:6px;">
+      MÃ THIẾT BỊ / USER KEY (mặc định: <code>default_user</code> hoặc Firebase UID của bạn):
+    </div>
+    <div class="row">
+      <input id="userKeyInput" type="text" placeholder="default_user" value="default_user">
+    </div>
+  </div>
+
+  <div class="tabs" id="catTabs">
+    <button class="tab active" data-cat="all">Tất cả</button>
+    <button class="tab" data-cat="1-cut">1 Ảnh (Tức thì ⚡)</button>
+    <button class="tab" data-cat="2-cut">2 Ảnh ✌️</button>
+    <button class="tab" data-cat="3-cut">3 Ảnh 🎞️</button>
+    <button class="tab" data-cat="4-cut">4 Ảnh 📸</button>
+  </div>
+
+  <div class="grid" id="framesGrid"></div>
+  <div class="toast" id="toast"></div>
+
+<script>
+  const WORKER_API = "https://locket-filter.manhcuong2112003.workers.dev";
+  let manifestData = null;
+  let activeCat = "all";
+  let selectedId = localStorage.getItem("pb_selected_frame") || "";
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.display = "block";
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => { t.style.display = "none"; }, 2600);
+  }
+
+  async function loadFrames() {
+    try {
+      const r = await fetch("./assets/photobooth/manifest.json");
+      manifestData = await r.json();
+      renderGrid();
+    } catch (e) {
+      showToast("Không tải được danh sách khung!");
+    }
+  }
+
+  function renderGrid() {
+    if (!manifestData || !manifestData.frames) return;
+    const grid = document.getElementById("framesGrid");
+    const items = Object.values(manifestData.frames).filter(
+      f => activeCat === "all" || f.category === activeCat
+    );
+    grid.innerHTML = items.map(f => `
+      <div class="frame-card ${selectedId === f.id ? "selected" : ""}" onclick="selectFrame('${f.id}')">
+        <img src="./assets/photobooth/${f.frame_file}" alt="${f.title}" loading="lazy">
+        <div class="frame-title">${f.title}</div>
+        <div class="frame-meta">${f.shots} ảnh • ${f.category}</div>
+      </div>
+    `).join("");
+  }
+
+  async function selectFrame(frameId) {
+    const userKey = (document.getElementById("userKeyInput").value || "default_user").trim();
+    localStorage.setItem("pb_user_key", userKey);
+    localStorage.setItem("pb_selected_frame", frameId);
+    selectedId = frameId;
+    renderGrid();
+
+    try {
+      const r = await fetch(`${WORKER_API}/api/photobooth/select-frame`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userKey, frameId })
+      });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      showToast("✔ Đã chọn khung: " + frameId);
+    } catch (e) {
+      showToast("⚠ Đã lưu cục bộ, lỗi kết nối server: " + e.message);
+    }
+  }
+
+  document.getElementById("catTabs").addEventListener("click", (e) => {
+    const btn = e.target.closest(".tab");
+    if (!btn) return;
+    activeCat = btn.dataset.cat;
+    document.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b === btn));
+    renderGrid();
+  });
+
+  const savedKey = localStorage.getItem("pb_user_key");
+  if (savedKey) document.getElementById("userKeyInput").value = savedKey;
+  loadFrames();
+</script>
+</body>
+</html>
