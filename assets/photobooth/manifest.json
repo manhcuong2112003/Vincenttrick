@@ -1,51 +1,54 @@
 {
-  "version": 1,
+  "version": 2,
   "canvas_size": 2048,
   "frames": {
-    "photobooth_1cut_polaroid": {
-      "id": "photobooth_1cut_polaroid",
-      "title": "POLAROID INSTANT",
-      "category": "1-cut",
-      "shots": 1,
-      "tone": "warm",
-      "frame_file": "frames/photobooth_1cut_polaroid.png",
-      "icon_file": "icons/icon_photobooth_1cut_polaroid.png",
+    "photobooth_locket_4cut": {
+      "id": "photobooth_locket_4cut",
+      "title": "photobooth_locket_4cut",
+      "category": "locket",
+      "shots": 4,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_locket_4cut.png",
+      "icon_file": "icons/icon_photobooth_locket_4cut.png",
       "slots": [
         {
-          "x": 144,
-          "y": 144,
-          "w": 1760,
-          "h": 1640,
-          "radius": 36
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
         }
       ]
     },
-    "photobooth_1cut_tet": {
-      "id": "photobooth_1cut_tet",
-      "title": "HAPPY LUNAR NEW YEAR",
-      "category": "1-cut",
-      "shots": 1,
-      "tone": "warm",
-      "frame_file": "frames/photobooth_1cut_tet.png",
-      "icon_file": "icons/icon_photobooth_1cut_tet.png",
-      "slots": [
-        {
-          "x": 104,
-          "y": 128,
-          "w": 1840,
-          "h": 1780,
-          "radius": 48
-        }
-      ]
-    },
-    "photobooth_1cut_noel": {
-      "id": "photobooth_1cut_noel",
-      "title": "MERRY CHRISTMAS",
-      "category": "1-cut",
+    "photobooth_locket_1cut": {
+      "id": "photobooth_locket_1cut",
+      "title": "photobooth_locket_1cut",
+      "category": "locket",
       "shots": 1,
       "tone": "normal",
-      "frame_file": "frames/photobooth_1cut_noel.png",
-      "icon_file": "icons/icon_photobooth_1cut_noel.png",
+      "frame_file": "frames/photobooth_locket_1cut.png",
+      "icon_file": "icons/icon_photobooth_locket_1cut.png",
       "slots": [
         {
           "x": 104,
@@ -56,68 +59,14 @@
         }
       ]
     },
-    "photobooth_1cut_valentine": {
-      "id": "photobooth_1cut_valentine",
-      "title": "SWEET VALENTINE",
-      "category": "1-cut",
-      "shots": 1,
-      "tone": "pink",
-      "frame_file": "frames/photobooth_1cut_valentine.png",
-      "icon_file": "icons/icon_photobooth_1cut_valentine.png",
-      "slots": [
-        {
-          "x": 104,
-          "y": 128,
-          "w": 1840,
-          "h": 1780,
-          "radius": 48
-        }
-      ]
-    },
-    "photobooth_1cut_birthday": {
-      "id": "photobooth_1cut_birthday",
-      "title": "HAPPY BIRTHDAY!",
-      "category": "1-cut",
-      "shots": 1,
-      "tone": "normal",
-      "frame_file": "frames/photobooth_1cut_birthday.png",
-      "icon_file": "icons/icon_photobooth_1cut_birthday.png",
-      "slots": [
-        {
-          "x": 104,
-          "y": 128,
-          "w": 1840,
-          "h": 1780,
-          "radius": 48
-        }
-      ]
-    },
-    "photobooth_1cut_film": {
-      "id": "photobooth_1cut_film",
-      "title": "KODAK PORTRA 400",
-      "category": "1-cut",
-      "shots": 1,
-      "tone": "film",
-      "frame_file": "frames/photobooth_1cut_film.png",
-      "icon_file": "icons/icon_photobooth_1cut_film.png",
-      "slots": [
-        {
-          "x": 104,
-          "y": 128,
-          "w": 1840,
-          "h": 1780,
-          "radius": 48
-        }
-      ]
-    },
-    "photobooth_2cut_duo": {
-      "id": "photobooth_2cut_duo",
-      "title": "DUO PHOTOBOOTH",
-      "category": "2-cut",
+    "photobooth_locket_2cut": {
+      "id": "photobooth_locket_2cut",
+      "title": "photobooth_locket_2cut",
+      "category": "locket",
       "shots": 2,
       "tone": "normal",
-      "frame_file": "frames/photobooth_2cut_duo.png",
-      "icon_file": "icons/icon_photobooth_2cut_duo.png",
+      "frame_file": "frames/photobooth_locket_2cut.png",
+      "icon_file": "icons/icon_photobooth_locket_2cut.png",
       "slots": [
         {
           "x": 124,
@@ -135,39 +84,14 @@
         }
       ]
     },
-    "photobooth_2cut_film": {
-      "id": "photobooth_2cut_film",
-      "title": "DUO FILM 35MM",
-      "category": "2-cut",
-      "shots": 2,
-      "tone": "bw",
-      "frame_file": "frames/photobooth_2cut_film.png",
-      "icon_file": "icons/icon_photobooth_2cut_film.png",
-      "slots": [
-        {
-          "x": 92,
-          "y": 210,
-          "w": 906,
-          "h": 1620,
-          "radius": 42
-        },
-        {
-          "x": 1050,
-          "y": 210,
-          "w": 906,
-          "h": 1620,
-          "radius": 42
-        }
-      ]
-    },
-    "photobooth_3cut_strip": {
-      "id": "photobooth_3cut_strip",
-      "title": "3-CUT FILM STRIP",
-      "category": "3-cut",
+    "photobooth_locket_3cut": {
+      "id": "photobooth_locket_3cut",
+      "title": "photobooth_locket_3cut",
+      "category": "locket",
       "shots": 3,
-      "tone": "pink",
-      "frame_file": "frames/photobooth_3cut_strip.png",
-      "icon_file": "icons/icon_photobooth_3cut_strip.png",
+      "tone": "normal",
+      "frame_file": "frames/photobooth_locket_3cut.png",
+      "icon_file": "icons/icon_photobooth_locket_3cut.png",
       "slots": [
         {
           "x": 264,
@@ -192,35 +116,202 @@
         }
       ]
     },
-    "photobooth_3cut_collage": {
-      "id": "photobooth_3cut_collage",
-      "title": "3-CUT COLLAGE",
-      "category": "3-cut",
-      "shots": 3,
-      "tone": "normal",
-      "frame_file": "frames/photobooth_3cut_collage.png",
-      "icon_file": "icons/icon_photobooth_3cut_collage.png",
+    "photobooth_4cut_kitty": {
+      "id": "photobooth_4cut_kitty",
+      "title": "HELLO KITTY BOOTH",
+      "category": "4-cut",
+      "shots": 4,
+      "tone": "pink",
+      "frame_file": "frames/photobooth_4cut_kitty.png",
+      "icon_file": "icons/icon_photobooth_4cut_kitty.png",
       "slots": [
         {
-          "x": 94,
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_4cut_loopy": {
+      "id": "photobooth_4cut_loopy",
+      "title": "LOOPY PHOTOBOOTH",
+      "category": "4-cut",
+      "shots": 4,
+      "tone": "pink",
+      "frame_file": "frames/photobooth_4cut_loopy.png",
+      "icon_file": "icons/icon_photobooth_4cut_loopy.png",
+      "slots": [
+        {
+          "x": 84,
           "y": 124,
-          "w": 1860,
-          "h": 940,
-          "radius": 42
+          "w": 910,
+          "h": 900,
+          "radius": 48,
+          "shape": "rect"
         },
         {
-          "x": 94,
-          "y": 1114,
-          "w": 905,
-          "h": 820,
-          "radius": 42
+          "x": 1054,
+          "y": 124,
+          "w": 910,
+          "h": 900,
+          "radius": 48,
+          "shape": "rect"
         },
         {
-          "x": 1049,
-          "y": 1114,
-          "w": 905,
-          "h": 820,
-          "radius": 42
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 880,
+          "radius": 44,
+          "shape": "heart"
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 880,
+          "radius": 44,
+          "shape": "circle"
+        }
+      ]
+    },
+    "photobooth_4cut_cute": {
+      "id": "photobooth_4cut_cute",
+      "title": "PHOTOBOOTH CUTE",
+      "category": "4-cut",
+      "shots": 4,
+      "tone": "warm",
+      "frame_file": "frames/photobooth_4cut_cute.png",
+      "icon_file": "icons/icon_photobooth_4cut_cute.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_4cut_melody": {
+      "id": "photobooth_4cut_melody",
+      "title": "MY MELODY BOW",
+      "category": "4-cut",
+      "shots": 4,
+      "tone": "pink",
+      "frame_file": "frames/photobooth_4cut_melody.png",
+      "icon_file": "icons/icon_photobooth_4cut_melody.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_4cut_cortis": {
+      "id": "photobooth_4cut_cortis",
+      "title": "CORTIS PHOTOBOOTH",
+      "category": "4-cut",
+      "shots": 4,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_4cut_cortis.png",
+      "icon_file": "icons/icon_photobooth_4cut_cortis.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
         }
       ]
     },
@@ -377,6 +468,282 @@
           "w": 910,
           "h": 910,
           "radius": 44
+        }
+      ]
+    },
+    "photobooth_3cut_strip": {
+      "id": "photobooth_3cut_strip",
+      "title": "3-CUT FILM STRIP",
+      "category": "3-cut",
+      "shots": 3,
+      "tone": "pink",
+      "frame_file": "frames/photobooth_3cut_strip.png",
+      "icon_file": "icons/icon_photobooth_3cut_strip.png",
+      "slots": [
+        {
+          "x": 264,
+          "y": 124,
+          "w": 1520,
+          "h": 570,
+          "radius": 38
+        },
+        {
+          "x": 264,
+          "y": 740,
+          "w": 1520,
+          "h": 570,
+          "radius": 38
+        },
+        {
+          "x": 264,
+          "y": 1356,
+          "w": 1520,
+          "h": 570,
+          "radius": 38
+        }
+      ]
+    },
+    "photobooth_3cut_collage": {
+      "id": "photobooth_3cut_collage",
+      "title": "3-CUT COLLAGE",
+      "category": "3-cut",
+      "shots": 3,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_3cut_collage.png",
+      "icon_file": "icons/icon_photobooth_3cut_collage.png",
+      "slots": [
+        {
+          "x": 94,
+          "y": 124,
+          "w": 1860,
+          "h": 940,
+          "radius": 42
+        },
+        {
+          "x": 94,
+          "y": 1114,
+          "w": 905,
+          "h": 820,
+          "radius": 42
+        },
+        {
+          "x": 1049,
+          "y": 1114,
+          "w": 905,
+          "h": 820,
+          "radius": 42
+        }
+      ]
+    },
+    "photobooth_2cut_duo": {
+      "id": "photobooth_2cut_duo",
+      "title": "DUO PHOTOBOOTH",
+      "category": "2-cut",
+      "shots": 2,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_2cut_duo.png",
+      "icon_file": "icons/icon_photobooth_2cut_duo.png",
+      "slots": [
+        {
+          "x": 124,
+          "y": 132,
+          "w": 1800,
+          "h": 880,
+          "radius": 44
+        },
+        {
+          "x": 124,
+          "y": 1058,
+          "w": 1800,
+          "h": 880,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_2cut_film": {
+      "id": "photobooth_2cut_film",
+      "title": "DUO FILM 35MM",
+      "category": "2-cut",
+      "shots": 2,
+      "tone": "bw",
+      "frame_file": "frames/photobooth_2cut_film.png",
+      "icon_file": "icons/icon_photobooth_2cut_film.png",
+      "slots": [
+        {
+          "x": 92,
+          "y": 210,
+          "w": 906,
+          "h": 1620,
+          "radius": 42
+        },
+        {
+          "x": 1050,
+          "y": 210,
+          "w": 906,
+          "h": 1620,
+          "radius": 42
+        }
+      ]
+    },
+    "photobooth_1cut_kitty": {
+      "id": "photobooth_1cut_kitty",
+      "title": "HELLO KITTY 1-CUT",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "pink",
+      "frame_file": "frames/photobooth_1cut_kitty.png",
+      "icon_file": "icons/icon_photobooth_1cut_kitty.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_1cut_news": {
+      "id": "photobooth_1cut_news",
+      "title": "LOCKET NEWS",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "bw",
+      "frame_file": "frames/photobooth_1cut_news.png",
+      "icon_file": "icons/icon_photobooth_1cut_news.png",
+      "slots": [
+        {
+          "x": 124,
+          "y": 210,
+          "w": 1800,
+          "h": 1610,
+          "radius": 18
+        }
+      ]
+    },
+    "photobooth_1cut_firefly": {
+      "id": "photobooth_1cut_firefly",
+      "title": "ĐOM ĐÓM BOOTH",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_1cut_firefly.png",
+      "icon_file": "icons/icon_photobooth_1cut_firefly.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_1cut_polaroid": {
+      "id": "photobooth_1cut_polaroid",
+      "title": "POLAROID 1 ẢNH",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "warm",
+      "frame_file": "frames/photobooth_1cut_polaroid.png",
+      "icon_file": "icons/icon_photobooth_1cut_polaroid.png",
+      "slots": [
+        {
+          "x": 144,
+          "y": 144,
+          "w": 1760,
+          "h": 1640,
+          "radius": 36
+        }
+      ]
+    },
+    "photobooth_1cut_tet": {
+      "id": "photobooth_1cut_tet",
+      "title": "HAPPY LUNAR NEW YEAR",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "warm",
+      "frame_file": "frames/photobooth_1cut_tet.png",
+      "icon_file": "icons/icon_photobooth_1cut_tet.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_1cut_noel": {
+      "id": "photobooth_1cut_noel",
+      "title": "MERRY CHRISTMAS",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_1cut_noel.png",
+      "icon_file": "icons/icon_photobooth_1cut_noel.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_1cut_valentine": {
+      "id": "photobooth_1cut_valentine",
+      "title": "SWEET VALENTINE",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "pink",
+      "frame_file": "frames/photobooth_1cut_valentine.png",
+      "icon_file": "icons/icon_photobooth_1cut_valentine.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_1cut_birthday": {
+      "id": "photobooth_1cut_birthday",
+      "title": "HAPPY BIRTHDAY!",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_1cut_birthday.png",
+      "icon_file": "icons/icon_photobooth_1cut_birthday.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_1cut_film": {
+      "id": "photobooth_1cut_film",
+      "title": "KODAK PORTRA 400",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "film",
+      "frame_file": "frames/photobooth_1cut_film.png",
+      "icon_file": "icons/icon_photobooth_1cut_film.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
         }
       ]
     }
