@@ -746,6 +746,643 @@
           "radius": 48
         }
       ]
+    },
+    "photobooth_xmas_wreath": {
+      "id": "photobooth_xmas_wreath",
+      "title": "MERRY CHRISTMAS",
+      "category": "xmas",
+      "shots": 4,
+      "tone": "warm",
+      "frame_file": "frames/photobooth_xmas_wreath.png",
+      "icon_file": "icons/icon_photobooth_xmas_wreath.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_xmas_merry": {
+      "id": "photobooth_xmas_merry",
+      "title": "photobooth_xmas_merry",
+      "category": "xmas",
+      "shots": 1,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_xmas_merry.png",
+      "icon_file": "icons/icon_photobooth_xmas_merry.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_xmas_gingerbread": {
+      "id": "photobooth_xmas_gingerbread",
+      "title": "GINGERBREAD HOUSE",
+      "category": "xmas",
+      "shots": 4,
+      "tone": "warm",
+      "frame_file": "frames/photobooth_xmas_gingerbread.png",
+      "icon_file": "icons/icon_photobooth_xmas_gingerbread.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_xmas_snowman": {
+      "id": "photobooth_xmas_snowman",
+      "title": "SNOWMAN & XMAS",
+      "category": "xmas",
+      "shots": 4,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_xmas_snowman.png",
+      "icon_file": "icons/icon_photobooth_xmas_snowman.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_winter_ice": {
+      "id": "photobooth_winter_ice",
+      "title": "WINTER ICE",
+      "category": "xmas",
+      "shots": 2,
+      "tone": "bh2",
+      "frame_file": "frames/photobooth_winter_ice.png",
+      "icon_file": "icons/icon_photobooth_winter_ice.png",
+      "slots": [
+        {
+          "x": 92,
+          "y": 210,
+          "w": 906,
+          "h": 1620,
+          "radius": 42
+        },
+        {
+          "x": 1050,
+          "y": 210,
+          "w": 906,
+          "h": 1620,
+          "radius": 42
+        }
+      ]
+    },
+    "photobooth_couple_random": {
+      "id": "photobooth_couple_random",
+      "title": "photobooth_couple_random",
+      "category": "2-cut",
+      "shots": 2,
+      "tone": "pink",
+      "frame_file": "frames/photobooth_couple_random.png",
+      "icon_file": "icons/icon_photobooth_couple_random.png",
+      "slots": [
+        {
+          "x": 116,
+          "y": 420,
+          "w": 870,
+          "h": 1200,
+          "radius": 44
+        },
+        {
+          "x": 1062,
+          "y": 420,
+          "w": 870,
+          "h": 1200,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_kr_life4cuts": {
+      "id": "photobooth_kr_life4cuts",
+      "title": "LIFE4CUTS",
+      "category": "kr",
+      "shots": 4,
+      "tone": "cl1",
+      "frame_file": "frames/photobooth_kr_life4cuts.png",
+      "icon_file": "icons/icon_photobooth_kr_life4cuts.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_kr_pink_pastel": {
+      "id": "photobooth_kr_pink_pastel",
+      "title": "PASTEL SWEET",
+      "category": "kr",
+      "shots": 4,
+      "tone": "pk3",
+      "frame_file": "frames/photobooth_kr_pink_pastel.png",
+      "icon_file": "icons/icon_photobooth_kr_pink_pastel.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_kr_duo_gold": {
+      "id": "photobooth_kr_duo_gold",
+      "title": "GOLD VINTAGE DUO",
+      "category": "kr",
+      "shots": 2,
+      "tone": "warm",
+      "frame_file": "frames/photobooth_kr_duo_gold.png",
+      "icon_file": "icons/icon_photobooth_kr_duo_gold.png",
+      "slots": [
+        {
+          "x": 92,
+          "y": 210,
+          "w": 906,
+          "h": 1620,
+          "radius": 42
+        },
+        {
+          "x": 1050,
+          "y": 210,
+          "w": 906,
+          "h": 1620,
+          "radius": 42
+        }
+      ]
+    },
+    "photobooth_kr_duo_blue": {
+      "id": "photobooth_kr_duo_blue",
+      "title": "DENIM DUO",
+      "category": "kr",
+      "shots": 2,
+      "tone": "ab2",
+      "frame_file": "frames/photobooth_kr_duo_blue.png",
+      "icon_file": "icons/icon_photobooth_kr_duo_blue.png",
+      "slots": [
+        {
+          "x": 92,
+          "y": 210,
+          "w": 906,
+          "h": 1620,
+          "radius": 42
+        },
+        {
+          "x": 1050,
+          "y": 210,
+          "w": 906,
+          "h": 1620,
+          "radius": 42
+        }
+      ]
+    },
+    "photobooth_trend_sweet": {
+      "id": "photobooth_trend_sweet",
+      "title": "SWEET PHOTOBOOTH",
+      "category": "trend",
+      "shots": 1,
+      "tone": "pk3",
+      "frame_file": "frames/photobooth_trend_sweet.png",
+      "icon_file": "icons/icon_photobooth_trend_sweet.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_trend_y2k_heart": {
+      "id": "photobooth_trend_y2k_heart",
+      "title": "photobooth_trend_y2k_heart",
+      "category": "trend",
+      "shots": 1,
+      "tone": "sparkle",
+      "frame_file": "frames/photobooth_trend_y2k_heart.png",
+      "icon_file": "icons/icon_photobooth_trend_y2k_heart.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_trend_comment_top": {
+      "id": "photobooth_trend_comment_top",
+      "title": "photobooth_trend_comment_top",
+      "category": "trend",
+      "shots": 1,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_trend_comment_top.png",
+      "icon_file": "icons/icon_photobooth_trend_comment_top.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_trend_comment_bot": {
+      "id": "photobooth_trend_comment_bot",
+      "title": "photobooth_trend_comment_bot",
+      "category": "trend",
+      "shots": 1,
+      "tone": "normal",
+      "frame_file": "frames/photobooth_trend_comment_bot.png",
+      "icon_file": "icons/icon_photobooth_trend_comment_bot.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_pastel_daisy": {
+      "id": "photobooth_pastel_daisy",
+      "title": "photobooth_pastel_daisy",
+      "category": "trend",
+      "shots": 1,
+      "tone": "cl1",
+      "frame_file": "frames/photobooth_pastel_daisy.png",
+      "icon_file": "icons/icon_photobooth_pastel_daisy.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_pastel_cloud": {
+      "id": "photobooth_pastel_cloud",
+      "title": "photobooth_pastel_cloud",
+      "category": "trend",
+      "shots": 1,
+      "tone": "ab2",
+      "frame_file": "frames/photobooth_pastel_cloud.png",
+      "icon_file": "icons/icon_photobooth_pastel_cloud.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_cl1": {
+      "id": "photobooth_color_cl1",
+      "title": "photobooth_color_cl1",
+      "category": "color_meitu",
+      "shots": 1,
+      "tone": "cl1",
+      "frame_file": "frames/photobooth_color_cl1.png",
+      "icon_file": "icons/icon_photobooth_color_cl1.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_cr2": {
+      "id": "photobooth_color_cr2",
+      "title": "photobooth_color_cr2",
+      "category": "color_meitu",
+      "shots": 1,
+      "tone": "cr2",
+      "frame_file": "frames/photobooth_color_cr2.png",
+      "icon_file": "icons/icon_photobooth_color_cr2.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_pk3": {
+      "id": "photobooth_color_pk3",
+      "title": "photobooth_color_pk3",
+      "category": "color_meitu",
+      "shots": 1,
+      "tone": "pk3",
+      "frame_file": "frames/photobooth_color_pk3.png",
+      "icon_file": "icons/icon_photobooth_color_pk3.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_mt4": {
+      "id": "photobooth_color_mt4",
+      "title": "photobooth_color_mt4",
+      "category": "color_meitu",
+      "shots": 1,
+      "tone": "mt4",
+      "frame_file": "frames/photobooth_color_mt4.png",
+      "icon_file": "icons/icon_photobooth_color_mt4.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_ccd": {
+      "id": "photobooth_color_ccd",
+      "title": "photobooth_color_ccd",
+      "category": "color_ccd",
+      "shots": 1,
+      "tone": "ccd",
+      "frame_file": "frames/photobooth_color_ccd.png",
+      "icon_file": "icons/icon_photobooth_color_ccd.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_fj1": {
+      "id": "photobooth_color_fj1",
+      "title": "photobooth_color_fj1",
+      "category": "color_ccd",
+      "shots": 1,
+      "tone": "fj1",
+      "frame_file": "frames/photobooth_color_fj1.png",
+      "icon_file": "icons/icon_photobooth_color_fj1.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_ab2": {
+      "id": "photobooth_color_ab2",
+      "title": "photobooth_color_ab2",
+      "category": "color_ccd",
+      "shots": 1,
+      "tone": "ab2",
+      "frame_file": "frames/photobooth_color_ab2.png",
+      "icon_file": "icons/icon_photobooth_color_ab2.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_kg3": {
+      "id": "photobooth_color_kg3",
+      "title": "photobooth_color_kg3",
+      "category": "color_ccd",
+      "shots": 1,
+      "tone": "kg3",
+      "frame_file": "frames/photobooth_color_kg3.png",
+      "icon_file": "icons/icon_photobooth_color_kg3.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_hk9": {
+      "id": "photobooth_color_hk9",
+      "title": "photobooth_color_hk9",
+      "category": "color_mood",
+      "shots": 1,
+      "tone": "hk9",
+      "frame_file": "frames/photobooth_color_hk9.png",
+      "icon_file": "icons/icon_photobooth_color_hk9.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_ss1": {
+      "id": "photobooth_color_ss1",
+      "title": "photobooth_color_ss1",
+      "category": "color_mood",
+      "shots": 1,
+      "tone": "ss1",
+      "frame_file": "frames/photobooth_color_ss1.png",
+      "icon_file": "icons/icon_photobooth_color_ss1.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_bh2": {
+      "id": "photobooth_color_bh2",
+      "title": "photobooth_color_bh2",
+      "category": "color_mood",
+      "shots": 1,
+      "tone": "bh2",
+      "frame_file": "frames/photobooth_color_bh2.png",
+      "icon_file": "icons/icon_photobooth_color_bh2.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
+    },
+    "photobooth_color_mf3": {
+      "id": "photobooth_color_mf3",
+      "title": "photobooth_color_mf3",
+      "category": "color_mood",
+      "shots": 1,
+      "tone": "mf3",
+      "frame_file": "frames/photobooth_color_mf3.png",
+      "icon_file": "icons/icon_photobooth_color_mf3.png",
+      "slots": [
+        {
+          "x": 44,
+          "y": 44,
+          "w": 1960,
+          "h": 1960,
+          "radius": 64
+        }
+      ]
     }
   }
 }
