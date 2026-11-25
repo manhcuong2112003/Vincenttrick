@@ -8,6 +8,7 @@
       "category": "locket",
       "shots": 4,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_locket_4cut.png",
       "icon_file": "icons/icon_photobooth_locket_4cut.png",
       "slots": [
@@ -47,6 +48,7 @@
       "category": "locket",
       "shots": 1,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_locket_1cut.png",
       "icon_file": "icons/icon_photobooth_locket_1cut.png",
       "slots": [
@@ -65,6 +67,7 @@
       "category": "locket",
       "shots": 2,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_locket_2cut.png",
       "icon_file": "icons/icon_photobooth_locket_2cut.png",
       "slots": [
@@ -90,6 +93,7 @@
       "category": "locket",
       "shots": 3,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_locket_3cut.png",
       "icon_file": "icons/icon_photobooth_locket_3cut.png",
       "slots": [
@@ -122,6 +126,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "pink",
+      "no_frame": false,
       "frame_file": "frames/photobooth_4cut_kitty.png",
       "icon_file": "icons/icon_photobooth_4cut_kitty.png",
       "slots": [
@@ -161,6 +166,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "pink",
+      "no_frame": false,
       "frame_file": "frames/photobooth_4cut_loopy.png",
       "icon_file": "icons/icon_photobooth_4cut_loopy.png",
       "slots": [
@@ -204,6 +210,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "warm",
+      "no_frame": false,
       "frame_file": "frames/photobooth_4cut_cute.png",
       "icon_file": "icons/icon_photobooth_4cut_cute.png",
       "slots": [
@@ -243,6 +250,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "pink",
+      "no_frame": false,
       "frame_file": "frames/photobooth_4cut_melody.png",
       "icon_file": "icons/icon_photobooth_4cut_melody.png",
       "slots": [
@@ -282,6 +290,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_4cut_cortis.png",
       "icon_file": "icons/icon_photobooth_4cut_cortis.png",
       "slots": [
@@ -321,6 +330,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_strip_classic.png",
       "icon_file": "icons/icon_photobooth_strip_classic.png",
       "slots": [
@@ -360,6 +370,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "pink",
+      "no_frame": false,
       "frame_file": "frames/photobooth_strip_love.png",
       "icon_file": "icons/icon_photobooth_strip_love.png",
       "slots": [
@@ -399,6 +410,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "bw",
+      "no_frame": false,
       "frame_file": "frames/photobooth_vintage_bw.png",
       "icon_file": "icons/icon_photobooth_vintage_bw.png",
       "slots": [
@@ -438,6 +450,7 @@
       "category": "4-cut",
       "shots": 4,
       "tone": "sparkle",
+      "no_frame": false,
       "frame_file": "frames/photobooth_sparkle_pink.png",
       "icon_file": "icons/icon_photobooth_sparkle_pink.png",
       "slots": [
@@ -477,6 +490,7 @@
       "category": "3-cut",
       "shots": 3,
       "tone": "pink",
+      "no_frame": false,
       "frame_file": "frames/photobooth_3cut_strip.png",
       "icon_file": "icons/icon_photobooth_3cut_strip.png",
       "slots": [
@@ -509,6 +523,7 @@
       "category": "3-cut",
       "shots": 3,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_3cut_collage.png",
       "icon_file": "icons/icon_photobooth_3cut_collage.png",
       "slots": [
@@ -541,6 +556,7 @@
       "category": "2-cut",
       "shots": 2,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_2cut_duo.png",
       "icon_file": "icons/icon_photobooth_2cut_duo.png",
       "slots": [
@@ -566,6 +582,7 @@
       "category": "2-cut",
       "shots": 2,
       "tone": "bw",
+      "no_frame": false,
       "frame_file": "frames/photobooth_2cut_film.png",
       "icon_file": "icons/icon_photobooth_2cut_film.png",
       "slots": [
@@ -591,6 +608,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "pink",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_kitty.png",
       "icon_file": "icons/icon_photobooth_1cut_kitty.png",
       "slots": [
@@ -609,6 +627,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "bw",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_news.png",
       "icon_file": "icons/icon_photobooth_1cut_news.png",
       "slots": [
@@ -627,6 +646,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_firefly.png",
       "icon_file": "icons/icon_photobooth_1cut_firefly.png",
       "slots": [
@@ -645,6 +665,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "warm",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_polaroid.png",
       "icon_file": "icons/icon_photobooth_1cut_polaroid.png",
       "slots": [
@@ -663,6 +684,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "warm",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_tet.png",
       "icon_file": "icons/icon_photobooth_1cut_tet.png",
       "slots": [
@@ -681,6 +703,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_noel.png",
       "icon_file": "icons/icon_photobooth_1cut_noel.png",
       "slots": [
@@ -699,6 +722,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "pink",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_valentine.png",
       "icon_file": "icons/icon_photobooth_1cut_valentine.png",
       "slots": [
@@ -717,6 +741,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_birthday.png",
       "icon_file": "icons/icon_photobooth_1cut_birthday.png",
       "slots": [
@@ -735,6 +760,7 @@
       "category": "1-cut",
       "shots": 1,
       "tone": "film",
+      "no_frame": false,
       "frame_file": "frames/photobooth_1cut_film.png",
       "icon_file": "icons/icon_photobooth_1cut_film.png",
       "slots": [
@@ -753,6 +779,7 @@
       "category": "xmas",
       "shots": 4,
       "tone": "warm",
+      "no_frame": false,
       "frame_file": "frames/photobooth_xmas_wreath.png",
       "icon_file": "icons/icon_photobooth_xmas_wreath.png",
       "slots": [
@@ -792,6 +819,7 @@
       "category": "xmas",
       "shots": 1,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_xmas_merry.png",
       "icon_file": "icons/icon_photobooth_xmas_merry.png",
       "slots": [
@@ -810,6 +838,7 @@
       "category": "xmas",
       "shots": 4,
       "tone": "warm",
+      "no_frame": false,
       "frame_file": "frames/photobooth_xmas_gingerbread.png",
       "icon_file": "icons/icon_photobooth_xmas_gingerbread.png",
       "slots": [
@@ -849,6 +878,7 @@
       "category": "xmas",
       "shots": 4,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_xmas_snowman.png",
       "icon_file": "icons/icon_photobooth_xmas_snowman.png",
       "slots": [
@@ -888,6 +918,7 @@
       "category": "xmas",
       "shots": 2,
       "tone": "bh2",
+      "no_frame": false,
       "frame_file": "frames/photobooth_winter_ice.png",
       "icon_file": "icons/icon_photobooth_winter_ice.png",
       "slots": [
@@ -913,6 +944,7 @@
       "category": "2-cut",
       "shots": 2,
       "tone": "pink",
+      "no_frame": false,
       "frame_file": "frames/photobooth_couple_random.png",
       "icon_file": "icons/icon_photobooth_couple_random.png",
       "slots": [
@@ -938,6 +970,7 @@
       "category": "kr",
       "shots": 4,
       "tone": "cl1",
+      "no_frame": false,
       "frame_file": "frames/photobooth_kr_life4cuts.png",
       "icon_file": "icons/icon_photobooth_kr_life4cuts.png",
       "slots": [
@@ -977,6 +1010,7 @@
       "category": "kr",
       "shots": 4,
       "tone": "pk3",
+      "no_frame": false,
       "frame_file": "frames/photobooth_kr_pink_pastel.png",
       "icon_file": "icons/icon_photobooth_kr_pink_pastel.png",
       "slots": [
@@ -1016,6 +1050,7 @@
       "category": "kr",
       "shots": 2,
       "tone": "warm",
+      "no_frame": false,
       "frame_file": "frames/photobooth_kr_duo_gold.png",
       "icon_file": "icons/icon_photobooth_kr_duo_gold.png",
       "slots": [
@@ -1041,6 +1076,7 @@
       "category": "kr",
       "shots": 2,
       "tone": "ab2",
+      "no_frame": false,
       "frame_file": "frames/photobooth_kr_duo_blue.png",
       "icon_file": "icons/icon_photobooth_kr_duo_blue.png",
       "slots": [
@@ -1066,6 +1102,7 @@
       "category": "trend",
       "shots": 1,
       "tone": "pk3",
+      "no_frame": false,
       "frame_file": "frames/photobooth_trend_sweet.png",
       "icon_file": "icons/icon_photobooth_trend_sweet.png",
       "slots": [
@@ -1084,6 +1121,7 @@
       "category": "trend",
       "shots": 1,
       "tone": "sparkle",
+      "no_frame": false,
       "frame_file": "frames/photobooth_trend_y2k_heart.png",
       "icon_file": "icons/icon_photobooth_trend_y2k_heart.png",
       "slots": [
@@ -1102,6 +1140,7 @@
       "category": "trend",
       "shots": 1,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_trend_comment_top.png",
       "icon_file": "icons/icon_photobooth_trend_comment_top.png",
       "slots": [
@@ -1120,6 +1159,7 @@
       "category": "trend",
       "shots": 1,
       "tone": "normal",
+      "no_frame": false,
       "frame_file": "frames/photobooth_trend_comment_bot.png",
       "icon_file": "icons/icon_photobooth_trend_comment_bot.png",
       "slots": [
@@ -1138,6 +1178,7 @@
       "category": "trend",
       "shots": 1,
       "tone": "cl1",
+      "no_frame": false,
       "frame_file": "frames/photobooth_pastel_daisy.png",
       "icon_file": "icons/icon_photobooth_pastel_daisy.png",
       "slots": [
@@ -1156,6 +1197,7 @@
       "category": "trend",
       "shots": 1,
       "tone": "ab2",
+      "no_frame": false,
       "frame_file": "frames/photobooth_pastel_cloud.png",
       "icon_file": "icons/icon_photobooth_pastel_cloud.png",
       "slots": [
@@ -1174,15 +1216,16 @@
       "category": "color_meitu",
       "shots": 1,
       "tone": "cl1",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_cl1.png",
       "icon_file": "icons/icon_photobooth_color_cl1.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1192,15 +1235,16 @@
       "category": "color_meitu",
       "shots": 1,
       "tone": "cr2",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_cr2.png",
       "icon_file": "icons/icon_photobooth_color_cr2.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1210,15 +1254,16 @@
       "category": "color_meitu",
       "shots": 1,
       "tone": "pk3",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_pk3.png",
       "icon_file": "icons/icon_photobooth_color_pk3.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1228,15 +1273,16 @@
       "category": "color_meitu",
       "shots": 1,
       "tone": "mt4",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_mt4.png",
       "icon_file": "icons/icon_photobooth_color_mt4.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1246,15 +1292,16 @@
       "category": "color_ccd",
       "shots": 1,
       "tone": "ccd",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_ccd.png",
       "icon_file": "icons/icon_photobooth_color_ccd.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1264,15 +1311,16 @@
       "category": "color_ccd",
       "shots": 1,
       "tone": "fj1",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_fj1.png",
       "icon_file": "icons/icon_photobooth_color_fj1.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1282,15 +1330,16 @@
       "category": "color_ccd",
       "shots": 1,
       "tone": "ab2",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_ab2.png",
       "icon_file": "icons/icon_photobooth_color_ab2.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1300,15 +1349,16 @@
       "category": "color_ccd",
       "shots": 1,
       "tone": "kg3",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_kg3.png",
       "icon_file": "icons/icon_photobooth_color_kg3.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1318,15 +1368,16 @@
       "category": "color_mood",
       "shots": 1,
       "tone": "hk9",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_hk9.png",
       "icon_file": "icons/icon_photobooth_color_hk9.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1336,15 +1387,16 @@
       "category": "color_mood",
       "shots": 1,
       "tone": "ss1",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_ss1.png",
       "icon_file": "icons/icon_photobooth_color_ss1.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1354,15 +1406,16 @@
       "category": "color_mood",
       "shots": 1,
       "tone": "bh2",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_bh2.png",
       "icon_file": "icons/icon_photobooth_color_bh2.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     },
@@ -1372,15 +1425,16 @@
       "category": "color_mood",
       "shots": 1,
       "tone": "mf3",
+      "no_frame": true,
       "frame_file": "frames/photobooth_color_mf3.png",
       "icon_file": "icons/icon_photobooth_color_mf3.png",
       "slots": [
         {
-          "x": 44,
-          "y": 44,
-          "w": 1960,
-          "h": 1960,
-          "radius": 64
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
         }
       ]
     }
