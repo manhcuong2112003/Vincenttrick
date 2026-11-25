@@ -1437,6 +1437,85 @@
           "radius": 0
         }
       ]
+    },
+    "photobooth_xmas_candy_4cut": {
+      "id": "photobooth_xmas_candy_4cut",
+      "title": "MERRY CHRISTMAS",
+      "category": "xmas",
+      "shots": 4,
+      "tone": "warm",
+      "no_frame": false,
+      "frame_file": "frames/photobooth_xmas_candy_4cut.png",
+      "icon_file": "icons/icon_photobooth_xmas_candy_4cut.png",
+      "slots": [
+        {
+          "x": 84,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 114,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 84,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        },
+        {
+          "x": 1054,
+          "y": 1064,
+          "w": 910,
+          "h": 910,
+          "radius": 44
+        }
+      ]
+    },
+    "photobooth_xmas_ribbon_1cut": {
+      "id": "photobooth_xmas_ribbon_1cut",
+      "title": "photobooth_xmas_ribbon_1cut",
+      "category": "xmas",
+      "shots": 1,
+      "tone": "warm",
+      "no_frame": false,
+      "frame_file": "frames/photobooth_xmas_ribbon_1cut.png",
+      "icon_file": "icons/icon_photobooth_xmas_ribbon_1cut.png",
+      "slots": [
+        {
+          "x": 104,
+          "y": 128,
+          "w": 1840,
+          "h": 1780,
+          "radius": 48
+        }
+      ]
+    },
+    "photobooth_xmas_nativity_1cut": {
+      "id": "photobooth_xmas_nativity_1cut",
+      "title": "photobooth_xmas_nativity_1cut",
+      "category": "xmas",
+      "shots": 1,
+      "tone": "cl1",
+      "no_frame": false,
+      "frame_file": "frames/photobooth_xmas_nativity_1cut.png",
+      "icon_file": "icons/icon_photobooth_xmas_nativity_1cut.png",
+      "slots": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0,
+          "shape": "circle"
+        }
+      ]
     }
   }
 }
