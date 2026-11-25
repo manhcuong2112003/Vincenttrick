@@ -305,6 +305,15 @@ const FILTER_PROMPTS = {
     founding_father: "Show the person in the photo with the exact same pose and background, wearing a classic 18th-century white powdered curly colonial wig",
     Founding_father: "Show the person in the photo with the exact same pose and background, wearing a classic 18th-century white powdered curly colonial wig",
 
+    // Hot AI Cosplay VN & Noel
+    ai_santa_vip: "Show the person in the photo with the exact same pose and background, dressed as Santa Claus wearing a plush red velvet Santa suit with white fur trim and a Santa hat, with warm glowing Christmas lights and gentle snow",
+    ai_xmas_fairy: "Show the person in the photo with the exact same pose and background, dressed as a magical Christmas fairy with glowing translucent iridescent fairy wings, a sparkling red and white festive dress with fur trim, a golden star tiara, and warm fairy sparkles",
+    ai_grab: "Show the person in the photo with the exact same pose and background, dressed as a Grab rider wearing a bright green and white Grab jacket with white stripes and a matching green Grab helmet, keeping their face clearly visible",
+    ai_be: "Show the person in the photo with the exact same pose and background, dressed as a Be rider wearing a bright yellow and navy blue Be jacket and a matching yellow helmet, keeping their face clearly visible",
+    ai_xanh_sm: "Show the person in the photo with the exact same pose and background, dressed as a Xanh SM driver wearing a sleek cyan-teal polo jacket and a matching cyan helmet, keeping their face clearly visible",
+    ai_shopee_food: "Show the person in the photo with the exact same pose and background, dressed as a ShopeeFood shipper wearing a bright orange ShopeeFood delivery jacket and a matching orange helmet, keeping their face clearly visible",
+    ai_tire_love: "Show the person in the photo with the exact same pose and background, wearing a giant realistic black rubber car tire slung around their torso and shoulders like a funny ring, keeping their face and expression clearly visible",
+
     // Looks & Hair
     bye_brows: "Show the person in the photo with the exact same pose and background, with their eyebrows smoothly removed while keeping their face and expression identical",
     no_eyebrows: "Show the person in the photo with the exact same pose and background, with their eyebrows smoothly removed while keeping their face and expression identical",
@@ -998,6 +1007,34 @@ export default {
                     );
                 }
                 aiMs = Date.now() - aiStartedAt;
+
+                if (filterId === "ai_tire_love") {
+                    const pbServerUrl = getPhotoboothServerUrl(env);
+                    if (pbServerUrl) {
+                        try {
+                            const capHeaders = { "Content-Type": "application/json" };
+                            if (env?.PHOTOBOOTH_SECRET) {
+                                capHeaders["X-API-Secret"] = env.PHOTOBOOTH_SECRET;
+                            }
+                            const capResp = await fetch(`${pbServerUrl}/caption-overlay`, {
+                                method: "POST",
+                                headers: capHeaders,
+                                body: JSON.stringify({
+                                    imageBase64: arrayBufferToBase64(finalPhotoBytes),
+                                    caption: "Tưởng love hóa ra lốp"
+                                })
+                            });
+                            if (capResp.ok) {
+                                const capJson = await capResp.json();
+                                if (capJson?.imageBase64) {
+                                    finalPhotoBytes = new Uint8Array(base64ToArrayBuffer(capJson.imageBase64));
+                                }
+                            }
+                        } catch (capErr) {
+                            console.warn("Caption overlay skipped:", capErr.message);
+                        }
+                    }
+                }
 
                 const imageFormat = getImageFormat(finalPhotoBytes);
                 const uploadStartedAt = Date.now();
