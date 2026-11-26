@@ -329,6 +329,10 @@ const FILTER_PROMPTS = {
     founding_father: "Show the person in the photo with the exact same pose and background, wearing a classic 18th-century white powdered curly colonial wig",
     Founding_father: "Show the person in the photo with the exact same pose and background, wearing a classic 18th-century white powdered curly colonial wig",
 
+    // Hiệu ứng Thời tiết AI (FLUX.2 Klein 4B)
+    ai_blizzard_snow: "Show the person in the photo with the exact same face and pose, surrounded by a heavy winter snowstorm with thick white snow covering the ground, background, their hair and shoulders, dense falling snowflakes, and cold icy blue winter lighting",
+    ai_scorching_sun: "Show the person in the photo with the exact same face and pose, bathed in intense blazing golden sunlight with a huge bright glowing sun and warm lens flare in the sky behind them, dry arid sunlit background, heat haze, and hot golden summer lighting",
+
     // Looks & Hair
     bye_brows: "Show the person in the photo with the exact same pose and background, with their eyebrows smoothly removed while keeping their face and expression identical",
     no_eyebrows: "Show the person in the photo with the exact same pose and background, with their eyebrows smoothly removed while keeping their face and expression identical",
