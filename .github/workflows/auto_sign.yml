@@ -2,8 +2,8 @@ name: Sync Shadowrocket 3uTools Mirror
 
 on:
   schedule:
-    # Kiểm tra định kỳ (sync_3u_release.py tự giới hạn đúng 7 tuần / 49 ngày mới tải kiểm tra 1 lần)
-    - cron: '0 0 * * 0'
+    # Kiểm tra cập nhật bản mới từ 3uTools định kỳ ngày 1 và ngày 22 hàng tháng (~3 tuần/lần)
+    - cron: '0 2 1,22 * *'
   workflow_dispatch:
 
 permissions:
@@ -24,7 +24,6 @@ jobs:
       - name: Sync 3uTools IPA to GitHub Releases
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_NAME: ${{ github.event_name }}
         run: |
           python3 sync_3u_release.py
 
