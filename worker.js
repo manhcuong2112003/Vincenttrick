@@ -22,6 +22,31 @@ let monitorState = {
 
 const MONITOR_CACHE_URL = "https://monitor.cache.local/v1/photobooth-state";
 const DEFAULT_PHOTOBOOTH_SERVER_URL = "https://locket-photobooth-server.onrender.com";
+const LOCAL_COSPLAY_OVERLAYS = new Set(["ai_grab", "ai_be", "ai_xanh_sm", "ai_shopee_food", "ai_tire_love"]);
+
+async function syncDebugToRender(env, payload) {
+    const pbServerUrl = getPhotoboothServerUrl(env);
+    if (!pbServerUrl) return;
+    try {
+        const headers = { "Content-Type": "application/json" };
+        if (env?.PHOTOBOOTH_SECRET) headers["X-API-Secret"] = env.PHOTOBOOTH_SECRET;
+        await fetch(`${pbServerUrl}/last-debug`, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(payload)
+        });
+    } catch { }
+}
+
+async function fetchDebugFromRender(env) {
+    const pbServerUrl = getPhotoboothServerUrl(env);
+    if (!pbServerUrl) return null;
+    try {
+        const r = await fetch(`${pbServerUrl}/last-debug`);
+        if (r.ok) return await r.json();
+    } catch { }
+    return null;
+}
 
 function getPhotoboothServerUrl(env) {
     return ((env?.PHOTOBOOTH_SERVER_URL || DEFAULT_PHOTOBOOTH_SERVER_URL) + "").trim().replace(/\/+$/, "");
@@ -640,10 +665,15 @@ export default {
 
         // 2.1 Endpoint chẩn đoán
         if (url.pathname === "/last-payload") {
+            let dbg = lastDebugInfo;
+            if (!dbg.lastResult) {
+                const remote = await fetchDebugFromRender(env);
+                if (remote && remote.lastResult) dbg = remote;
+            }
             return new Response(JSON.stringify({
-                lastRequestSchema: lastDebugInfo.lastRequestSchema,
-                lastResult: lastDebugInfo.lastResult,
-                timestamp: lastDebugInfo.timestamp
+                lastRequestSchema: dbg.lastRequestSchema,
+                lastResult: dbg.lastResult,
+                timestamp: dbg.timestamp
             }, null, 2), {
                 headers: { "Content-Type": "application/json" }
             });
@@ -707,8 +737,13 @@ export default {
                         const helpNote = `\n\n📌 <b>Lệnh quản trị:</b>\n• <code>/status</code> — Xem trạng thái & lần chống ngủ gần nhất\n• <code>/ping</code> — Gửi lệnh chống ngủ / đánh thức ngay\n• <code>/last</code> — Xem kết quả/lỗi lần chụp gần nhất`;
                         await sendTelegram(env, buildStatusMessage(st, serverUrl) + helpNote);
                     } else if (text.startsWith("/last")) {
-                        const info = lastDebugInfo.lastResult
-                            ? `<pre>${JSON.stringify(lastDebugInfo.lastResult, null, 2)}</pre>`
+                        let resData = lastDebugInfo.lastResult;
+                        if (!resData) {
+                            const remote = await fetchDebugFromRender(env);
+                            if (remote && remote.lastResult) resData = remote.lastResult;
+                        }
+                        const info = resData
+                            ? `<pre>${JSON.stringify(resData, null, 2)}</pre>`
                             : "Chưa có lượt chụp nào trong phiên Worker hiện tại.";
                         await sendTelegram(env, `🧾 <b>Lần chụp Filter / Photobooth gần nhất:</b>\n${info}`);
                     }
@@ -798,9 +833,9 @@ export default {
                     imageBase64 = findBase64Image(json) || "";
                     foundImageUrl = findImageUrl(json) || "";
 
-                    // Chuyển tiếp riêng Photobooth sang Server 2K (Render / Oracle / VPS) thông qua 1 biến PHOTOBOOTH_SERVER_URL duy nhất
+                    // Chuyển tiếp Photobooth + Cosplay Overlay VN (Grab, Be, Xanh SM, ShopeeFood, Đeo Lốp) sang Server 2K
                     const pbServerUrl = getPhotoboothServerUrl(env);
-                    if (filterId.startsWith("photobooth") && pbServerUrl) {
+                    if ((filterId.startsWith("photobooth") || LOCAL_COSPLAY_OVERLAYS.has(filterId)) && pbServerUrl) {
                         const pbStart = Date.now();
                         const pbHeaders = { "Content-Type": "application/json" };
                         if (env?.PHOTOBOOTH_SECRET) {
@@ -845,6 +880,7 @@ export default {
                             outputUrl: pbJson.outputUrl
                         };
                         console.log("LOCKET_RESULT:", JSON.stringify(lastDebugInfo.lastResult));
+                        ctx.waitUntil(syncDebugToRender(env, lastDebugInfo));
                         return new Response(JSON.stringify(finalPayload), {
                             status: 200,
                             headers: {
@@ -1070,6 +1106,7 @@ export default {
                 };
 
                 console.log("LOCKET_RESULT:", JSON.stringify(lastDebugInfo.lastResult));
+                ctx.waitUntil(syncDebugToRender(env, lastDebugInfo));
 
                 return new Response(JSON.stringify(finalPayload), {
                     status: 200,

@@ -1516,6 +1516,101 @@
           "shape": "circle"
         }
       ]
+    },
+    "ai_grab": {
+      "id": "ai_grab",
+      "title": "Tài Xế Grab",
+      "category": "cosplay",
+      "shots": 1,
+      "tone": "normal",
+      "no_frame": false,
+      "frame_file": "frames/ai_grab.png",
+      "icon_file": "icons/icon_ai_grab.png",
+      "slots": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
+        }
+      ]
+    },
+    "ai_be": {
+      "id": "ai_be",
+      "title": "Tài Xế Be",
+      "category": "cosplay",
+      "shots": 1,
+      "tone": "normal",
+      "no_frame": false,
+      "frame_file": "frames/ai_be.png",
+      "icon_file": "icons/icon_ai_be.png",
+      "slots": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
+        }
+      ]
+    },
+    "ai_xanh_sm": {
+      "id": "ai_xanh_sm",
+      "title": "Tài Xế Xanh SM",
+      "category": "cosplay",
+      "shots": 1,
+      "tone": "normal",
+      "no_frame": false,
+      "frame_file": "frames/ai_xanh_sm.png",
+      "icon_file": "icons/icon_ai_xanh_sm.png",
+      "slots": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
+        }
+      ]
+    },
+    "ai_shopee_food": {
+      "id": "ai_shopee_food",
+      "title": "Shipper ShopeeFood",
+      "category": "cosplay",
+      "shots": 1,
+      "tone": "normal",
+      "no_frame": false,
+      "frame_file": "frames/ai_shopee_food.png",
+      "icon_file": "icons/icon_ai_shopee_food.png",
+      "slots": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
+        }
+      ]
+    },
+    "ai_tire_love": {
+      "id": "ai_tire_love",
+      "title": "Đeo Lốp (Tưởng Love)",
+      "category": "cosplay",
+      "shots": 1,
+      "tone": "normal",
+      "no_frame": false,
+      "frame_file": "frames/ai_tire_love.png",
+      "icon_file": "icons/icon_ai_tire_love.png",
+      "slots": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 2048,
+          "h": 2048,
+          "radius": 0
+        }
+      ]
     }
   }
 }
