@@ -48,10 +48,19 @@ function main() {
     throw new Error("Core Gold/30s flags missing");
   }
 
-  // 3. Kiểm tra Captions (Quote + Breaking News + VN Lyrics)
+  // 3. Kiểm tra Captions (Static VN Lyrics + Static LIVE Tin nóng; đã gỡ dynamic quote/breaking_news bị treo load)
   const dyn = JSON.parse(fbBody.entries.overlay_dynamic_captions || "[]");
-  if (!dyn.includes("quote") || !dyn.includes("breaking_news")) {
-    throw new Error("Missing quote/breaking_news in overlay_dynamic_captions");
+  if (dyn.includes("quote") || dyn.includes("breaking_news")) {
+    throw new Error("Dynamic quote/breaking_news should be removed from overlay_dynamic_captions");
+  }
+  const ovItems = JSON.parse(fbBody.entries.overlay_items || "[]");
+  const gen = ovItems.find(s => s.section && s.section.includes("General"));
+  if (!gen || gen.items.some(it => it.overlay_id === "caption:quote" || it.overlay_id === "caption:breaking_news")) {
+    throw new Error("Spinning quote/breaking_news should be removed from General");
+  }
+  const liveSec = ovItems.find(s => s.section && s.section.includes("Tin nóng"));
+  if (!liveSec || !Array.isArray(liveSec.items) || liveSec.items.length < 4) {
+    throw new Error("Missing static LIVE Tin nóng section in overlay_items");
   }
   const quotes = JSON.parse(fbBody.entries.quote_caption_options || "[]");
   if (quotes.length < 10) throw new Error("Too few quote_caption_options");
