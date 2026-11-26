@@ -66,6 +66,15 @@ def main() -> int:
     cfg = load_json(CONFIG_PATH)
     cache = load_json(CACHE_PATH)
 
+    event_name = os.environ.get("GITHUB_EVENT_NAME", "")
+    now_ts = int(datetime.now(timezone.utc).timestamp())
+    seven_weeks_sec = 49 * 86400
+    last_checked = int(cache.get("3u_last_checked_ts") or 0)
+    if event_name == "schedule" and last_checked and (now_ts - last_checked) < seven_weeks_sec and release_asset_exists():
+        days_left = (seven_weeks_sec - (now_ts - last_checked)) / 86400
+        print(f"[3uSync] Chua du 7 tuan ke tu lan kiem tra truoc (con {days_left:.1f} ngay). Bo qua.")
+        return 0
+
     plist_url = DEFAULT_3U_PLIST
     apps = cfg.get("apps") or []
     if apps and apps[0].get("fallback_3utools_plist"):
@@ -98,7 +107,9 @@ def main() -> int:
         return 1
 
     has_asset = release_asset_exists()
+    cache["3u_last_checked_ts"] = now_ts
     if has_asset and cache.get("3u_synced_ipa_url") == ipa_url and cache.get("3u_synced_sig") == remote_sig:
+        save_json(CACHE_PATH, cache)
         print(f"[3uSync] Ban Shadowrocket 3uTools ({version}) tren GitHub Releases da la moi nhat.")
         return 0
 
