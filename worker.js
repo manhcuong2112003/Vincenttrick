@@ -22,7 +22,6 @@ let monitorState = {
 
 const MONITOR_CACHE_URL = "https://monitor.cache.local/v1/photobooth-state";
 const DEFAULT_PHOTOBOOTH_SERVER_URL = "https://locket-photobooth-server.onrender.com";
-const LOCAL_COSPLAY_OVERLAYS = new Set(["ai_grab", "ai_be", "ai_xanh_sm", "ai_shopee_food", "ai_tire_love"]);
 
 async function syncDebugToRender(env, payload) {
     const pbServerUrl = getPhotoboothServerUrl(env);
@@ -329,15 +328,6 @@ const FILTER_PROMPTS = {
     clown: "Show the person in the photo with the exact same pose and background, wearing a colorful rainbow curly clown wig, a bright red foam clown nose, and a playful circus collar",
     founding_father: "Show the person in the photo with the exact same pose and background, wearing a classic 18th-century white powdered curly colonial wig",
     Founding_father: "Show the person in the photo with the exact same pose and background, wearing a classic 18th-century white powdered curly colonial wig",
-
-    // Hot AI Cosplay VN & Noel (mô tả thị giác chi tiết cho FLUX.2 Klein 4B)
-    ai_santa_vip: "Show the person in the photo with the exact same face, pose, and background, dressed in a bright red velvet Santa Claus coat with fluffy white fur trim and wearing a red Santa hat with white fur trim",
-    ai_xmas_fairy: "Show the person in the photo with the exact same face, pose, and background, dressed in a sparkling red and white Christmas fairy outfit with glowing translucent fairy wings behind their shoulders and a golden star tiara",
-    ai_grab: "Show the person in the photo with the exact same face, pose, and background, dressed in a vibrant emerald-green zip-up windbreaker jacket with grey reflective sleeve stripes and white text Grab on the chest, wearing a glossy emerald-green half-shell motorbike helmet",
-    ai_be: "Show the person in the photo with the exact same face, pose, and background, dressed in a bright yellow windbreaker jacket with dark navy-blue collar and cuffs and blue text be on the chest, wearing a glossy bright yellow half-shell motorbike helmet",
-    ai_xanh_sm: "Show the person in the photo with the exact same face, pose, and background, dressed in a bright cyan-turquoise zip-up windbreaker jacket with a yellow inner collar and grey reflective sleeve stripes, wearing a glossy cyan-turquoise half-shell motorbike helmet",
-    ai_shopee_food: "Show the person in the photo with the exact same face, pose, and background, dressed in a bright vibrant orange zip-up windbreaker jacket with grey reflective stripes and white text ShopeeFood on the chest, wearing a glossy orange and black half-shell motorbike helmet",
-    ai_tire_love: "Show the person in the photo with the exact same face, pose, and background, wearing a black hoodie with a thick black rubber motorcycle tire slung diagonally across their chest over one shoulder like a sash",
 
     // Looks & Hair
     bye_brows: "Show the person in the photo with the exact same pose and background, with their eyebrows smoothly removed while keeping their face and expression identical",
@@ -833,9 +823,9 @@ export default {
                     imageBase64 = findBase64Image(json) || "";
                     foundImageUrl = findImageUrl(json) || "";
 
-                    // Chuyển tiếp Photobooth + Cosplay Overlay VN (Grab, Be, Xanh SM, ShopeeFood, Đeo Lốp) sang Server 2K
+                    // Chuyển tiếp riêng Photobooth sang Server 2K
                     const pbServerUrl = getPhotoboothServerUrl(env);
-                    if ((filterId.startsWith("photobooth") || LOCAL_COSPLAY_OVERLAYS.has(filterId)) && pbServerUrl) {
+                    if (filterId.startsWith("photobooth") && pbServerUrl) {
                         const pbStart = Date.now();
                         const pbHeaders = { "Content-Type": "application/json" };
                         if (env?.PHOTOBOOTH_SECRET) {
@@ -1043,34 +1033,6 @@ export default {
                     );
                 }
                 aiMs = Date.now() - aiStartedAt;
-
-                if (filterId === "ai_tire_love") {
-                    const pbServerUrl = getPhotoboothServerUrl(env);
-                    if (pbServerUrl) {
-                        try {
-                            const capHeaders = { "Content-Type": "application/json" };
-                            if (env?.PHOTOBOOTH_SECRET) {
-                                capHeaders["X-API-Secret"] = env.PHOTOBOOTH_SECRET;
-                            }
-                            const capResp = await fetch(`${pbServerUrl}/caption-overlay`, {
-                                method: "POST",
-                                headers: capHeaders,
-                                body: JSON.stringify({
-                                    imageBase64: arrayBufferToBase64(finalPhotoBytes),
-                                    caption: "Tưởng love hóa ra lốp"
-                                })
-                            });
-                            if (capResp.ok) {
-                                const capJson = await capResp.json();
-                                if (capJson?.imageBase64) {
-                                    finalPhotoBytes = new Uint8Array(base64ToArrayBuffer(capJson.imageBase64));
-                                }
-                            }
-                        } catch (capErr) {
-                            console.warn("Caption overlay skipped:", capErr.message);
-                        }
-                    }
-                }
 
                 const imageFormat = getImageFormat(finalPhotoBytes);
                 const uploadStartedAt = Date.now();
