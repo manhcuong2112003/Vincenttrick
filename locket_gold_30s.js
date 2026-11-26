@@ -46,17 +46,8 @@
             obj.entries = Object.assign(obj.entries || {}, RAW_ENTRIES);
             obj.state = "UPDATE";
             obj.templateVersion = String(nowMs);
-            const stripKeys = { "content-length": true, "content-encoding": true, "transfer-encoding": true, "etag": true, "cache-control": true };
-            const cleanHeaders = {};
-            for (const k in headers) {
-                if (Object.prototype.hasOwnProperty.call(headers, k) && !stripKeys[k.toLowerCase()]) {
-                    cleanHeaders[k] = headers[k];
-                }
-            }
-            cleanHeaders["ETag"] = String(nowMs);
-            cleanHeaders["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0";
             body = JSON.stringify(obj);
-            $done({ headers: cleanHeaders, body });
+            $done({ body });
         } else {
             $done({ body });
         }
