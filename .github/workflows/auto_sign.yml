@@ -1,16 +1,16 @@
-name: Auto-Sign & Health Check Shadowrocket iOS
+name: Sync Shadowrocket 3uTools Mirror
 
 on:
   schedule:
-    # Tự động chạy mỗi 20 phút trên máy chủ GitHub (24/7 kể cả khi tắt PC)
-    - cron: '*/20 * * * *'
+    # Kiểm tra cập nhật bản mới từ 3uTools mỗi 6 giờ
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  sync-and-sign:
+  sync-3u-mirror:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,36 +21,33 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run Auto-Sign & Health Check Manager
+      - name: Sync 3uTools IPA to GitHub Releases
         env:
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
-          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python3 auto_sign_manager.py
+          python3 sync_3u_release.py
 
       - name: Verify No Conflict Markers & Valid JSON
         run: |
           python3 -c "
           import re, sys, json
-          for f in ['links_cache.json', 'config.json', 'index.html']:
+          for f in ['links_cache.json', 'config.json', 'index.html', 'shadowrocket-3u.plist']:
               with open(f, 'r', encoding='utf-8') as fp:
                   if re.search(r'^(<{7}|={7}|>{7})(\s|$)', fp.read(), re.MULTILINE):
                       print(f'ERROR: Conflict marker found in {f}!')
                       sys.exit(1)
           json.load(open('links_cache.json', encoding='utf-8'))
           json.load(open('config.json', encoding='utf-8'))
-          print('OK: Cache files valid and free of conflict markers.')
+          print('OK: Cache & plist files valid.')
           "
 
-      - name: Commit and Push updated cache only
+      - name: Commit and Push updated cache & plist
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Tách rời: Chỉ commit file dữ liệu links_cache.json & config.json, không sửa index.html
-          git add links_cache.json config.json
+          git add links_cache.json shadowrocket-3u.plist
           if ! git diff --cached --quiet; then
-            git commit -m "chore(auto-sign): update Shadowrocket manifest links & status [skip ci]"
+            git commit -m "chore(mirror): sync Shadowrocket 3uTools release [skip ci]"
             git push
           else
             echo "Không có thay đổi mới cần commit."
