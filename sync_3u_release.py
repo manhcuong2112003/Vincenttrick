@@ -4,6 +4,7 @@ import plistlib
 import subprocess
 import sys
 import urllib.request
+from datetime import datetime, timedelta, timezone
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
@@ -127,9 +128,36 @@ def main() -> int:
     os.remove(tmp_ipa)
 
     update_local_plist(version)
+    vn_now = datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S")
+    cache["updated_at"] = vn_now
+    cache["version"] = version
     cache["3u_synced_ipa_url"] = ipa_url
     cache["3u_synced_sig"] = remote_sig
     cache["3u_synced_version"] = version
+    cache["servers"] = [
+        {
+            "cert_id": "apple_official_3u",
+            "label": f"Server 1 — Bản gốc 3uTools (v{version})",
+            "badge": "Khuyên dùng trên 4G/5G • Có sẵn chữ ký",
+            "manifest_url": plist_url,
+            "install_url": f"itms-services://?action=download-manifest&url={urllib.request.quote(plist_url, safe='')}",
+            "ipa_url": ipa_url,
+            "signed_at": vn_now,
+            "ocsp_status": "APPLE_OFFICIAL",
+            "status": "active",
+        },
+        {
+            "cert_id": "github_3u_mirror",
+            "label": f"Server 2 — Dự phòng GitHub (3uTools Mirror v{version})",
+            "badge": "Không nghẽn Wi-Fi • Tải nhanh",
+            "manifest_url": "https://vincenttrick.pages.dev/shadowrocket-3u.plist",
+            "install_url": "itms-services://?action=download-manifest&url=https%3A%2F%2Fvincenttrick.pages.dev%2Fshadowrocket-3u.plist",
+            "ipa_url": GITHUB_ASSET_URL,
+            "signed_at": vn_now,
+            "ocsp_status": "APPLE_OFFICIAL",
+            "status": "active",
+        },
+    ]
     save_json(CACHE_PATH, cache)
     print(f"[3uSync] Hoan tat dong bo Shadowrocket v{version} len Release {RELEASE_TAG}!")
     return 0
