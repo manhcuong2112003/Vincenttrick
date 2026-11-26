@@ -64,11 +64,7 @@
             body = JSON.stringify(obj);
         }
 
-        headers["etag"] = String(nowMs);
-        headers["ETag"] = String(nowMs);
-        headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0";
-        headers["Pragma"] = "no-cache";
-        $done({ headers, body });
+        $done({ body });
     } catch (e) {
         $done({ body });
     }
