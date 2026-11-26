@@ -53,5 +53,8 @@
       "ocsp_status": "REVOKED",
       "status": "active"
     }
-  ]
+  ],
+  "3u_synced_ipa_url": "https://dl.3u.com/soft/2026/09/07/z_932747118_890167352_1.ipa",
+  "3u_synced_sig": "\"lqAKV52bqI2zw8KHteokOpppxkFs\"",
+  "3u_synced_version": "2.2.92"
 }
