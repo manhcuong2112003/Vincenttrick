@@ -728,8 +728,28 @@ export default {
                         await sendTelegram(env, `⚡ <b>Đã gửi lệnh chống ngủ thủ công!</b>\n\n${buildStatusMessage(st, serverUrl)}`);
                     } else if (text.startsWith("/status") || text.startsWith("/start") || text.startsWith("/help")) {
                         const st = await loadMonitorState();
-                        const helpNote = `\n\n📌 <b>Lệnh quản trị:</b>\n• <code>/status</code> — Xem trạng thái & lần chống ngủ gần nhất\n• <code>/ping</code> — Gửi lệnh chống ngủ / đánh thức ngay\n• <code>/last</code> — Xem kết quả/lỗi lần chụp gần nhất`;
+                        const helpNote = `\n\n📌 <b>Lệnh quản trị:</b>\n• <code>/status</code> — Xem trạng thái & lần chống ngủ gần nhất\n• <code>/ping</code> — Gửi lệnh chống ngủ / đánh thức ngay\n• <code>/last</code> — Xem kết quả/lỗi lần chụp gần nhất\n• <code>/text NỘI DUNG</code> — Đặt chữ Depth Text (tối đa 15 ký tự)`;
                         await sendTelegram(env, buildStatusMessage(st, serverUrl) + helpNote);
+                    } else if (text.startsWith("/text")) {
+                        const rawArg = text.slice(5).trim();
+                        if (!rawArg) {
+                            await sendTelegram(env, "✍️ Cách dùng: <code>/text CHILL NHÉ</code> (tối đa <b>15 ký tự</b>).");
+                        } else {
+                            const trimmed = rawArg.slice(0, 15);
+                            const pbHeaders = { "Content-Type": "application/json" };
+                            if (env?.PHOTOBOOTH_SECRET) pbHeaders["X-API-Secret"] = env.PHOTOBOOTH_SECRET;
+                            const r = await fetch(`${serverUrl}/depth-text`, {
+                                method: "POST",
+                                headers: pbHeaders,
+                                body: JSON.stringify({ userKey: "default_user", text: trimmed, color: "#FFFFFF" })
+                            });
+                            if (r.ok) {
+                                const note = rawArg.length > 15 ? `\n⚠️ Đã tự cắt còn <b>15 ký tự</b>.` : "";
+                                await sendTelegram(env, `✅ Đã lưu chữ Depth Text: <code>${trimmed}</code>${note}\nMở Locket chọn filter <b>Chữ Của Bạn ✍️</b> để dùng ngay!`);
+                            } else {
+                                await sendTelegram(env, `❌ Lỗi lưu chữ Depth Text: HTTP ${r.status}`);
+                            }
+                        }
                     } else if (text.startsWith("/last")) {
                         let resData = lastDebugInfo.lastResult;
                         if (!resData) {
@@ -795,6 +815,49 @@ export default {
                 status: r.status,
                 headers: { "Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*" }
             });
+        }
+
+        // 2.6 API & Web đặt chữ Depth Text (tối đa 15 ký tự)
+        if (url.pathname === "/api/depth-text") {
+            if (request.method === "OPTIONS") {
+                return new Response(null, {
+                    status: 204,
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                        "Access-Control-Allow-Headers": "Content-Type"
+                    }
+                });
+            }
+            const pbServerUrl = getPhotoboothServerUrl(env);
+            const pbHeaders = { "Content-Type": "application/json" };
+            if (env?.PHOTOBOOTH_SECRET) pbHeaders["X-API-Secret"] = env.PHOTOBOOTH_SECRET;
+            if (request.method === "GET") {
+                const userKey = url.searchParams.get("userKey") || "default_user";
+                const r = await fetch(`${pbServerUrl}/depth-text?userKey=${encodeURIComponent(userKey)}`);
+                return new Response(await r.text(), {
+                    status: r.status,
+                    headers: { "Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*" }
+                });
+            }
+            const payload = await request.json();
+            const cleanText = String(payload?.text || "").trim().slice(0, 15);
+            const color = String(payload?.color || "#FFFFFF").trim();
+            const userKey = String(payload?.userKey || "default_user").trim();
+            const r = await fetch(`${pbServerUrl}/depth-text`, {
+                method: "POST",
+                headers: pbHeaders,
+                body: JSON.stringify({ userKey, text: cleanText, color })
+            });
+            return new Response(await r.text(), {
+                status: r.status,
+                headers: { "Content-Type": "application/json; charset=utf-8", "Access-Control-Allow-Origin": "*" }
+            });
+        }
+
+        if (url.pathname === "/depth-text") {
+            const html = `<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Depth Text 15 Ký Tự — Vincenttrick</title><style>body{font-family:system-ui,-apple-system,sans-serif;background:#0f172a;color:#f8fafc;margin:0;padding:24px;display:flex;justify-content:center}.card{width:100%;max-width:420px;background:#1e293b;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.4)}h2{margin:0 0 8px;font-size:20px}p{margin:0 0 16px;color:#94a3b8;font-size:14px}input{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:10px;border:1px solid #334155;background:#0f172a;color:#fff;font-size:18px;font-weight:700;text-transform:uppercase}.row{display:flex;justify-content:space-between;align-items:center;margin:8px 0 16px;font-size:13px;color:#94a3b8}.colors{display:flex;gap:10px;margin-bottom:16px}.cbtn{width:34px;height:34px;border-radius:50%;border:2px solid transparent;cursor:pointer}.cbtn.active{border-color:#38bdf8;transform:scale(1.1)}button.save{width:100%;padding:12px;border:0;border-radius:10px;background:#facc15;color:#0f172a;font-weight:700;font-size:15px;cursor:pointer}#msg{margin-top:12px;font-size:14px;text-align:center}</style></head><body><div class="card"><h2>Chữ Sau Lưng Chủ Thể 🪪</h2><p>Nhập nội dung (tối đa <b>15 ký tự</b>) rồi chọn filter <b>Chữ Của Bạn ✍️</b> trên Locket.</p><input id="txt" maxlength="15" placeholder="VD: THỨ NĂM" value="VINCENT"><div class="row"><span>Giới hạn 15 ký tự</span><span id="cnt">7/15</span></div><div class="colors"><button class="cbtn active" data-c="#FFFFFF" style="background:#FFFFFF"></button><button class="cbtn" data-c="#FACC15" style="background:#FACC15"></button><button class="cbtn" data-c="#F472B6" style="background:#F472B6"></button><button class="cbtn" data-c="#38BDF8" style="background:#38BDF8"></button><button class="cbtn" data-c="#EF4444" style="background:#EF4444"></button></div><button class="save" onclick="save()">Lưu Chữ Depth Text</button><div id="msg"></div></div><script>let col="#FFFFFF";const inp=document.getElementById("txt"),cnt=document.getElementById("cnt"),msg=document.getElementById("msg");function upd(){cnt.textContent=inp.value.length+"/15"}inp.addEventListener("input",upd);document.querySelectorAll(".cbtn").forEach(b=>b.onclick=()=>{document.querySelectorAll(".cbtn").forEach(x=>x.classList.remove("active"));b.classList.add("active");col=b.dataset.c});fetch("/api/depth-text").then(r=>r.json()).then(d=>{if(d&&d.text){inp.value=d.text.slice(0,15);upd()}if(d&&d.color){col=d.color;document.querySelectorAll(".cbtn").forEach(x=>x.classList.toggle("active",x.dataset.c===col))}}).catch(()=>{});async function save(){const t=inp.value.trim().slice(0,15);if(!t){msg.textContent="Vui lòng nhập chữ!";return}const r=await fetch("/api/depth-text",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({userKey:"default_user",text:t,color:col})});const d=await r.json();msg.textContent=r.ok?"✅ Đã lưu: "+d.text:"❌ Lỗi: "+(d.detail||r.status)}</script></body></html>`;
+            return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8" } });
         }
 
         // 3. Endpoint xử lý Filter ảnh: /generateFilteredImage
@@ -872,6 +935,60 @@ export default {
                             totalMs: Date.now() - startTime,
                             outputBytes: pbJson.outputBytes,
                             outputUrl: pbJson.outputUrl
+                        };
+                        console.log("LOCKET_RESULT:", JSON.stringify(lastDebugInfo.lastResult));
+                        ctx.waitUntil(syncDebugToRender(env, lastDebugInfo));
+                        return new Response(JSON.stringify(finalPayload), {
+                            status: 200,
+                            headers: {
+                                "Content-Type": "application/json; charset=utf-8",
+                                "Access-Control-Allow-Origin": "*"
+                            }
+                        });
+                    }
+
+                    // Chuyển tiếp riêng Depth Text (chữ sau chủ thể) sang Server Python
+                    if (filterId.startsWith("depth_") && pbServerUrl) {
+                        const dtHeaders = { "Content-Type": "application/json" };
+                        if (env?.PHOTOBOOTH_SECRET) {
+                            dtHeaders["X-API-Secret"] = env.PHOTOBOOTH_SECRET;
+                        }
+                        const dtResp = await fetch(`${pbServerUrl}/depth-text-render`, {
+                            method: "POST",
+                            headers: dtHeaders,
+                            body: JSON.stringify({
+                                filterId,
+                                userKey: getPhotoboothUserKey(request),
+                                imageUrl: foundImageUrl,
+                                imageBase64,
+                                authorization: request.headers.get("authorization") || ""
+                            })
+                        });
+                        if (!dtResp.ok) {
+                            const errTxt = await dtResp.text();
+                            throw new Error(`Depth Text Server HTTP ${dtResp.status}: ${errTxt.slice(0, 160)}`);
+                        }
+                        const dtJson = await dtResp.json();
+                        if (!dtJson?.outputUrl) {
+                            throw new Error("Depth Text Server did not return outputUrl");
+                        }
+                        const finalPayload = {
+                            result: {
+                                status: 200,
+                                data: { outputUrl: dtJson.outputUrl },
+                                outputUrl: dtJson.outputUrl,
+                                errors: []
+                            }
+                        };
+                        lastDebugInfo.lastResult = {
+                            status: "ok",
+                            mode: "depth-text-server",
+                            filterId,
+                            text: dtJson.text,
+                            renderMs: dtJson.renderMs,
+                            totalMs: Date.now() - startTime,
+                            outputBytes: dtJson.outputBytes,
+                            outputUrl: dtJson.outputUrl
                         };
                         console.log("LOCKET_RESULT:", JSON.stringify(lastDebugInfo.lastResult));
                         ctx.waitUntil(syncDebugToRender(env, lastDebugInfo));
