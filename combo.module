@@ -4,11 +4,15 @@
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Star.png
 
 [Rule]
-# 1. Chặn AppAttest và Firebase Realtime của Locket
+# 1. Chặn AppAttest, Firebase Realtime & Telemetry của Locket
 DOMAIN,appattest.apple.com,REJECT
 DOMAIN,firebaseremoteconfigrealtime.googleapis.com,REJECT
 DOMAIN-SUFFIX,firebaselogging.googleapis.com,REJECT
 DOMAIN-SUFFIX,firebaselogging-pa.googleapis.com,REJECT
+DOMAIN-SUFFIX,sentry.io,REJECT
+DOMAIN-SUFFIX,crashlytics.com,REJECT
+DOMAIN-SUFFIX,amplitude.com,REJECT
+DOMAIN-SUFFIX,appsflyersdk.com,REJECT
 # 2. Chặn UDP 443 (QUIC) để ép Locket & YouTube hạ xuống TCP HTTPS
 AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
 
@@ -29,10 +33,10 @@ AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT
 deleteHeader = type=http-request,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com|firebaseremoteconfig\.googleapis\.com)\/.+,script-path=https://vincenttrick.pages.dev/deleteHeader.js,timeout=60
 
 # [Locket] 2. Mở khóa toàn bộ API RevenueCat VIP
-revenuecat = type=http-response,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com)\/.+\/(receipts|subscribers|offerings|product_entitlement_mapping).*,script-path=https://vincenttrick.pages.dev/revenuecat_gold.js?v=20261126c,requires-body=true,max-size=-1,timeout=60
+revenuecat = type=http-response,pattern=^https?:\/\/((api|rc-cdn|sdk)\.revenuecat\.com|revenuecat\.com)\/.+\/(receipts|subscribers|offerings|product_entitlement_mapping).*,script-path=https://vincenttrick.pages.dev/revenuecat_gold.js?v=20261126h,requires-body=true,max-size=-1,timeout=60
 
 # [Locket] 3. Mở khóa toàn bộ 1,014 cờ Firebase Remote Config (Gold VIP + 30s)
-locketFirebase = type=http-response,pattern=^https?:\/\/firebaseremoteconfig\.googleapis\.com\/.+,script-path=https://vincenttrick.pages.dev/locket_gold_30s.js?v=20261126g,requires-body=true,max-size=-1,timeout=60
+locketFirebase = type=http-response,pattern=^https?:\/\/firebaseremoteconfig\.googleapis\.com\/.+,script-path=https://vincenttrick.pages.dev/locket_gold_30s.js?v=20261126h,requires-body=true,max-size=-1,timeout=60
 
 # [YouTube] 4. Mở khóa YouTube Premium & Chặn quảng cáo Protobuf
 youtube.response = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/(youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch|log_event|config))(\?(.*))?$,requires-body=1,max-size=-1,binary-body-mode=1,script-path=https://vincenttrick.pages.dev/youtube.response.js,argument="{"captionLang":"vi","blockUpload":true,"blockImmersive":true,"blockShorts":false,"debug":false}"

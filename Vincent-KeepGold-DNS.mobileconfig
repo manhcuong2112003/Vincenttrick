@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>DNSSettings</key>
+			<dict>
+				<key>DNSProtocol</key>
+				<string>HTTPS</string>
+				<key>ServerURL</key>
+				<string>https://vincenttrick.pages.dev/dns-query</string>
+				<key>SupplementalMatchDomains</key>
+				<array>
+					<string>ocsp.apple.com</string>
+					<string>ocsp2.apple.com</string>
+					<string>valid.apple.com</string>
+					<string>crl.apple.com</string>
+					<string>certs.apple.com</string>
+					<string>appattest.apple.com</string>
+					<string>api.revenuecat.com</string>
+					<string>rc-cdn.revenuecat.com</string>
+					<string>sdk.revenuecat.com</string>
+					<string>rc-backup.revenuecat.com</string>
+					<string>api.rc-backup.com</string>
+					<string>firebaseremoteconfig.googleapis.com</string>
+					<string>firebaseremoteconfigrealtime.googleapis.com</string>
+					<string>sentry.io</string>
+					<string>crashlytics.com</string>
+					<string>amplitude.com</string>
+					<string>appsflyersdk.com</string>
+				</array>
+			</dict>
+			<key>OnDemandRules</key>
+			<array>
+				<dict>
+					<key>Action</key>
+					<string>Connect</string>
+				</dict>
+			</array>
+			<key>PayloadDisplayName</key>
+			<string>Vincent KeepGold DNS (Giữ Gold &amp; Chống Thu Hồi)</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.dnsSettings.managed.vincenttrick.keepgold</string>
+			<key>PayloadOrganization</key>
+			<string>VincentTrick iOS Portal</string>
+			<key>PayloadType</key>
+			<string>com.apple.dnsSettings.managed</string>
+			<key>PayloadUUID</key>
+			<string>9B85D13F-5E23-4F9C-8A21-8D76F2A13B22</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Chặn kiểm tra thu hồi chứng chỉ Apple + chặn Locket gọi về RevenueCat/Firebase gốc khi tắt VPN giúp giữ cache Gold lâu hơn. (Lưu ý: Chỉ bật sau khi đã kích hoạt Gold qua Shadowrocket; khi cần Update Module/nạp lại Gold hãy chuyển về Vincent-DNS mặc định.)</string>
+	<key>PayloadDisplayName</key>
+	<string>👑 Vincent KeepGold DNS — Giữ Gold Khi Tắt VPN</string>
+	<key>PayloadIdentifier</key>
+	<string>com.vincenttrick.keepgold.profile</string>
+	<key>PayloadOrganization</key>
+	<string>VincentTrick iOS Portal</string>
+	<key>PayloadScope</key>
+	<string>User</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>4E3615F1-5A90-42E4-8B1D-1416F93D4402</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
