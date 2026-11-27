@@ -1528,11 +1528,49 @@
       "icon_file": "icons/icon_photobooth_1cut_music_wall.png",
       "slots": [
         {
-          "x": 624,
-          "y": 370,
-          "w": 800,
-          "h": 780,
-          "radius": 44
+          "x": 681,
+          "y": 462,
+          "w": 686,
+          "h": 687,
+          "radius": 37
+        }
+      ]
+    },
+    "photobooth_1cut_music_bw": {
+      "id": "photobooth_1cut_music_bw",
+      "title": "MUSIC B&W",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "bw",
+      "no_frame": false,
+      "frame_file": "frames/photobooth_1cut_music_bw.png",
+      "icon_file": "icons/icon_photobooth_1cut_music_bw.png",
+      "slots": [
+        {
+          "x": 470,
+          "y": 83,
+          "w": 1095,
+          "h": 1088,
+          "radius": 60
+        }
+      ]
+    },
+    "photobooth_1cut_music_blur": {
+      "id": "photobooth_1cut_music_blur",
+      "title": "MUSIC BLUR",
+      "category": "1-cut",
+      "shots": 1,
+      "tone": "normal",
+      "no_frame": false,
+      "frame_file": "frames/photobooth_1cut_music_blur.png",
+      "icon_file": "icons/icon_photobooth_1cut_music_blur.png",
+      "slots": [
+        {
+          "x": 1325,
+          "y": 425,
+          "w": 516,
+          "h": 515,
+          "radius": 28
         }
       ]
     }
