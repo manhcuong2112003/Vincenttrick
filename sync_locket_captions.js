@@ -48,15 +48,15 @@ function main() {
     throw new Error("Core Gold/30s flags missing");
   }
 
-  // 3. Kiểm tra Captions (VertexAI quote/breaking_news + Static VN Lyrics + Static LIVE Tin nóng)
+  // 3. Kiểm tra Captions (Static VN Lyrics + Static LIVE Tin nóng; đã gỡ VertexAI quote/breaking_news bị Tap to retry)
   const dyn = JSON.parse(fbBody.entries.overlay_dynamic_captions || "[]");
-  if (!dyn.includes("quote") || !dyn.includes("breaking_news")) {
-    throw new Error("Missing quote/breaking_news in overlay_dynamic_captions");
+  if (dyn.includes("quote") || dyn.includes("breaking_news")) {
+    throw new Error("Failing VertexAI quote/breaking_news should be removed from overlay_dynamic_captions");
   }
   const ovItems = JSON.parse(fbBody.entries.overlay_items || "[]");
   const gen = ovItems.find(s => s.section && s.section.includes("General"));
-  if (!gen || !gen.items.some(it => it.overlay_id === "caption:quote") || !gen.items.some(it => it.overlay_id === "caption:breaking_news")) {
-    throw new Error("Missing quote/breaking_news in General");
+  if (!gen || gen.items.some(it => it.overlay_id === "caption:quote" || it.overlay_id === "caption:breaking_news")) {
+    throw new Error("Failing VertexAI quote/breaking_news should be removed from General");
   }
   const liveSec = ovItems.find(s => s.section && s.section.includes("Tin nóng"));
   if (!liveSec || !Array.isArray(liveSec.items) || liveSec.items.length < 4) {

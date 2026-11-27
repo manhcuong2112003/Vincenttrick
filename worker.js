@@ -659,6 +659,11 @@ export default {
 
         // 2.1 Endpoint chẩn đoán
         if (url.pathname === "/last-payload") {
+            const dashPass = (env?.DASHBOARD_PASS || "").trim();
+            const keyParam = url.searchParams.get("key") || "";
+            if (dashPass && keyParam !== dashPass) {
+                return new Response("Unauthorized", { status: 401 });
+            }
             let dbg = lastDebugInfo;
             if (!dbg.lastResult) {
                 const remote = await fetchDebugFromRender(env);
@@ -799,6 +804,18 @@ export default {
 
         // 3. Endpoint xử lý Filter ảnh: /generateFilteredImage
         if (url.pathname.endsWith("/generateFilteredImage") || url.pathname.includes("generateFilteredImage")) {
+            const authHeader = (request.headers.get("authorization") || "").trim();
+            const secretHeader = (request.headers.get("x-api-secret") || "").trim();
+            const expectedSecret = (env?.PHOTOBOOTH_SECRET || "").trim();
+            const hasValidSecret = expectedSecret && secretHeader === expectedSecret;
+            if (!authHeader.startsWith("Bearer ") && !hasValidSecret) {
+                return new Response(JSON.stringify({
+                    error: { status: "UNAUTHENTICATED", message: "Missing Locket Bearer token" }
+                }), {
+                    status: 401,
+                    headers: { "Content-Type": "application/json; charset=utf-8" }
+                });
+            }
             const startTime = Date.now();
             let fetchMs = 0;
             let aiMs = 0;
