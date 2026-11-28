@@ -108,26 +108,60 @@ async function saveMonitorState() {
     } catch { }
 }
 
-async function sendTelegram(env, text) {
+async function sendTelegram(env, text, replyMarkup = null) {
     const token = (env?.TELEGRAM_BOT_TOKEN || "").trim();
     const chatId = (env?.TELEGRAM_CHAT_ID || "").trim();
     if (!token || !chatId) return false;
     try {
+        const payload = {
+            chat_id: chatId,
+            text,
+            parse_mode: "HTML",
+            disable_web_page_preview: true
+        };
+        if (replyMarkup) payload.reply_markup = replyMarkup;
         const resp = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text,
-                parse_mode: "HTML",
-                disable_web_page_preview: true
-            })
+            body: JSON.stringify(payload)
         });
         return resp.ok;
     } catch {
         return false;
     }
 }
+
+async function answerTelegramCallback(env, callbackQueryId, text = "") {
+    const token = (env?.TELEGRAM_BOT_TOKEN || "").trim();
+    if (!token || !callbackQueryId) return;
+    try {
+        await fetch(`https://api.telegram.org/bot${token}/answerCallbackQuery`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ callback_query_id: callbackQueryId, text })
+        });
+    } catch { }
+}
+
+async function createOneTimeToken(env, scope) {
+    if (!env?.ONE_TIME_LINKS) {
+        throw new Error("Chưa gắn KV Namespace ONE_TIME_LINKS cho Worker trên Cloudflare Dashboard.");
+    }
+    const bytes = new Uint8Array(24);
+    crypto.getRandomValues(bytes);
+    const token = Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+    await env.ONE_TIME_LINKS.put(`tok:${token}`, JSON.stringify({ scope }), { expirationTtl: 3600 });
+    return token;
+}
+
+const GEN_MENU_MARKUP = {
+    inline_keyboard: [
+        [{ text: "📱 Link cài Shadowrocket (1 lần • 1 giờ)", callback_data: "gen:sdrk" }],
+        [{ text: "👑 Link Module Locket Gold (1 lần • 1 giờ)", callback_data: "gen:module:locket" }],
+        [{ text: "🌟 Link Module Combo 2-in-1 (1 lần • 1 giờ)", callback_data: "gen:module:combo" }],
+        [{ text: "🎬 Link Module YouTube (1 lần • 1 giờ)", callback_data: "gen:module:youtube" }]
+    ]
+};
 
 async function pingPhotoboothServer(env, source = "cron") {
     await loadMonitorState();
@@ -717,24 +751,68 @@ export default {
             });
         }
 
-        // 2.4 Telegram Bot Webhook (/telegram) — Quản trị Server qua lệnh /status, /ping, /last
+        // 2.4 Telegram Bot Webhook (/telegram) — Quản trị Server & Tạo Link 1-Lần (@cuonghym)
         if (url.pathname === "/telegram" && request.method === "POST") {
             try {
                 const update = await request.json();
+                const allowedChatId = (env?.TELEGRAM_CHAT_ID || "").trim();
+                const pagesBase = (env?.PAGES_BASE_URL || "https://vincenttrick.pages.dev").trim().replace(/\/+$/, "");
+
+                // Xử lý bấm nút Inline Menu tạo link 1-lần (chỉ Admin TELEGRAM_CHAT_ID)
+                if (update?.callback_query) {
+                    const cb = update.callback_query;
+                    const cbChatId = cb?.message?.chat?.id ? String(cb.message.chat.id) : "";
+                    const data = String(cb?.data || "");
+                    if (cbChatId && (!allowedChatId || cbChatId === allowedChatId) && data.startsWith("gen:")) {
+                        const scope = data.slice(4);
+                        try {
+                            const tok = await createOneTimeToken(env, scope);
+                            await answerTelegramCallback(env, cb.id, "Đã tạo link 1-lần (1 giờ)!");
+                            if (scope === "sdrk") {
+                                const link = `${pagesBase}/?t=${tok}`;
+                                await sendTelegram(
+                                    env,
+                                    `📱 <b>Link cài đặt Shadowrocket (Chỉ dùng 1 lần • Hạn 1 tiếng):</b>\n<code>${link}</code>\n\n• Chỉ mở phần cài Shadowrocket &amp; DNS (đã tách riêng, không lộ Module).\n• Không lưu thông tin người dùng hay IP.`
+                                );
+                            } else if (scope.startsWith("module:")) {
+                                const modName = scope.split(":")[1];
+                                const modUrl = `${pagesBase}/m/${tok}/${modName}.module`;
+                                const srLink = `shadowrocket://install?module=${encodeURIComponent(modUrl)}`;
+                                const labels = { locket: "Locket Gold", combo: "Combo 2-in-1", youtube: "YouTube Premium" };
+                                await sendTelegram(
+                                    env,
+                                    `🧩 <b>Link Module ${labels[modName] || modName} (Chỉ dùng 1 lần • Hạn 1 tiếng):</b>\n\n🔗 <b>URL Module (dán vào Shadowrocket → Modules):</b>\n<code>${modUrl}</code>\n\n⚡ <b>Link mở thẳng trong Shadowrocket:</b>\n<code>${srLink}</code>\n\n• Tự hủy ngay sau 1 lần tải hoặc sau 60 phút.`
+                                );
+                            }
+                        } catch (err) {
+                            await answerTelegramCallback(env, cb.id, "Lỗi tạo link");
+                            await sendTelegram(env, `❌ <b>Không tạo được link:</b> <code>${err.message}</code>`);
+                        }
+                    } else {
+                        await answerTelegramCallback(env, cb.id, "Không có quyền.");
+                    }
+                    return new Response("OK", { status: 200 });
+                }
+
                 const msg = update?.message;
                 const chatId = msg?.chat?.id ? String(msg.chat.id) : "";
-                const allowedChatId = (env?.TELEGRAM_CHAT_ID || "").trim();
                 const text = (msg?.text || "").trim();
 
                 if (chatId && (!allowedChatId || chatId === allowedChatId)) {
                     const serverUrl = getPhotoboothServerUrl(env);
-                    if (text.startsWith("/ping")) {
+                    if (text.startsWith("/gen") || text.startsWith("/menu") || text.startsWith("/link")) {
+                        await sendTelegram(
+                            env,
+                            "🔐 <b>Tạo Link Dùng 1 Lần (Hạn 1 tiếng • Không lưu dữ liệu)</b>\nChọn loại link muốn cấp cho người dùng:",
+                            GEN_MENU_MARKUP
+                        );
+                    } else if (text.startsWith("/ping")) {
                         const st = await pingPhotoboothServer(env, "telegram");
                         await sendTelegram(env, `⚡ <b>Đã gửi lệnh chống ngủ thủ công!</b>\n\n${buildStatusMessage(st, serverUrl)}`);
                     } else if (text.startsWith("/status") || text.startsWith("/start") || text.startsWith("/help")) {
                         const st = await loadMonitorState();
-                        const helpNote = `\n\n📌 <b>Lệnh quản trị:</b>\n• <code>/status</code> — Xem trạng thái & lần chống ngủ gần nhất\n• <code>/ping</code> — Gửi lệnh chống ngủ / đánh thức ngay\n• <code>/last</code> — Xem kết quả/lỗi lần chụp gần nhất`;
-                        await sendTelegram(env, buildStatusMessage(st, serverUrl) + helpNote);
+                        const helpNote = `\n\n📌 <b>Lệnh quản trị:</b>\n• <code>/gen</code> — Mở menu tạo link 1-lần (Shadowrocket hoặc Module riêng)\n• <code>/status</code> — Xem trạng thái &amp; lần chống ngủ gần nhất\n• <code>/ping</code> — Gửi lệnh chống ngủ / đánh thức ngay\n• <code>/last</code> — Xem kết quả/lỗi lần chụp gần nhất`;
+                        await sendTelegram(env, buildStatusMessage(st, serverUrl) + helpNote, GEN_MENU_MARKUP);
                     } else if (text.startsWith("/last")) {
                         let resData = lastDebugInfo.lastResult;
                         if (!resData) {
