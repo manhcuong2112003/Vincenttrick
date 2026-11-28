@@ -154,14 +154,40 @@ async function createOneTimeToken(env, scope) {
     return token;
 }
 
-const GEN_MENU_MARKUP = {
-    inline_keyboard: [
-        [{ text: "📱 Link cài Shadowrocket (1 lần • 1 giờ)", callback_data: "gen:sdrk" }],
-        [{ text: "👑 Link Module Locket Gold (1 lần • 1 giờ)", callback_data: "gen:module:locket" }],
-        [{ text: "🌟 Link Module Combo 2-in-1 (1 lần • 1 giờ)", callback_data: "gen:module:combo" }],
-        [{ text: "🎬 Link Module YouTube (1 lần • 1 giờ)", callback_data: "gen:module:youtube" }]
-    ]
+const MAIN_REPLY_KEYBOARD = {
+    keyboard: [
+        [{ text: "📱 Link Shadowrocket" }, { text: "👑 Module Locket" }],
+        [{ text: "🌟 Module Combo" }, { text: "🎬 Module YouTube" }],
+        [{ text: "📊 Status" }, { text: "⚡ Ping Server" }, { text: "🧾 Last Log" }]
+    ],
+    resize_keyboard: true,
+    is_persistent: true,
+    input_field_placeholder: "Chọn nút bên dưới hoặc gõ lệnh..."
 };
+
+async function sendOneTimeLink(env, pagesBase, scope) {
+    const tok = await createOneTimeToken(env, scope);
+    if (scope === "sdrk") {
+        const link = `${pagesBase}/?t=${tok}`;
+        await sendTelegram(
+            env,
+            `📱 <b>Link cài đặt Shadowrocket (Chỉ dùng 1 lần • Hạn 1 tiếng):</b>\n<code>${link}</code>\n\n• Chỉ mở phần cài Shadowrocket &amp; DNS (đã tách riêng, không lộ Module).\n• Không lưu thông tin người dùng hay IP.`,
+            MAIN_REPLY_KEYBOARD
+        );
+    } else if (scope.startsWith("module:")) {
+        const modName = scope.split(":")[1];
+        const modUrl = `${pagesBase}/m/${tok}/${modName}.module`;
+        const srLink = `shadowrocket://install?module=${encodeURIComponent(modUrl)}`;
+        const labels = { locket: "Locket Gold", combo: "Combo 2-in-1", youtube: "YouTube Premium" };
+        await sendTelegram(
+            env,
+            `🧩 <b>Link Module ${labels[modName] || modName} (Chỉ dùng 1 lần • Hạn 1 tiếng):</b>\n\n🔗 <b>URL Module (dán vào Shadowrocket → Modules):</b>\n<code>${modUrl}</code>\n\n⚡ <b>Link mở thẳng trong Shadowrocket:</b>\n<code>${srLink}</code>\n\n• Tự hủy ngay sau 1 lần tải hoặc sau 60 phút.`,
+            MAIN_REPLY_KEYBOARD
+        );
+    }
+}
+
+const GEN_MENU_MARKUP = MAIN_REPLY_KEYBOARD;
 
 async function pingPhotoboothServer(env, source = "cron") {
     await loadMonitorState();
@@ -766,27 +792,11 @@ export default {
                     if (cbChatId && (!allowedChatId || cbChatId === allowedChatId) && data.startsWith("gen:")) {
                         const scope = data.slice(4);
                         try {
-                            const tok = await createOneTimeToken(env, scope);
                             await answerTelegramCallback(env, cb.id, "Đã tạo link 1-lần (1 giờ)!");
-                            if (scope === "sdrk") {
-                                const link = `${pagesBase}/?t=${tok}`;
-                                await sendTelegram(
-                                    env,
-                                    `📱 <b>Link cài đặt Shadowrocket (Chỉ dùng 1 lần • Hạn 1 tiếng):</b>\n<code>${link}</code>\n\n• Chỉ mở phần cài Shadowrocket &amp; DNS (đã tách riêng, không lộ Module).\n• Không lưu thông tin người dùng hay IP.`
-                                );
-                            } else if (scope.startsWith("module:")) {
-                                const modName = scope.split(":")[1];
-                                const modUrl = `${pagesBase}/m/${tok}/${modName}.module`;
-                                const srLink = `shadowrocket://install?module=${encodeURIComponent(modUrl)}`;
-                                const labels = { locket: "Locket Gold", combo: "Combo 2-in-1", youtube: "YouTube Premium" };
-                                await sendTelegram(
-                                    env,
-                                    `🧩 <b>Link Module ${labels[modName] || modName} (Chỉ dùng 1 lần • Hạn 1 tiếng):</b>\n\n🔗 <b>URL Module (dán vào Shadowrocket → Modules):</b>\n<code>${modUrl}</code>\n\n⚡ <b>Link mở thẳng trong Shadowrocket:</b>\n<code>${srLink}</code>\n\n• Tự hủy ngay sau 1 lần tải hoặc sau 60 phút.`
-                                );
-                            }
+                            await sendOneTimeLink(env, pagesBase, scope);
                         } catch (err) {
                             await answerTelegramCallback(env, cb.id, "Lỗi tạo link");
-                            await sendTelegram(env, `❌ <b>Không tạo được link:</b> <code>${err.message}</code>`);
+                            await sendTelegram(env, `❌ <b>Không tạo được link:</b> <code>${err.message}</code>`, MAIN_REPLY_KEYBOARD);
                         }
                     } else {
                         await answerTelegramCallback(env, cb.id, "Không có quyền.");
@@ -800,20 +810,32 @@ export default {
 
                 if (chatId && (!allowedChatId || chatId === allowedChatId)) {
                     const serverUrl = getPhotoboothServerUrl(env);
-                    if (text.startsWith("/gen") || text.startsWith("/menu") || text.startsWith("/link")) {
+                    const quickScopeMap = {
+                        "📱 Link Shadowrocket": "sdrk",
+                        "👑 Module Locket": "module:locket",
+                        "🌟 Module Combo": "module:combo",
+                        "🎬 Module YouTube": "module:youtube"
+                    };
+                    if (quickScopeMap[text]) {
+                        try {
+                            await sendOneTimeLink(env, pagesBase, quickScopeMap[text]);
+                        } catch (err) {
+                            await sendTelegram(env, `❌ <b>Không tạo được link:</b> <code>${err.message}</code>`, MAIN_REPLY_KEYBOARD);
+                        }
+                    } else if (text.startsWith("/gen") || text.startsWith("/menu") || text.startsWith("/link")) {
                         await sendTelegram(
                             env,
-                            "🔐 <b>Tạo Link Dùng 1 Lần (Hạn 1 tiếng • Không lưu dữ liệu)</b>\nChọn loại link muốn cấp cho người dùng:",
-                            GEN_MENU_MARKUP
+                            "🔐 <b>Bảng Điều Khiển Tạo Link 1-Lần (Hạn 1 tiếng • Không lưu dữ liệu)</b>\nBấm trực tiếp các nút trên bàn phím bên dưới:",
+                            MAIN_REPLY_KEYBOARD
                         );
-                    } else if (text.startsWith("/ping")) {
+                    } else if (text.startsWith("/ping") || text === "⚡ Ping Server") {
                         const st = await pingPhotoboothServer(env, "telegram");
-                        await sendTelegram(env, `⚡ <b>Đã gửi lệnh chống ngủ thủ công!</b>\n\n${buildStatusMessage(st, serverUrl)}`);
-                    } else if (text.startsWith("/status") || text.startsWith("/start") || text.startsWith("/help")) {
+                        await sendTelegram(env, `⚡ <b>Đã gửi lệnh chống ngủ thủ công!</b>\n\n${buildStatusMessage(st, serverUrl)}`, MAIN_REPLY_KEYBOARD);
+                    } else if (text.startsWith("/status") || text === "📊 Status" || text.startsWith("/start") || text.startsWith("/help")) {
                         const st = await loadMonitorState();
-                        const helpNote = `\n\n📌 <b>Lệnh quản trị:</b>\n• <code>/gen</code> — Mở menu tạo link 1-lần (Shadowrocket hoặc Module riêng)\n• <code>/status</code> — Xem trạng thái &amp; lần chống ngủ gần nhất\n• <code>/ping</code> — Gửi lệnh chống ngủ / đánh thức ngay\n• <code>/last</code> — Xem kết quả/lỗi lần chụp gần nhất`;
-                        await sendTelegram(env, buildStatusMessage(st, serverUrl) + helpNote, GEN_MENU_MARKUP);
-                    } else if (text.startsWith("/last")) {
+                        const helpNote = `\n\n📌 <b>Bàn phím nhanh đã mở bên dưới</b> — bấm 1 chạm để tạo link 1-lần hoặc quản trị server.`;
+                        await sendTelegram(env, buildStatusMessage(st, serverUrl) + helpNote, MAIN_REPLY_KEYBOARD);
+                    } else if (text.startsWith("/last") || text === "🧾 Last Log") {
                         let resData = lastDebugInfo.lastResult;
                         if (!resData) {
                             const remote = await fetchDebugFromRender(env);
@@ -822,7 +844,7 @@ export default {
                         const info = resData
                             ? `<pre>${JSON.stringify(resData, null, 2)}</pre>`
                             : "Chưa có lượt chụp nào trong phiên Worker hiện tại.";
-                        await sendTelegram(env, `🧾 <b>Lần chụp Filter / Photobooth gần nhất:</b>\n${info}`);
+                        await sendTelegram(env, `🧾 <b>Lần chụp Filter / Photobooth gần nhất:</b>\n${info}`, MAIN_REPLY_KEYBOARD);
                     }
                 }
             } catch (e) {
