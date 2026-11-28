@@ -9,6 +9,12 @@
   "ai": {
     "binding": "AI"
   },
+  "kv_namespaces": [
+    {
+      "binding": "ONE_TIME_LINKS",
+      "id": "a979f7ca70474e8d92798783de1782cb"
+    }
+  ],
   "triggers": {
     "crons": ["*/10 * * * *"]
   }
