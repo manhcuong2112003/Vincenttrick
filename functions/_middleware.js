@@ -5,6 +5,7 @@
 const SESSION_COOKIE = "vt_sess";
 const SESSION_TTL_SEC = 900; // 15 phút để hoàn tất cài Shadowrocket + DNS trên đúng Safari đó
 const LINK_PREVIEW_BOTS = /TelegramBot|facebookexternalhit|Facebot|WhatsApp|Zalo|Twitterbot|Discordbot|Slackbot|LinkedInBot/i;
+const ANTI_INSPECT_SCRIPT = `<script>(function(){document.addEventListener("contextmenu",function(e){e.preventDefault()});document.addEventListener("keydown",function(e){var k=(e.key||"").toUpperCase();if(e.keyCode===123||k==="F12"||((e.ctrlKey||e.metaKey)&&e.shiftKey&&["I","J","C","K"].indexOf(k)!==-1)||((e.ctrlKey||e.metaKey)&&["U","S"].indexOf(k)!==-1)){e.preventDefault();e.stopPropagation();return false}},true);if(!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)){setInterval(function(){if(window.outerWidth-window.innerWidth>180||window.outerHeight-window.innerHeight>180){document.documentElement.innerHTML="<body style='margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:#0b0f19;color:#f8fafc;font-family:sans-serif'><h2>🔒 Truy cập bị chặn — Liên hệ @cuonghym</h2></body>"}},800)}})();</script>`;
 
 function toHex(buf) {
     return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
@@ -66,6 +67,7 @@ function renderBlockedHtml(title, message) {
     <p>${message}</p>
     <a class="btn" href="https://t.me/cuonghym" target="_blank" rel="noopener">Liên hệ Telegram @cuonghym</a>
   </div>
+${ANTI_INSPECT_SCRIPT}
 </body>
 </html>`;
 }
@@ -96,6 +98,7 @@ function renderRedeemHtml(token) {
       <button type="submit">🔓 Bắt đầu cài đặt Shadowrocket</button>
     </form>
   </div>
+${ANTI_INSPECT_SCRIPT}
 </body>
 </html>`;
 }
@@ -283,6 +286,7 @@ export async function onRequest(context) {
         );
         if (path === "/" || path === "/index.html") {
             text = text.replace("</head>", "<style>#tab-btn-locket,#tab-content-locket{display:none!important}</style></head>");
+            text = text.replace("</body>", `${ANTI_INSPECT_SCRIPT}</body>`);
         }
         const hdrs = new Headers(resp.headers);
         hdrs.set("Cache-Control", "no-store");
